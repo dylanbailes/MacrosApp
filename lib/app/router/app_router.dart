@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
@@ -18,88 +19,96 @@ class AppRoutes {
 /// Application router configuration using GoRouter.
 /// 
 /// Implements a feature-first navigation structure with smooth transitions.
-final appRouter = GoRouter(
-  initialLocation: AppRoutes.home,
-  debugLogDiagnostics: true,
-  routes: [
-    // Home Route - Main entry point
-    GoRoute(
-      path: AppRoutes.home,
-      name: 'home',
-      builder: (context, state) => const HomePage(),
-      routes: [
-        // Dashboard - Child of home
-        GoRoute(
-          path: 'dashboard',
-          name: 'dashboard',
-          builder: (context, state) => const DashboardPage(),
-        ),
-        
-        // Settings - Child of home
-        GoRoute(
-          path: 'settings',
-          name: 'settings',
-          builder: (context, state) => const SettingsPage(),
-        ),
-        
-        // Meal Tracking - Placeholder route for future implementation
-        GoRoute(
-          path: 'meal-tracking',
-          name: 'meal_tracking',
-          pageBuilder: (context, state) => CustomTransitionPage(
-            key: state.pageKey,
-            child: const Scaffold(
-              body: Center(
-                child: Text('Meal Tracking - Coming Soon'),
-              ),
+final class AppRouter {
+  AppRouter._();
+
+  static final GoRouter router = GoRouter(
+    initialLocation: AppRoutes.home,
+    debugLogDiagnostics: true,
+    routes: [
+      // Home Route - Main entry point
+      GoRoute(
+        path: AppRoutes.home,
+        name: 'home',
+        builder: (context, state) => const HomePage(),
+        routes: [
+          // Dashboard - Child of home
+          GoRoute(
+            path: 'dashboard',
+            name: 'dashboard',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: DashboardPage(),
             ),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
           ),
-        ),
-        
-        // Analytics - Placeholder route for future implementation
-        GoRoute(
-          path: 'analytics',
-          name: 'analytics',
-          pageBuilder: (context, state) => CustomTransitionPage(
-            key: state.pageKey,
-            child: const Scaffold(
-              body: Center(
-                child: Text('Analytics - Coming Soon'),
-              ),
+
+          // Settings - Child of home
+          GoRoute(
+            path: 'settings',
+            name: 'settings',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: SettingsPage(),
             ),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
           ),
-        ),
-      ],
-    ),
-  ],
-  errorBuilder: (context, state) => Scaffold(
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Page not found',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+
+          // Meal Tracking - Placeholder route for future implementation
+          GoRoute(
+            path: 'meal-tracking',
+            name: 'meal_tracking',
+            pageBuilder: (context, state) => CustomTransitionPage<void>(
+              key: state.pageKey,
+              child: const Scaffold(
+                body: Center(
+                  child: Text('Meal Tracking - Coming Soon'),
+                ),
+              ),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),
           ),
-          const SizedBox(height: 16),
-          Text(
-            'Route: ${state.uri.path}',
-            style: const TextStyle(color: Colors.grey),
+
+          // Analytics - Placeholder route for future implementation
+          GoRoute(
+            path: 'analytics',
+            name: 'analytics',
+            pageBuilder: (context, state) => CustomTransitionPage<void>(
+              key: state.pageKey,
+              child: const Scaffold(
+                body: Center(
+                  child: Text('Analytics - Coming Soon'),
+                ),
+              ),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            ),
           ),
         ],
       ),
+    ],
+    errorBuilder: (context, state) => Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Page not found',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Route: ${state.uri.path}',
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
     ),
-  ),
-);
+  );
+}
