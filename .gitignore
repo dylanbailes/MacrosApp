@@ -1,37 +1,50 @@
 ```
-# Environment
+# Flutter/Dart specific
+.dart_tool/
+.packages
+pubspec.lock
+*.g.dart
+*.freezed.dart
+
+# Build
+build/
+**/ios/Flutter/.last_build_id
+
+# iOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/build/
+*.xcodeproj/
+*.xcworkspace/
+
+# Android
+**/android/flutter-stamp/
+**/android/gradle/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/key.properties
+
+# Web
+**/web/build/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Environment variables
 .env
 .env.local
 *.env.*
 
-# Dependencies
-.pub/
-.buildlog
-.packages
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# Coverage
-coverage/
-*.coverage
-.htmlcov
-
 # IDE
-.idea/
 .vscode/
-*.iml
-*.ipr
-*.iws
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Build outputs
-build/
-dist/
-target/
 ```

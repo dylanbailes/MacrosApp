@@ -15,27 +15,29 @@ class MacroTrackerApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp.router(
-      title: 'Macro Tracker',
-      debugShowCheckedModeBanner: false,
-      
-      // Theme Configuration - Dark mode only
-      theme: AppTheme.darkTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
-      
-      // Router Configuration
-      routerConfig: appRouter,
-      
-      // Builder for global overlays (if needed in future)
-      builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(1.0), // Optional: Disable system font scaling
-          ),
-          child: child ?? const SizedBox.shrink(),
-        );
-      },
+    return ProviderScope(
+      child: MaterialApp.router(
+        title: 'Macro Tracker',
+        debugShowCheckedModeBanner: false,
+        
+        // Theme Configuration - Dark mode only
+        theme: AppTheme.darkTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.dark,
+        
+        // Router Configuration
+        routerConfig: AppRouter.router,
+        
+        // Builder for global overlays (if needed in future)
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(1.0), // Optional: Disable system font scaling
+            ),
+            child: child ?? const SizedBox.shrink(),
+          );
+        },
+      ),
     );
   }
 }
