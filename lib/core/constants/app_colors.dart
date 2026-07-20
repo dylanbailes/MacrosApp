@@ -2,102 +2,91 @@
 import 'package:flutter/material.dart';
 
 /// Core color palette for the Macro Tracker application.
-/// 
+///
 /// Design philosophy: Nothing OS / Linear inspired, minimal, true dark mode.
 /// Optimized for OLED displays with true blacks and high contrast accents.
+/// 
+/// Reference: Visual Design Specification §2 — Color Palette
 class AppColors {
   AppColors._();
 
-  /// Primary brand color - high contrast accent
-  static const Color primary = Color(0xFFE2E2E2); // Off-white/Silver for premium feel
-  
-  /// Primary variant for hover/pressed states
-  static const Color primaryVariant = Color(0xFFFFFFFF);
-  
-  /// Secondary accent color (subtle)
-  static const Color secondary = Color(0xFF2A2A2A);
-  
-  /// Semantic colors
-  static const Color error = Color(0xFFFF453A); // Apple-like red
-  static const Color warning = Color(0xFFFF9F0A); // Apple-like orange
-  static const Color success = Color(0xFF32D74B); // Apple-like green
-  static const Color info = Color(0xFF0A84FF); // Apple-like blue
+  // --- Base (true black system, OLED-first) ---
 
-  // Surface Colors - True Dark Mode
-  
-  /// Main background color (True OLED Black)
+  /// App background, true black
   static const Color background = Color(0xFF000000);
   
-  /// Secondary background for cards and elevated surfaces
-  static const Color surface = Color(0xFF111111);
+  /// Standard cards, tiles
+  static const Color surface = Color(0xFF0D0D0F);
   
-  /// Elevated surface for dialogs and modals
-  static const Color surfaceElevated = Color(0xFF1C1C1E);
+  /// Nested elements, pressed/active rows
+  static const Color surfaceElevated = Color(0xFF16161A);
   
-  /// Surface with subtle transparency for glass effects
-  static const Color surfaceGlass = Color(0xB3111111); // 70% opacity
+  /// Modals, sheets, toasts
+  static const Color surfaceGlass = Color(0xFF202024);
   
-  /// Card background color
-  static const Color card = Color(0xFF151515);
-  
-  /// Card with hover state
-  static const Color cardHover = Color(0xFF1F1F1F);
-
-  // Divider & Border Colors
-  
-  /// Subtle divider color
-  static const Color divider = Color(0xFF222222);
+  /// 1px borders/dividers everywhere
+  static const Color divider = Color(0x14FFFFFF); // rgba(255,255,255,0.08)
   
   /// Stronger divider for emphasis
-  static const Color dividerStrong = Color(0xFF333333);
-  
-  /// Border for glass elements
-  static const Color glassBorder = Color(0x33FFFFFF);
+  static const Color dividerStrong = Color(0x1FFFFFFF); // rgba(255,255,255,0.12)
 
-  // Text Colors
+  // --- Text Colors ---
   
-  /// Primary text color - highest emphasis
-  static const Color onPrimary = Color(0xFF111111); // Dark text on light primary
+  /// Headlines, hero numerals (warm off-white, not clinical pure white)
+  static const Color onPrimary = Color(0xFFF5F5F2);
   
-  /// Text color on primary background (alias for onPrimary)
-  static const Color textOnPrimary = onPrimary;
+  /// Body copy, sub-labels
+  static const Color textSecondary = Color(0xFF9A9A9E);
   
-  /// Primary text color on dark surfaces
-  static const Color onSurface = Color(0xFFF5F5F5);
+  /// Meta, timestamps
+  static const Color textTertiary = Color(0xFF5C5C60);
   
-  /// Secondary text color - medium emphasis
-  static const Color textSecondary = Color(0xFF8E8E93);
+  /// Inactive state
+  static const Color textDisabled = Color(0xFF38383A);
   
-  /// Tertiary text color - low emphasis (placeholders, hints)
-  static const Color textTertiary = Color(0xFF636366);
+  /// Text on primary surfaces (for Primary button)
+  static const Color textOnPrimary = Color(0xFFFFFFFF);
 
-  // Icon Colors
+  // --- Brand Accent ---
+
+  /// Primary CTA, Log button, streaks, live/recording dot, critical alerts
+  static const Color primary = Color(0xFFFF1E3C);
+
+  // --- Macro Semantics ---
+
+  /// Protein numerals, rings, chart lines
+  static const Color protein = Color(0xFF3D8BFD);
   
-  /// Default icon color
-  static const Color iconDefault = Color(0xFF8E8E93);
+  /// Carbs numerals, rings, chart lines
+  static const Color carbs = Color(0xFFFFB020);
   
-  /// Icon color on primary surfaces
+  /// Fat numerals, rings, chart lines (coral)
+  static const Color fat = Color(0xFFFF6B5E);
+  
+  /// Calorie ring/number — kept neutral
+  static const Color energyNeutral = Color(0xFFF5F5F2);
+
+  // --- Data & Status ---
+
+  /// Trend improving, streak maintained, goal hit
+  static const Color success = Color(0xFF34D399);
+  
+  /// Over target, missed check-in (reuses signal red)
+  static const Color error = Color(0xFFFF1E3C);
+  
+  /// Flat trend, "holding" state
+  static const Color warning = Color(0xFF9A9A9E);
+
+  // --- Legacy compatibility aliases ---
+  static const Color primaryVariant = Color(0xFFFF3B54);
+  static const Color secondary = Color(0xFF2A2A2A);
+  static const Color info = Color(0xFF3D8BFD);
+  static const Color card = Color(0xFF0D0D0F);
+  static const Color cardHover = Color(0xFF16161A);
+  static const Color glassBorder = Color(0x29FFFFFF); // rgba(255,255,255,.16)
+  static const Color onSurface = Color(0xFFF5F5F2);
+  static const Color iconDefault = Color(0xFF9A9A9E);
   static const Color iconOnPrimary = Color(0xFF111111);
-
-  // Special Effects
-  
-  /// Overlay color for modals and dialogs
-  static const Color overlay = Color(0x99000000);
-  
-  /// Scrim color for bottom sheets
-  static const Color scrim = Color(0x80000000);
-
-  /// Get gradient for primary elements (subtle silver gradient)
-  static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFFFFFFFF), Color(0xFFE2E2E2)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  /// Get gradient for surface cards
-  static const LinearGradient surfaceGradient = LinearGradient(
-    colors: [Color(0xFF181818), Color(0xFF111111)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+  static const Color overlay = Color(0xB3000000); // rgba(0,0,0,.7)
+  static const Color scrim = Color(0xB3000000);
 }

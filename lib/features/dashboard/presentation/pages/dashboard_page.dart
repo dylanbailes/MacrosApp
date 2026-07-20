@@ -3,74 +3,56 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/app_card.dart';
 
-/// Dashboard page - Main overview of daily macros and progress.
+/// Dashboard page — Main overview of daily macros and progress.
+///
+/// Reference: Blueprint §3.1 — Dashboard (Home)
 /// 
-/// This page displays:
-/// - Daily macro summary (protein, carbs, fat)
-/// - Calorie tracking
-/// - Progress charts (future)
-/// - Quick actions for meal logging
+/// Screen hierarchy:
+/// 1. Page Header (greeting + date)
+/// 2. Calorie Hero (ring + numeral)
+/// 3. Macro Overview (3-tile row: Protein / Carbs / Fat)
+/// 4. Quick Stats row
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              // Refresh functionality will be implemented later
-            },
-          ),
-        ],
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.xl,  // 20px screen margin
+            AppSpacing.lg,  // 16px top
+            AppSpacing.xl,  // 20px screen margin
+            AppSpacing.quadXl * 2, // Extra bottom padding for nav
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Date Header
-              _buildDateHeader(),
-              
+              // 1. Page Header
+              const _PageHeader(),
+
               const SizedBox(height: AppSpacing.xxxl),
-              
-              // Macro Summary Cards
-              _buildMacroSummary(context),
-              
+
+              // 2. Calorie Hero
+              const _CalorieHero(),
+
               const SizedBox(height: AppSpacing.xxxl),
-              
-              // Calorie Progress
-              _buildCalorieProgress(context),
-              
+
+              // 3. Macro Overview
+              _buildSectionLabel(context, "TODAY'S MACROS"),
+              const SizedBox(height: AppSpacing.md),
+              const _MacroOverview(),
+
               const SizedBox(height: AppSpacing.xxxl),
-              
-              // Quick Stats Grid
-              _buildQuickStats(context),
-              
-              const SizedBox(height: AppSpacing.quadXl),
-              
-              // Placeholder message
-              Center(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.construction_outlined,
-                      size: 48,
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    Text(
-                      'More features coming soon',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
+
+              // 4. Quick Stats
+              _buildSectionLabel(context, 'QUICK STATS'),
+              const SizedBox(height: AppSpacing.md),
+              const _QuickStatsRow(),
             ],
           ),
         ),
@@ -78,155 +60,228 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
-  Widget _buildDateHeader() {
+  Widget _buildSectionLabel(BuildContext context, String text) {
+    return Text(
+      text,
+      style: AppTextStyles.labelLarge,
+    );
+  }
+}
+
+/// Section 1: Page header with greeting and date
+class _PageHeader extends StatelessWidget {
+  const _PageHeader();
+
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  }
+
+  String _getFormattedDate() {
     final now = DateTime.now();
-    final dayName = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][now.weekday - 1];
-    
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          dayName,
-          style: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          '${now.day}/${now.month}/${now.year}',
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.grey[400],
-          ),
-        ),
-      ],
-    );
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    return '${months[now.month - 1]} ${now.day}, ${now.year}';
   }
 
-  Widget _buildMacroSummary(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Today\'s Macros',
-          style: Theme.of(context).textTheme.titleLarge,
+          _getGreeting(),
+          style: AppTextStyles.headlineLarge,
         ),
-        const SizedBox(height: AppSpacing.md),
-        const Row(
-          children: [
-            Expanded(child: _MacroCard(label: 'Protein', value: '0g', color: Colors.blue)),
-            SizedBox(width: AppSpacing.md),
-            Expanded(child: _MacroCard(label: 'Carbs', value: '0g', color: Colors.orange)),
-            SizedBox(width: AppSpacing.md),
-            Expanded(child: _MacroCard(label: 'Fat', value: '0g', color: Colors.red)),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCalorieProgress(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+        const SizedBox(height: AppSpacing.xs),
         Text(
-          'Calories',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              children: [
-                const Text(
-                  '0 / 2000 kcal',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xxl),
-                LinearProgressIndicator(
-                  value: 0,
-                  minHeight: 8,
-                  borderRadius: BorderRadius.circular(4),
-                  backgroundColor: AppColors.divider,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildQuickStats(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Quick Stats',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: AppSpacing.md),
-        const Row(
-          children: [
-            Expanded(child: _StatCard(label: 'Meals', value: '0')),
-            SizedBox(width: 12),
-            Expanded(child: _StatCard(label: 'Water', value: '0L')),
-            SizedBox(width: 12),
-            Expanded(child: _StatCard(label: 'Weight', value: '--')),
-          ],
+          _getFormattedDate(),
+          style: AppTextStyles.bodyMedium,
         ),
       ],
     );
   }
 }
 
-class _MacroCard extends StatelessWidget {
-  const _MacroCard({
-    required this.label,
-    required this.value,
-    required this.color,
-  });
-
-  final String label;
-  final String value;
-  final Color color;
+/// Section 2: Calorie Hero — progress ring + Ndot numeral
+class _CalorieHero extends StatelessWidget {
+  const _CalorieHero();
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          children: [
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: color,
+    return AppCard(
+      variant: AppCardVariant.hero,
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      child: Column(
+        children: [
+          // Calorie ring (visual circle placeholder)
+          Container(
+            width: 180,
+            height: 180,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: AppColors.divider,
+                width: 8,
               ),
             ),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[400],
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '0',
+                    style: AppTextStyles.displayLarge,
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    'of 2,400 kcal',
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _StatCard extends StatelessWidget {
-  const _StatCard({
+/// Section 3: Macro Overview — 3-tile row (Protein / Carbs / Fat)
+class _MacroOverview extends StatelessWidget {
+  const _MacroOverview();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Expanded(child: _MacroTile(
+          label: 'PROTEIN',
+          value: '0',
+          target: '180g',
+          macroColor: AppColors.protein,
+          progress: 0.0,
+        )),
+        SizedBox(width: AppSpacing.md),
+        Expanded(child: _MacroTile(
+          label: 'CARBS',
+          value: '0',
+          target: '250g',
+          macroColor: AppColors.carbs,
+          progress: 0.0,
+        )),
+        SizedBox(width: AppSpacing.md),
+        Expanded(child: _MacroTile(
+          label: 'FAT',
+          value: '0',
+          target: '65g',
+          macroColor: AppColors.fat,
+          progress: 0.0,
+        )),
+      ],
+    );
+  }
+}
+
+/// A single macro tile in the 3-tile row
+///
+/// Reference: Blueprint §2.3 — Macro Tile
+class _MacroTile extends StatelessWidget {
+  const _MacroTile({
+    required this.label,
+    required this.value,
+    required this.target,
+    required this.macroColor,
+    required this.progress,
+  });
+
+  final String label;
+  final String value;
+  final String target;
+  final Color macroColor;
+  final double progress;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      variant: AppCardVariant.standard,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Label
+          Text(
+            label,
+            style: AppTextStyles.macroLabel,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Value + Target
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                value,
+                style: AppTextStyles.macroValue.copyWith(color: macroColor),
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 2.0),
+                child: Text(
+                  '/ $target',
+                  style: AppTextStyles.caption.copyWith(
+                    color: AppColors.textTertiary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Progress bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: SizedBox(
+              height: 3,
+              child: LinearProgressIndicator(
+                value: progress,
+                backgroundColor: AppColors.divider,
+                valueColor: AlwaysStoppedAnimation<Color>(macroColor.withValues(alpha: 0.8)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Section 4: Quick Stats row
+class _QuickStatsRow extends StatelessWidget {
+  const _QuickStatsRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Expanded(child: _StatTile(label: 'MEALS', value: '0')),
+        SizedBox(width: AppSpacing.md),
+        Expanded(child: _StatTile(label: 'STREAK', value: '0')),
+        SizedBox(width: AppSpacing.md),
+        Expanded(child: _StatTile(label: 'GOAL', value: '0%')),
+      ],
+    );
+  }
+}
+
+/// A single stat tile for the quick stats row
+class _StatTile extends StatelessWidget {
+  const _StatTile({
     required this.label,
     required this.value,
   });
@@ -236,28 +291,21 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          children: [
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[400],
-              ),
-            ),
-          ],
-        ),
+    return AppCard(
+      variant: AppCardVariant.standard,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: AppTextStyles.titleLarge,
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            label,
+            style: AppTextStyles.macroLabel,
+          ),
+        ],
       ),
     );
   }

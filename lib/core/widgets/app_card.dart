@@ -1,13 +1,21 @@
 // Path: widgets\app_card.dart
 import 'package:flutter/material.dart';
 
+import '../constants/app_border_radius.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_durations.dart';
 import '../constants/app_spacing.dart';
 
 /// A reusable card widget with consistent styling throughout the application.
+///
+/// Reference: Blueprint §2.2 — Card
 /// 
-/// Features a subtle border, hover elevation, and smooth scale-down animation on tap.
+/// Variants:
+/// - Standard: vertical content stack
+/// - Row: horizontal content (e.g., food-log list item)
+/// - Hero: uses radius.lg (28px), reserved for the single most important card per screen
+/// - Interactive: adds tap/press treatment
+/// - Static: informational only, no press feedback
 class AppCard extends StatefulWidget {
   const AppCard({
     super.key,
@@ -15,9 +23,8 @@ class AppCard extends StatefulWidget {
     this.padding,
     this.margin,
     this.onTap,
-    this.borderRadius,
+    this.variant = AppCardVariant.standard,
     this.showBorder = true,
-    this.elevated = false,
     this.backgroundColor,
   });
 
@@ -25,9 +32,8 @@ class AppCard extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final VoidCallback? onTap;
-  final double? borderRadius;
+  final AppCardVariant variant;
   final bool showBorder;
-  final bool elevated;
   final Color? backgroundColor;
 
   @override
@@ -46,7 +52,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
       vsync: this,
       duration: AppDurations.xFast,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.97).animate(
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeInOutCubic,
@@ -60,33 +66,34 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  bool get _isInteractive => widget.onTap != null && widget.variant != AppCardVariant.static;
+
   void _onTapDown(TapDownDetails details) {
-    if (widget.onTap != null) _controller.forward();
+    if (_isInteractive) _controller.forward();
   }
 
   void _onTapUp(TapUpDetails details) {
-    if (widget.onTap != null) {
+    if (_isInteractive) {
       _controller.reverse();
       widget.onTap!();
     }
   }
 
   void _onTapCancel() {
-    if (widget.onTap != null) _controller.reverse();
+    if (_isInteractive) _controller.reverse();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
-    // Default radius is 20 for cards
-    final radius = widget.borderRadius ?? 20.0;
-    
-    final baseColor = widget.backgroundColor ?? 
-                      (widget.elevated ? AppColors.surfaceElevated : AppColors.card);
+    final radius = switch (widget.variant) {
+      AppCardVariant.hero => AppBorderRadius.lg,
+      AppCardVariant.row => AppBorderRadius.sm,
+      _ => AppBorderRadius.md,
+    };
 
-    final resolvedColor = _isHovered && widget.onTap != null 
-        ? AppColors.cardHover 
+    final baseColor = widget.backgroundColor ?? AppColors.surface;
+    final resolvedColor = _isHovered && _isInteractive
+        ? AppColors.surfaceElevated
         : baseColor;
 
     final card = AnimatedContainer(
@@ -97,18 +104,9 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         borderRadius: BorderRadius.circular(radius),
         border: widget.showBorder
             ? Border.all(
-                color: theme.dividerColor,
+                color: AppColors.divider,
                 width: 1,
               )
-            : null,
-        boxShadow: widget.elevated || (_isHovered && widget.onTap != null)
-            ? [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                )
-              ]
             : null,
       ),
       child: ClipRRect(
@@ -120,7 +118,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
       ),
     );
 
-    if (widget.onTap == null) return card;
+    if (!_isInteractive) return card;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -139,3 +137,20 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   }
 }
 
+/// Card variants per Blueprint §2.2
+enum AppCardVariant {
+  /// Vertical content stack (default)
+  standard,
+
+  /// Horizontal content, e.g., food-log list item
+  row,
+
+  /// Uses radius.lg (28px), for the single most important card per screen
+  hero,
+
+  /// Adds tap/press treatment
+  interactive,
+
+  /// Informational only, no press feedback
+  static,
+}

@@ -30,6 +30,9 @@ class AppSpacing {
   /// Double extra large spacing (32dp)
   static const double xxxl = 32.0;
 
+  /// 40dp spacing (between xxxl and quadXl)
+  static const double xxxxl = 40.0;
+
   /// Quadruple extra large spacing (48dp)
   static const double quadXl = 48.0;
 
