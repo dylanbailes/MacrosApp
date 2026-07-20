@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_colors.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_spacing.dart';
 
 /// Dashboard page - Main overview of daily macros and progress.
 /// 
@@ -28,29 +29,29 @@ class DashboardPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Date Header
               _buildDateHeader(),
               
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               
               // Macro Summary Cards
               _buildMacroSummary(context),
               
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               
               // Calorie Progress
               _buildCalorieProgress(context),
               
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               
               // Quick Stats Grid
               _buildQuickStats(context),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSpacing.quadXl),
               
               // Placeholder message
               Center(
@@ -61,7 +62,7 @@ class DashboardPage extends StatelessWidget {
                       size: 48,
                       color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: AppSpacing.md),
                     Text(
                       'More features coming soon',
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -109,13 +110,13 @@ class DashboardPage extends StatelessWidget {
           'Today\'s Macros',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.md),
         Row(
           children: [
             Expanded(child: _MacroCard(label: 'Protein', value: '0g', color: Colors.blue)),
-            const SizedBox(width: 12),
+            const SizedBox(width: AppSpacing.md),
             Expanded(child: _MacroCard(label: 'Carbs', value: '0g', color: Colors.orange)),
-            const SizedBox(width: 12),
+            const SizedBox(width: AppSpacing.md),
             Expanded(child: _MacroCard(label: 'Fat', value: '0g', color: Colors.red)),
           ],
         ),
@@ -131,10 +132,10 @@ class DashboardPage extends StatelessWidget {
           'Calories',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.md),
         Card(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
               children: [
                 const Text(
@@ -144,7 +145,7 @@ class DashboardPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.xxl),
                 LinearProgressIndicator(
                   value: 0,
                   minHeight: 8,
@@ -167,7 +168,7 @@ class DashboardPage extends StatelessWidget {
           'Quick Stats',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: AppSpacing.md),
         Row(
           children: [
             Expanded(child: const _StatCard(label: 'Meals', value: '0')),
@@ -197,7 +198,7 @@ class _MacroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           children: [
             Text(
@@ -208,7 +209,7 @@ class _MacroCard extends StatelessWidget {
                 color: color,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             Text(
               label,
               style: TextStyle(
@@ -236,7 +237,7 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           children: [
             Text(
@@ -246,7 +247,7 @@ class _StatCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             Text(
               label,
               style: TextStyle(

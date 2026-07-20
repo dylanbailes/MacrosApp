@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_spacing.dart';
+
 /// Settings page - Application configuration and preferences.
 /// 
 /// This page will eventually include:
@@ -20,7 +22,7 @@ class SettingsPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           children: [
             // Profile Section
             _SettingsSection(
@@ -41,7 +43,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.xxxl),
             
             // Preferences Section
             _SettingsSection(
@@ -62,7 +64,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.xxxl),
             
             // Data Section
             _SettingsSection(
@@ -83,7 +85,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.xxxl),
             
             // About Section
             _SettingsSection(
@@ -109,7 +111,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             
-            const SizedBox(height: 32),
+            const SizedBox(height: AppSpacing.quadXl),
             
             // Sign Out Button (placeholder for future auth)
             SizedBox(
@@ -121,7 +123,7 @@ class SettingsPage extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.error,
                   side: BorderSide(color: Theme.of(context).colorScheme.error),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                 ),
               ),
             ),
@@ -147,7 +149,7 @@ class _SettingsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
           child: Text(
             title,
             style: TextStyle(
@@ -184,10 +186,10 @@ class _SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSpacing.sm),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppSpacing.sm),
         ),
         child: Icon(
           icon,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_spacing.dart';
+
 /// Home page - Main entry point of the application.
 /// 
 /// This page serves as the primary navigation hub, directing users to
@@ -22,24 +24,24 @@ class HomePage extends StatelessWidget {
                 size: 80,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               
               Text(
                 'Macro Tracker',
                 style: Theme.of(context).textTheme.displaySmall,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
               
               Text(
                 'Track your nutrition with precision',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: AppSpacing.quadXl),
               
               // Quick Navigation Cards
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                   child: Column(
                     children: [
                       _NavigationCard(
@@ -48,21 +50,21 @@ class HomePage extends StatelessWidget {
                         subtitle: 'View your daily progress',
                         onTap: () => context.go('/dashboard'),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.md),
                       _NavigationCard(
                         icon: Icons.restaurant_outlined,
                         title: 'Meal Tracking',
                         subtitle: 'Log your meals quickly',
                         onTap: () => context.go('/meal-tracking'),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.md),
                       _NavigationCard(
                         icon: Icons.analytics_outlined,
                         title: 'Analytics',
                         subtitle: 'Insights and trends',
                         onTap: () => context.go('/analytics'),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: AppSpacing.md),
                       _NavigationCard(
                         icon: Icons.settings_outlined,
                         title: 'Settings',
@@ -101,14 +103,14 @@ class _NavigationCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(AppSpacing.xxl),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppSpacing.xxl),
                 ),
                 child: Icon(
                   icon,
@@ -116,7 +118,7 @@ class _NavigationCard extends StatelessWidget {
                   size: 24,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: AppSpacing.lg),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +127,7 @@ class _NavigationCard extends StatelessWidget {
                       title,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: AppSpacing.xs),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodySmall,

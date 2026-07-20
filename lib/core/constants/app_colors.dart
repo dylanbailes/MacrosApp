@@ -59,19 +59,16 @@ class AppColors {
   // Text Colors
   
   /// Primary text color - highest emphasis
-  static const Color textPrimary = Color(0xFFFAFAFA);
+  static const Color onPrimary = Color(0xFFFAFAFA);
   
   /// Secondary text color - medium emphasis
-  static const Color textSecondary = Color(0xFFA0A0A0);
   
   /// Tertiary text color - low emphasis (placeholders, hints)
-  static const Color textTertiary = Color(0xFF6B6B6B);
   
   /// Text color on primary background
-  static const Color textOnPrimary = Color(0xFFFFFFFF);
   
   /// Text color on surfaces
-  static const Color textOnSurface = Color(0xFFFAFAFA);
+  static const Color onSurface = Color(0xFFFAFAFA);
 
   // Icon Colors
   

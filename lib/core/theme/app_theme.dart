@@ -28,21 +28,21 @@ class AppTheme {
         secondary: AppColors.secondary,
         onSecondary: AppColors.textOnPrimary,
         secondaryContainer: AppColors.surface,
-        onSecondaryContainer: AppColors.textPrimary,
+        onSecondaryContainer: AppColors.onPrimary,
         tertiary: AppColors.info,
         onTertiary: AppColors.textOnPrimary,
         error: AppColors.error,
         onError: AppColors.textOnPrimary,
         background: AppColors.background,
-        onBackground: AppColors.textPrimary,
+        onBackground: AppColors.onPrimary,
         surface: AppColors.surface,
-        onSurface: AppColors.textOnSurface,
+        onSurface: AppColors.onSurface,
         surfaceTint: Colors.transparent,
         outline: AppColors.divider,
         outlineVariant: AppColors.dividerStrong,
         shadow: Colors.black,
         scrim: AppColors.scrim,
-        inverseSurface: AppColors.textPrimary,
+        inverseSurface: AppColors.onPrimary,
         onInverseSurface: AppColors.background,
         inversePrimary: AppColors.primary,
       ),
@@ -53,22 +53,22 @@ class AppTheme {
       // AppBar Theme
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
-        foregroundColor: AppColors.textPrimary,
+        foregroundColor: AppColors.onPrimary,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
         titleTextStyle: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: AppColors.onPrimary,
           height: 1.4,
         ),
         iconTheme: IconThemeData(
-          color: AppColors.textPrimary,
+          color: AppColors.onPrimary,
           size: AppSpacing.iconLg,
         ),
         actionsIconTheme: IconThemeData(
-          color: AppColors.textPrimary,
+          color: AppColors.onPrimary,
           size: AppSpacing.iconLg,
         ),
       ),
@@ -125,7 +125,7 @@ class AppTheme {
       // Outlined Button Theme
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.textPrimary,
+          foregroundColor: AppColors.onPrimary,
           side: const BorderSide(color: AppColors.dividerStrong),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
@@ -167,7 +167,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppBorderRadius.inputField),
           borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
-        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textTertiary),
+        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.onSurface.withOpacity(0.4)),
         labelStyle: AppTextStyles.bodyMedium,
         errorStyle: AppTextStyles.labelSmall.copyWith(color: AppColors.error),
         prefixIconColor: AppColors.iconDefault,
@@ -212,7 +212,7 @@ class AppTheme {
       // Snackbar Theme
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AppColors.surfaceElevated,
-        contentTextStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimary),
+        contentTextStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.onPrimary),
         actionTextColor: AppColors.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.sm),
@@ -264,16 +264,16 @@ class AppTheme {
         tileColor: Colors.transparent,
         selectedTileColor: AppColors.primary.withOpacity(0.1),
         iconColor: AppColors.iconDefault,
-        textColor: AppColors.textPrimary,
+        textColor: AppColors.onPrimary,
         titleTextStyle: const TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
+          color: AppColors.onPrimary,
         ),
         subtitleTextStyle: const TextStyle(
           fontSize: 13.0,
           fontWeight: FontWeight.w400,
-          color: AppColors.textSecondary,
+          color: AppColors.onSurface.withOpacity(0.6),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.sm)),
@@ -293,7 +293,7 @@ class AppTheme {
           if (states.contains(MaterialState.selected)) {
             return AppColors.primary;
           }
-          return AppColors.textTertiary;
+          return AppColors.onSurface.withOpacity(0.4);
         }),
         trackColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
@@ -323,7 +323,7 @@ class AppTheme {
           if (states.contains(MaterialState.selected)) {
             return AppColors.primary;
           }
-          return AppColors.textTertiary;
+          return AppColors.onSurface.withOpacity(0.4);
         }),
       ),
 
@@ -363,14 +363,14 @@ class AppTheme {
           if (states.contains(MaterialState.selected)) {
             return TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600);
           }
-          return TextStyle(color: AppColors.textSecondary);
+          return TextStyle(color: AppColors.onSurface.withOpacity(0.6));
         }),
       ),
 
       // Tab Bar Theme
       tabBarTheme: const TabBarTheme(
         labelColor: AppColors.primary,
-        unselectedLabelColor: AppColors.textSecondary,
+        unselectedLabelColor: AppColors.onSurface.withOpacity(0.6),
         labelStyle: TextStyle(fontWeight: FontWeight.w600),
         unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
         indicatorSize: TabBarIndicatorSize.label,
@@ -384,7 +384,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppBorderRadius.sm),
           border: Border.all(color: AppColors.dividerStrong),
         ),
-        textStyle: AppTextStyles.labelSmall.copyWith(color: AppColors.textPrimary),
+        textStyle: AppTextStyles.labelSmall.copyWith(color: AppColors.onPrimary),
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.xs,

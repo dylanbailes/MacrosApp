@@ -74,7 +74,7 @@ class AppCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: Padding(
-        padding: padding ?? const EdgeInsets.all(16),
+        padding: padding ?? const EdgeInsets.all(AppSpacing.lg),
         child: child,
       ),
     );
@@ -82,7 +82,7 @@ class AppCard extends StatelessWidget {
     return onTap != null
         ? InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(borderRadius ?? 12),
+            borderRadius: BorderRadius.circular(borderRadius ?? AppSpacing.xxl),
             child: widget,
           )
         : widget;
