@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/app_spacing.dart';
+
 /// A reusable card widget with consistent styling throughout the application.
 /// 
 /// Design philosophy: Minimal, subtle borders, dark mode optimized.
@@ -41,13 +43,20 @@ class AppCard extends StatelessWidget {
     final theme = Theme.of(context);
     final cardTheme = theme.cardTheme;
 
+    // Extract borderRadius from CardTheme, with safe fallback
+    final effectiveBorderRadius = switch (cardTheme.shape) {
+      RoundedRectangleBorder rrect => rrect.borderRadius.topLeft ?? AppSpacing.lg.toDouble(),
+      _ => AppSpacing.lg.toDouble(),
+    };
+    final radius = borderRadius ?? effectiveBorderRadius;
+
     final widget = Card(
       margin: margin ?? EdgeInsets.zero,
       color: elevated ? cardTheme.color?.withOpacity(0.8) : cardTheme.color,
       surfaceTintColor: Colors.transparent,
       elevation: elevated ? 2 : 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius ?? cardTheme.shape?.borderRadius.topLeft ?? 12),
+        borderRadius: BorderRadius.circular(radius),
         side: showBorder
             ? BorderSide(
                 color: theme.dividerColor,

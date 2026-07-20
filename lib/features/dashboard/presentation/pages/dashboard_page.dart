@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/app_colors.dart';
+
 /// Dashboard page - Main overview of daily macros and progress.
 /// 
 /// This page displays:
@@ -147,7 +149,7 @@ class DashboardPage extends StatelessWidget {
                   value: 0,
                   minHeight: 8,
                   borderRadius: BorderRadius.circular(4),
-                  backgroundColor: Colors.grey[800],
+                  backgroundColor: AppColors.divider,
                 ),
               ],
             ),
@@ -172,7 +174,7 @@ class DashboardPage extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(child: _StatCard(label: 'Water', value: '0L')),
             const SizedBox(width: 12),
-            Expanded(child: _StatCard(label: 'Weight', value: '--'))),
+            Expanded(child: _StatCard(label: 'Weight', value: '--')),
           ],
         ),
       ],

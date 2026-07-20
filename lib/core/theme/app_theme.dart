@@ -256,8 +256,8 @@ class AppTheme {
       ),
 
       // List Tile Theme
-      listTileTheme: const ListTileThemeData(
-        contentPadding: EdgeInsets.symmetric(
+      listTileTheme: ListTileThemeData(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.sm,
         ),
@@ -265,12 +265,12 @@ class AppTheme {
         selectedTileColor: AppColors.primary.withOpacity(0.1),
         iconColor: AppColors.iconDefault,
         textColor: AppColors.textPrimary,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.w500,
           color: AppColors.textPrimary,
         ),
-        subtitleTextStyle: TextStyle(
+        subtitleTextStyle: const TextStyle(
           fontSize: 13.0,
           fontWeight: FontWeight.w400,
           color: AppColors.textSecondary,
@@ -289,14 +289,14 @@ class AppTheme {
 
       // Switch Theme
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        thumbColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return AppColors.primary;
           }
           return AppColors.textTertiary;
         }),
-        trackColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        trackColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return AppColors.primary.withOpacity(0.5);
           }
           return AppColors.divider;
@@ -305,13 +305,13 @@ class AppTheme {
 
       // Checkbox Theme
       checkboxTheme: CheckboxThemeData(
-        fillColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        fillColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return AppColors.primary;
           }
           return Colors.transparent;
         }),
-        checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
+        checkColor: MaterialStateProperty.all(AppColors.textOnPrimary),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.xs),
         ),
@@ -319,8 +319,8 @@ class AppTheme {
 
       // Radio Theme
       radioTheme: RadioThemeData(
-        fillColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        fillColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return AppColors.primary;
           }
           return AppColors.textTertiary;
@@ -338,17 +338,17 @@ class AppTheme {
       ),
 
       // Navigation Bar Theme
-      navigationBarTheme: const NavigationBarThemeData(
+      navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.primary.withOpacity(0.2),
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        labelTextStyle: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return AppTextStyles.labelMedium.copyWith(color: AppColors.primary);
           }
           return AppTextStyles.labelMedium;
         }),
-        iconTheme: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        iconTheme: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return IconThemeData(color: AppColors.primary, size: AppSpacing.iconLg);
           }
           return const IconThemeData(color: AppColors.iconDefault, size: AppSpacing.iconLg);
@@ -356,11 +356,11 @@ class AppTheme {
       ),
 
       // Navigation Drawer Theme
-      navigationDrawerTheme: const NavigationDrawerThemeData(
+      navigationDrawerTheme: NavigationDrawerThemeData(
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.primary.withOpacity(0.2),
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
+        labelTextStyle: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
             return TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600);
           }
           return TextStyle(color: AppColors.textSecondary);
