@@ -61,11 +61,12 @@ class AppColors {
   /// Primary text color - highest emphasis
   static const Color onPrimary = Color(0xFFFAFAFA);
   
+  /// Text color on primary background (alias for onPrimary)
+  static const Color textOnPrimary = onPrimary;
+  
   /// Secondary text color - medium emphasis
   
   /// Tertiary text color - low emphasis (placeholders, hints)
-  
-  /// Text color on primary background
   
   /// Text color on surfaces
   static const Color onSurface = Color(0xFFFAFAFA);
