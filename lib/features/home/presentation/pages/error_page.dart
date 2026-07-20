@@ -1,3 +1,4 @@
+// Path: pages\error_page.dart
 import 'package:flutter/material.dart';
 
 /// Error page displayed when a route is not found.

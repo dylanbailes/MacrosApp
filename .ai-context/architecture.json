@@ -1,0 +1,55 @@
+{
+  "projectType": "monorepo",
+  "indicators": [
+    "Found 5 pubspec.yaml files (monorepo indicator)",
+    "Found `flutter` key in pubspec.yaml"
+  ],
+  "entryPoints": [
+    "lib\\lib\\main.dart"
+  ],
+  "layers": {
+    "Provider": {
+      "fileCount": 2,
+      "files": [
+        "lib\\providers\\app_providers.dart",
+        "lib\\providers\\providers.dart"
+      ]
+    },
+    "Widget": {
+      "fileCount": 5,
+      "files": [
+        "lib\\widgets\\app_animated_switcher.dart",
+        "lib\\widgets\\app_button.dart",
+        "lib\\widgets\\app_card.dart",
+        "lib\\widgets\\app_text_field.dart",
+        "lib\\widgets\\widgets.dart"
+      ]
+    },
+    "Page": {
+      "fileCount": 8,
+      "files": [
+        "lib\\pages\\analytics_page.dart",
+        "lib\\pages\\coach_page.dart",
+        "lib\\pages\\dashboard_page.dart",
+        "lib\\pages\\error_page.dart",
+        "lib\\pages\\home_page.dart",
+        "lib\\pages\\log_page.dart",
+        "lib\\pages\\profile_page.dart",
+        "lib\\pages\\settings_page.dart"
+      ]
+    },
+    "Domain": {
+      "fileCount": 3,
+      "files": [
+        "lib\\domain\\domain.dart",
+        "lib\\domain\\entity.dart",
+        "lib\\domain\\failure.dart"
+      ]
+    }
+  },
+  "layerDependencies": {
+    "Page": [
+      "Core"
+    ]
+  }
+}

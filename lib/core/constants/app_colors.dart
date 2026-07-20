@@ -1,3 +1,4 @@
+// Path: constants\app_colors.dart
 import 'package:flutter/material.dart';
 
 /// Core color palette for the Macro Tracker application.

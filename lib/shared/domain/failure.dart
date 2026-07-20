@@ -1,3 +1,4 @@
+// Path: domain\failure.dart
 /// Base class for all failures/errors in the application.
 abstract class Failure implements Exception {
   const Failure({

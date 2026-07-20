@@ -1,3 +1,4 @@
+// Path: constants\app_border_radius.dart
 /// Border radius constants for consistent styling throughout the application.
 /// 
 /// Design philosophy: Smooth, modern curves inspired by Nothing OS aesthetic.

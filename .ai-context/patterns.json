@@ -1,0 +1,32 @@
+{
+  "frameworks": {
+    "Riverpod": {
+      "inPubspec": true,
+      "fileCount": 4,
+      "files": [
+        "lib\\app\\macro_tracker_app.dart",
+        "lib\\providers\\app_providers.dart",
+        "lib\\providers\\providers.dart",
+        "lib\\lib\\main.dart"
+      ]
+    },
+    "GoRouter": {
+      "inPubspec": true,
+      "fileCount": 2,
+      "files": [
+        "lib\\router\\app_router.dart",
+        "lib\\pages\\home_page.dart"
+      ]
+    },
+    "Dio": {
+      "inPubspec": true,
+      "fileCount": 0,
+      "files": []
+    },
+    "Freezed": {
+      "inPubspec": true,
+      "fileCount": 0,
+      "files": []
+    }
+  }
+}

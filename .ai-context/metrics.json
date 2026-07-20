@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "totalFiles": 32,
+    "dartFiles": 32,
+    "totalLines": 2714,
+    "averageLocPerFile": 85.8,
+    "averageCommentRatio": 8.4,
+    "totalClasses": 37,
+    "totalMethods": 66,
+    "filesWithoutComments": 6
+  },
+  "largestFiles": [
+    {
+      "file": "lib\\theme\\app_theme.dart",
+      "lines": 439
+    },
+    {
+      "file": "lib\\pages\\dashboard_page.dart",
+      "lines": 265
+    },
+    {
+      "file": "lib\\widgets\\app_button.dart",
+      "lines": 220
+    },
+    {
+      "file": "lib\\pages\\settings_page.dart",
+      "lines": 211
+    },
+    {
+      "file": "lib\\theme\\app_text_styles.dart",
+      "lines": 168
+    }
+  ],
+  "smallestFile": {
+    "file": "lib\\extensions\\extensions.dart",
+    "lines": 2
+  }
+}

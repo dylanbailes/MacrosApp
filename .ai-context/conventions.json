@@ -1,0 +1,13 @@
+{
+  "fileSuffixes": {
+    "_page": 8
+  },
+  "classSuffixes": {
+    "Page": 8
+  },
+  "filePurposes": {
+    "other": 18,
+    "widget": 13,
+    "entry_point": 1
+  }
+}

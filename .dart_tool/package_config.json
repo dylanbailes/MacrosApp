@@ -224,6 +224,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_project_structure",
+      "rootUri": "file:///C:/Users/dbail/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_project_structure-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "flutter_riverpod",
       "rootUri": "file:///C:/Users/dbail/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_riverpod-2.6.1",
       "packageUri": "lib/",
@@ -396,6 +402,12 @@
       "rootUri": "file:///C:/Users/dbail/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.13.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
+    },
+    {
+      "name": "mcp_dart",
+      "rootUri": "file:///C:/Users/dbail/AppData/Local/Pub/Cache/hosted/pub.dev/mcp_dart-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "meta",

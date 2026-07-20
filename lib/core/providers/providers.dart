@@ -1,3 +1,4 @@
+// Path: providers\providers.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 export 'app_providers.dart';

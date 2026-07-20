@@ -1,3 +1,4 @@
+// Path: domain\entity.dart
 import 'package:equatable/equatable.dart';
 
 /// Base class for all domain models/entities.

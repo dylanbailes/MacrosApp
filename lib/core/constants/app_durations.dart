@@ -1,3 +1,4 @@
+// Path: constants\app_durations.dart
 import 'package:flutter/material.dart';
 
 /// Animation duration constants for consistent motion throughout the application.

@@ -1,3 +1,4 @@
+// Path: widgets\app_animated_switcher.dart
 import 'package:flutter/material.dart';
 
 import '../constants/app_durations.dart';

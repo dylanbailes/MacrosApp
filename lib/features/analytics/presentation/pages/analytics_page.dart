@@ -1,3 +1,4 @@
+// Path: pages\analytics_page.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_spacing.dart';

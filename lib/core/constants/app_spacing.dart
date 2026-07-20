@@ -1,3 +1,4 @@
+// Path: constants\app_spacing.dart
 import 'package:flutter/material.dart';
 
 /// Spacing constants for consistent layout throughout the application.

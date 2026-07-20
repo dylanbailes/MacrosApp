@@ -1,3 +1,4 @@
+// Path: pages\dashboard_page.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

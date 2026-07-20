@@ -1,0 +1,261 @@
+{
+  "totalFiles": 32,
+  "files": {
+    "lib\\app\\macro_tracker_app.dart": {
+      "purpose": "other",
+      "linesOfCode": 45,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 6,
+      "commentRatio": 13.3
+    },
+    "lib\\router\\app_router.dart": {
+      "purpose": "other",
+      "linesOfCode": 100,
+      "classes": 2,
+      "methods": 0,
+      "commentLines": 4,
+      "commentRatio": 4.0
+    },
+    "lib\\constants\\app_border_radius.dart": {
+      "purpose": "other",
+      "linesOfCode": 53,
+      "classes": 1,
+      "methods": 0,
+      "commentLines": 18,
+      "commentRatio": 34.0
+    },
+    "lib\\constants\\app_colors.dart": {
+      "purpose": "other",
+      "linesOfCode": 105,
+      "classes": 1,
+      "methods": 0,
+      "commentLines": 30,
+      "commentRatio": 28.6
+    },
+    "lib\\constants\\app_durations.dart": {
+      "purpose": "other",
+      "linesOfCode": 43,
+      "classes": 1,
+      "methods": 0,
+      "commentLines": 14,
+      "commentRatio": 32.6
+    },
+    "lib\\constants\\app_spacing.dart": {
+      "purpose": "other",
+      "linesOfCode": 64,
+      "classes": 1,
+      "methods": 0,
+      "commentLines": 19,
+      "commentRatio": 29.7
+    },
+    "lib\\constants\\app_typography.dart": {
+      "purpose": "other",
+      "linesOfCode": 135,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 9,
+      "commentRatio": 6.7
+    },
+    "lib\\constants\\constants.dart": {
+      "purpose": "other",
+      "linesOfCode": 7,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    },
+    "lib\\providers\\app_providers.dart": {
+      "purpose": "other",
+      "linesOfCode": 21,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 6,
+      "commentRatio": 28.6
+    },
+    "lib\\providers\\providers.dart": {
+      "purpose": "other",
+      "linesOfCode": 25,
+      "classes": 1,
+      "methods": 2,
+      "commentLines": 1,
+      "commentRatio": 4.0
+    },
+    "lib\\theme\\app_text_styles.dart": {
+      "purpose": "other",
+      "linesOfCode": 168,
+      "classes": 1,
+      "methods": 19,
+      "commentLines": 8,
+      "commentRatio": 4.8
+    },
+    "lib\\theme\\app_theme.dart": {
+      "purpose": "other",
+      "linesOfCode": 439,
+      "classes": 1,
+      "methods": 2,
+      "commentLines": 6,
+      "commentRatio": 1.4
+    },
+    "lib\\theme\\theme.dart": {
+      "purpose": "other",
+      "linesOfCode": 4,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    },
+    "lib\\widgets\\app_animated_switcher.dart": {
+      "purpose": "widget",
+      "linesOfCode": 39,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 1,
+      "commentRatio": 2.6
+    },
+    "lib\\widgets\\app_button.dart": {
+      "purpose": "widget",
+      "linesOfCode": 220,
+      "classes": 1,
+      "methods": 5,
+      "commentLines": 13,
+      "commentRatio": 5.9
+    },
+    "lib\\widgets\\app_card.dart": {
+      "purpose": "widget",
+      "linesOfCode": 92,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 10,
+      "commentRatio": 10.9
+    },
+    "lib\\widgets\\app_text_field.dart": {
+      "purpose": "widget",
+      "linesOfCode": 83,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 1,
+      "commentRatio": 1.2
+    },
+    "lib\\widgets\\widgets.dart": {
+      "purpose": "widget",
+      "linesOfCode": 6,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    },
+    "lib\\pages\\analytics_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 67,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 9,
+      "commentRatio": 13.4
+    },
+    "lib\\pages\\coach_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 66,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 8,
+      "commentRatio": 12.1
+    },
+    "lib\\pages\\dashboard_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 265,
+      "classes": 3,
+      "methods": 7,
+      "commentLines": 7,
+      "commentRatio": 2.6
+    },
+    "lib\\pages\\error_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 32,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 1,
+      "commentRatio": 3.1
+    },
+    "lib\\pages\\home_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 150,
+      "classes": 2,
+      "methods": 2,
+      "commentLines": 4,
+      "commentRatio": 2.7
+    },
+    "lib\\pages\\log_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 67,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 9,
+      "commentRatio": 13.4
+    },
+    "lib\\pages\\profile_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 67,
+      "classes": 1,
+      "methods": 1,
+      "commentLines": 9,
+      "commentRatio": 13.4
+    },
+    "lib\\pages\\settings_page.dart": {
+      "purpose": "widget",
+      "linesOfCode": 211,
+      "classes": 3,
+      "methods": 3,
+      "commentLines": 9,
+      "commentRatio": 4.3
+    },
+    "lib\\lib\\main.dart": {
+      "purpose": "entry_point",
+      "linesOfCode": 22,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    },
+    "lib\\domain\\domain.dart": {
+      "purpose": "other",
+      "linesOfCode": 4,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    },
+    "lib\\domain\\entity.dart": {
+      "purpose": "other",
+      "linesOfCode": 19,
+      "classes": 1,
+      "methods": 3,
+      "commentLines": 5,
+      "commentRatio": 26.3
+    },
+    "lib\\domain\\failure.dart": {
+      "purpose": "other",
+      "linesOfCode": 74,
+      "classes": 8,
+      "methods": 1,
+      "commentLines": 10,
+      "commentRatio": 13.5
+    },
+    "lib\\extensions\\build_context_extensions.dart": {
+      "purpose": "other",
+      "linesOfCode": 50,
+      "classes": 0,
+      "methods": 12,
+      "commentLines": 13,
+      "commentRatio": 26.0
+    },
+    "lib\\extensions\\extensions.dart": {
+      "purpose": "other",
+      "linesOfCode": 3,
+      "classes": 0,
+      "methods": 0,
+      "commentLines": 0,
+      "commentRatio": 0.0
+    }
+  }
+}
