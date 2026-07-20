@@ -1,33 +1,37 @@
 ```
-# Environment variables
+# Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Dependencies
-.dart_tool/
-.packages
 .pub/
-pubspec.lock
+.buildlog
+.packages
 
-# Build outputs
-build/
-dist/
-
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+*.swp
 
-# IDE files
-.vscode/
+# Coverage
+coverage/
+*.coverage
+.htmlcov
+
+# IDE
 .idea/
+.vscode/
 *.iml
 *.ipr
 *.iws
 
-# OS generated files
+# OS
 .DS_Store
 Thumbs.db
 
-# Coverage
-coverage/
+# Build outputs
+build/
+dist/
+target/
 ```

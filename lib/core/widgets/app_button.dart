@@ -129,7 +129,11 @@ class AppButton extends StatelessWidget {
       duration: AppDurations.fast,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppBorderRadius.button),
-        border: _getBorderColor(theme),
+        // _getBorderColor returns a nullable BorderSide; wrap it in Border for BoxDecoration
+        border: (() {
+          final borderSide = _getBorderColor(theme);
+          return borderSide != null ? Border.fromBorderSide(borderSide) : null;
+        })(),
       ),
       child: Material(
         color: _getBackgroundColor(theme),
@@ -175,13 +179,16 @@ class AppButton extends StatelessWidget {
   BorderSide? _getBorderColor(ThemeData theme) {
     if (disabled) return const BorderSide(color: AppColors.dividerStrong);
 
-    return switch (variant) {
+    final borderSide = switch (variant) {
       AppButtonVariant.primary => BorderSide.none,
       AppButtonVariant.secondary => BorderSide.none,
       AppButtonVariant.outline => const BorderSide(color: AppColors.dividerStrong),
       AppButtonVariant.ghost => BorderSide.none,
       AppButtonVariant.text => BorderSide.none,
     };
+
+    // Convert BorderSide to BoxBorder for BoxDecoration.border
+    return borderSide == BorderSide.none ? null : borderSide;
   }
 
   Color _getSplashColor(ThemeData theme) {

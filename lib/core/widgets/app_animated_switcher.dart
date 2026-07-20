@@ -36,33 +36,3 @@ class AppAnimatedSwitcher extends StatelessWidget {
     );
   }
 }
-
-/// Page transition builder for GoRouter
-Route<T> createPageTransition<T>({
-  required Widget child,
-  required GoRouterState state,
-}) {
-  return PageRouteBuilder<T>(
-    pageBuilder: (_, __, ___) => child,
-    transitionDuration: AppDurations.medium,
-    reverseTransitionDuration: AppDurations.fast,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return FadeTransition(
-        opacity: CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutCubic,
-        ),
-        child: SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0.02, 0.0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutCubic,
-          )),
-          child: child,
-        ),
-      );
-    },
-  );
-}
