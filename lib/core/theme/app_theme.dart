@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../constants/app_border_radius.dart';
 import '../constants/app_colors.dart';
@@ -74,7 +75,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.card,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
@@ -185,7 +186,7 @@ class AppTheme {
       ),
 
       // Dialog Theme
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: AppColors.surfaceElevated,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
@@ -368,7 +369,7 @@ class AppTheme {
       ),
 
       // Tab Bar Theme
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme: const TabBarThemeData(
         labelColor: AppColors.primary,
         unselectedLabelColor: AppColors.onSurface.withOpacity(0.6),
         labelStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -412,13 +413,13 @@ class AppTheme {
       ),
 
       // Page Transitions Theme
-      pageTransitionsTheme: const PageTransitionsTheme(
+      pageTransitionsTheme: PageTransitionsTheme(
         builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: const CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
+          TargetPlatform.windows: const CupertinoPageTransitionsBuilder(),
+          TargetPlatform.linux: const CupertinoPageTransitionsBuilder(),
+          TargetPlatform.macOS: const CupertinoPageTransitionsBuilder(),
         },
       ),
 
