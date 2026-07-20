@@ -44,11 +44,19 @@ class AppCard extends StatelessWidget {
     final cardTheme = theme.cardTheme;
 
     // Extract borderRadius from CardTheme, with safe fallback
-    final effectiveBorderRadius = switch (cardTheme.shape) {
-      RoundedRectangleBorder rrect => rrect.borderRadius.topLeft ?? AppSpacing.lg.toDouble(),
-      _ => AppSpacing.lg.toDouble(),
+    // CardTheme.shape is ShapeBorder?, so we need to safely extract the radius
+    final BorderRadiusGeometry? themeBorderRadius = switch (cardTheme.shape) {
+      RoundedRectangleBorder rrect => rrect.borderRadius,
+      _ => null,
     };
-    final radius = borderRadius ?? effectiveBorderRadius;
+    
+    // Resolve the BorderRadiusGeometry to BorderRadius and extract a consistent radius value
+    final resolvedBorder = themeBorderRadius?.resolve(TextDirection.ltr);
+    final effectiveRadiusValue = resolvedBorder != null 
+        ? resolvedBorder.topLeft.x // Radius.x gives us the double value
+        : AppSpacing.lg.toDouble();
+    
+    final radius = borderRadius ?? effectiveRadiusValue;
 
     final widget = Card(
       margin: margin ?? EdgeInsets.zero,

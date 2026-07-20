@@ -129,9 +129,11 @@ class AppButton extends StatelessWidget {
       duration: AppDurations.fast,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppBorderRadius.button),
-        border: _getBorderColor(theme) != null
-            ? Border.fromBorderSide(_getBorderColor(theme)!)
-            : null,
+        // _getBorderColor returns a nullable BorderSide; wrap it in Border for BoxDecoration
+        border: (() {
+          final borderSide = _getBorderColor(theme);
+          return borderSide != null ? Border.fromBorderSide(borderSide) : null;
+        })(),
       ),
       child: Material(
         color: _getBackgroundColor(theme),
