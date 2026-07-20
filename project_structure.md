@@ -16,9 +16,13 @@
         <details>
           <summary>Imports</summary>
 
+          - `../../features/analytics/presentation/pages/analytics_page.dart`
+          - `../../features/coach/presentation/pages/coach_page.dart`
           - `../../features/dashboard/presentation/pages/dashboard_page.dart`
           - `../../features/home/presentation/pages/error_page.dart`
           - `../../features/home/presentation/pages/home_page.dart`
+          - `../../features/log/presentation/pages/log_page.dart`
+          - `../../features/profile/presentation/pages/profile_page.dart`
           - `../../features/settings/presentation/pages/settings_page.dart`
           - `package:flutter/material.dart`
           - `package:go_router/go_router.dart`
@@ -42,12 +46,6 @@
         </details>
 
     - 📄 `core\constants\app_spacing.dart`
-        <details>
-          <summary>Imports</summary>
-
-          - `package:flutter/material.dart`
-        </details>
-
     - 📄 `core\constants\app_typography.dart`
         <details>
           <summary>Imports</summary>
@@ -79,7 +77,6 @@
           <summary>Imports</summary>
 
           - `../constants/app_colors.dart`
-          - `../constants/app_spacing.dart`
           - `package:flutter/material.dart`
           - `package:google_fonts/google_fonts.dart`
         </details>
@@ -90,7 +87,6 @@
 
           - `../constants/app_border_radius.dart`
           - `../constants/app_colors.dart`
-          - `../constants/app_durations.dart`
           - `../constants/app_spacing.dart`
           - `app_text_styles.dart`
           - `package:flutter/cupertino.dart`
@@ -99,11 +95,28 @@
 
     - 📄 `core\theme\theme.dart`
   - 📁 **widgets**
-    - 📄 `core\widgets\app_animated_switcher.dart`
+    - 📄 `core\widgets\animated_list_item.dart`
         <details>
           <summary>Imports</summary>
 
           - `../constants/app_durations.dart`
+          - `package:flutter/material.dart`
+        </details>
+
+    - 📄 `core\widgets\animated_metric_ring.dart`
+        <details>
+          <summary>Imports</summary>
+
+          - `../constants/app_colors.dart`
+          - `../constants/app_durations.dart`
+          - `dart:math`
+          - `package:flutter/material.dart`
+        </details>
+
+    - 📄 `core\widgets\app_animated_switcher.dart`
+        <details>
+          <summary>Imports</summary>
+
           - `package:flutter/material.dart`
         </details>
 
@@ -115,7 +128,6 @@
           - `../constants/app_colors.dart`
           - `../constants/app_durations.dart`
           - `../constants/app_spacing.dart`
-          - `../theme/app_text_styles.dart`
           - `package:flutter/material.dart`
         </details>
 
@@ -123,7 +135,19 @@
         <details>
           <summary>Imports</summary>
 
+          - `../constants/app_colors.dart`
+          - `../constants/app_durations.dart`
           - `../constants/app_spacing.dart`
+          - `package:flutter/material.dart`
+        </details>
+
+    - 📄 `core\widgets\app_glass_container.dart`
+        <details>
+          <summary>Imports</summary>
+
+          - `../constants/app_border_radius.dart`
+          - `../constants/app_colors.dart`
+          - `dart:ui`
           - `package:flutter/material.dart`
         </details>
 
@@ -188,7 +212,12 @@
             <details>
               <summary>Imports</summary>
 
+              - `../../../../core/constants/app_colors.dart`
+              - `../../../../core/constants/app_durations.dart`
               - `../../../../core/constants/app_spacing.dart`
+              - `../../../../core/theme/app_text_styles.dart`
+              - `../../../../core/widgets/app_glass_container.dart`
+              - `package:flutter/cupertino.dart`
               - `package:flutter/material.dart`
               - `package:go_router/go_router.dart`
             </details>
@@ -279,8 +308,8 @@
 
 ### Detected Layers
 
+- **Widget** (8 files)
 - **Page** (8 files)
-- **Widget** (5 files)
 - **Domain** (3 files)
 - **Provider** (2 files)
 
@@ -296,10 +325,10 @@
 
 ## Project Statistics
 
-- Total Files: 32
-- Dart Files: 32
-- Total Lines of Dart Code: 2714
-- Largest File: `lib\theme\app_theme.dart` with 438 lines
+- Total Files: 35
+- Dart Files: 35
+- Total Lines of Dart Code: 3075
+- Largest File: `lib\theme\app_theme.dart` with 329 lines
 - Smallest File: `lib\extensions\extensions.dart` with 2 lines
 
 
@@ -315,13 +344,15 @@ Used in:
   - lib\router\app_router.dart
   - lib\constants\app_colors.dart
   - lib\constants\app_durations.dart
-  - lib\constants\app_spacing.dart
   - lib\constants\app_typography.dart
   - lib\theme\app_text_styles.dart
   - lib\theme\app_theme.dart
+  - lib\widgets\animated_list_item.dart
+  - lib\widgets\animated_metric_ring.dart
   - lib\widgets\app_animated_switcher.dart
   - lib\widgets\app_button.dart
   - lib\widgets\app_card.dart
+  - lib\widgets\app_glass_container.dart
   - lib\widgets\app_text_field.dart
   - lib\pages\analytics_page.dart
   - lib\pages\coach_page.dart
@@ -367,11 +398,11 @@ File: lib\app\macro_tracker_app.dart
   Comment Ratio: 13.33%
 
 File: lib\router\app_router.dart
-  Lines of Code: 100
+  Lines of Code: 117
   Classes: 2
   Methods: 0
-  Comment Lines: 4
-  Comment Ratio: 4.00%
+  Comment Lines: 5
+  Comment Ratio: 4.27%
 
 File: lib\constants\app_border_radius.dart
   Lines of Code: 53
@@ -381,25 +412,25 @@ File: lib\constants\app_border_radius.dart
   Comment Ratio: 33.96%
 
 File: lib\constants\app_colors.dart
-  Lines of Code: 105
+  Lines of Code: 104
   Classes: 1
   Methods: 0
-  Comment Lines: 30
-  Comment Ratio: 28.57%
+  Comment Lines: 28
+  Comment Ratio: 26.92%
 
 File: lib\constants\app_durations.dart
-  Lines of Code: 43
-  Classes: 1
-  Methods: 0
-  Comment Lines: 14
-  Comment Ratio: 32.56%
+  Lines of Code: 62
+  Classes: 2
+  Methods: 1
+  Comment Lines: 16
+  Comment Ratio: 25.81%
 
 File: lib\constants\app_spacing.dart
-  Lines of Code: 64
+  Lines of Code: 63
   Classes: 1
   Methods: 0
   Comment Lines: 19
-  Comment Ratio: 29.69%
+  Comment Ratio: 30.16%
 
 File: lib\constants\app_typography.dart
   Lines of Code: 135
@@ -430,18 +461,18 @@ File: lib\providers\providers.dart
   Comment Ratio: 4.00%
 
 File: lib\theme\app_text_styles.dart
-  Lines of Code: 168
+  Lines of Code: 172
   Classes: 1
   Methods: 19
   Comment Lines: 8
-  Comment Ratio: 4.76%
+  Comment Ratio: 4.65%
 
 File: lib\theme\app_theme.dart
-  Lines of Code: 439
+  Lines of Code: 330
   Classes: 1
   Methods: 2
   Comment Lines: 6
-  Comment Ratio: 1.37%
+  Comment Ratio: 1.82%
 
 File: lib\theme\theme.dart
   Lines of Code: 4
@@ -450,26 +481,47 @@ File: lib\theme\theme.dart
   Comment Lines: 0
   Comment Ratio: 0.00%
 
+File: lib\widgets\animated_list_item.dart
+  Lines of Code: 91
+  Classes: 2
+  Methods: 5
+  Comment Lines: 6
+  Comment Ratio: 6.59%
+
+File: lib\widgets\animated_metric_ring.dart
+  Lines of Code: 198
+  Classes: 3
+  Methods: 7
+  Comment Lines: 10
+  Comment Ratio: 5.05%
+
 File: lib\widgets\app_animated_switcher.dart
-  Lines of Code: 39
+  Lines of Code: 38
   Classes: 1
   Methods: 1
   Comment Lines: 1
-  Comment Ratio: 2.56%
+  Comment Ratio: 2.63%
 
 File: lib\widgets\app_button.dart
-  Lines of Code: 220
-  Classes: 1
-  Methods: 5
-  Comment Lines: 13
-  Comment Ratio: 5.91%
+  Lines of Code: 239
+  Classes: 2
+  Methods: 11
+  Comment Lines: 3
+  Comment Ratio: 1.26%
 
 File: lib\widgets\app_card.dart
-  Lines of Code: 92
+  Lines of Code: 142
+  Classes: 2
+  Methods: 7
+  Comment Lines: 3
+  Comment Ratio: 2.11%
+
+File: lib\widgets\app_glass_container.dart
+  Lines of Code: 61
   Classes: 1
   Methods: 1
-  Comment Lines: 10
-  Comment Ratio: 10.87%
+  Comment Lines: 4
+  Comment Ratio: 6.56%
 
 File: lib\widgets\app_text_field.dart
   Lines of Code: 83
@@ -479,7 +531,7 @@ File: lib\widgets\app_text_field.dart
   Comment Ratio: 1.20%
 
 File: lib\widgets\widgets.dart
-  Lines of Code: 6
+  Lines of Code: 9
   Classes: 0
   Methods: 0
   Comment Lines: 0
@@ -514,11 +566,11 @@ File: lib\pages\error_page.dart
   Comment Ratio: 3.13%
 
 File: lib\pages\home_page.dart
-  Lines of Code: 150
-  Classes: 2
-  Methods: 2
-  Comment Lines: 4
-  Comment Ratio: 2.67%
+  Lines of Code: 164
+  Classes: 3
+  Methods: 4
+  Comment Lines: 6
+  Comment Ratio: 3.66%
 
 File: lib\pages\log_page.dart
   Lines of Code: 67
@@ -587,7 +639,7 @@ File: lib\extensions\extensions.dart
 
 ## Naming Conventions
 
-- Files following suffix convention: 8/32 (25.0%)
+- Files following suffix convention: 8/35 (22.9%)
 
 ### File Naming Conventions
 
@@ -600,6 +652,7 @@ File: lib\extensions\extensions.dart
 | Suffix | Count |
 |--------|-------|
 | `Page` | 8 |
+| `State` | 4 |
 
 
 
@@ -610,7 +663,7 @@ File: lib\extensions\extensions.dart
 | Purpose | Count |
 |---------|-------|
 | other | 18 |
-| widget | 13 |
+| widget | 16 |
 | entry_point | 1 |
 
 ### File Details
@@ -642,9 +695,12 @@ File: lib\extensions\extensions.dart
 - `lib\theme\app_text_styles.dart` → other
 - `lib\theme\app_theme.dart` → other
 - `lib\theme\theme.dart` → other
+- `lib\widgets\animated_list_item.dart` → widget
+- `lib\widgets\animated_metric_ring.dart` → widget
 - `lib\widgets\app_animated_switcher.dart` → widget
 - `lib\widgets\app_button.dart` → widget
 - `lib\widgets\app_card.dart` → widget
+- `lib\widgets\app_glass_container.dart` → widget
 - `lib\widgets\app_text_field.dart` → widget
 - `lib\widgets\widgets.dart` → widget
 
@@ -652,18 +708,18 @@ File: lib\extensions\extensions.dart
 
 ## Aggregated Metrics
 
-- Total Classes: 37
-- Total Methods: 66
-- Average LOC per file: 85.8
-- Average Comment Ratio: 8.4%
+- Total Classes: 47
+- Total Methods: 94
+- Average LOC per file: 88.9
+- Average Comment Ratio: 7.6%
 - Files without comments: 6
 
 ### Largest Files (Top 5)
 
-1. `lib\theme\app_theme.dart` - 439 lines
+1. `lib\theme\app_theme.dart` - 330 lines
 2. `lib\pages\dashboard_page.dart` - 265 lines
-3. `lib\widgets\app_button.dart` - 220 lines
+3. `lib\widgets\app_button.dart` - 239 lines
 4. `lib\pages\settings_page.dart` - 211 lines
-5. `lib\theme\app_text_styles.dart` - 168 lines
+5. `lib\widgets\animated_metric_ring.dart` - 198 lines
 
 

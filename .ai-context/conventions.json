@@ -3,11 +3,12 @@
     "_page": 8
   },
   "classSuffixes": {
+    "State": 4,
     "Page": 8
   },
   "filePurposes": {
     "other": 18,
-    "widget": 13,
+    "widget": 16,
     "entry_point": 1
   }
 }

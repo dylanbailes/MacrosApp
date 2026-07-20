@@ -1,3 +1,4 @@
+// Path: widgets\animated_list_item.dart
 import 'package:flutter/material.dart';
 
 import '../constants/app_durations.dart';

@@ -16,11 +16,14 @@
       ]
     },
     "Widget": {
-      "fileCount": 5,
+      "fileCount": 8,
       "files": [
+        "lib\\widgets\\animated_list_item.dart",
+        "lib\\widgets\\animated_metric_ring.dart",
         "lib\\widgets\\app_animated_switcher.dart",
         "lib\\widgets\\app_button.dart",
         "lib\\widgets\\app_card.dart",
+        "lib\\widgets\\app_glass_container.dart",
         "lib\\widgets\\app_text_field.dart",
         "lib\\widgets\\widgets.dart"
       ]

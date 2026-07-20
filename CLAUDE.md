@@ -10,8 +10,8 @@
 
 ### Layers
 
+- Widget (8 files)
 - Page (8 files)
-- Widget (5 files)
 - Domain (3 files)
 - Provider (2 files)
 
@@ -43,9 +43,12 @@ lib/
       app_theme.dart
       theme.dart
     widgets/
+      animated_list_item.dart
+      animated_metric_ring.dart
       app_animated_switcher.dart
       app_button.dart
       app_card.dart
+      app_glass_container.dart
       app_text_field.dart
       widgets.dart
   features/
@@ -77,12 +80,12 @@ lib/
 ## Conventions
 
 - File naming: snake_case with suffixes (_page)
-- Class naming: PascalCase with suffixes (Page)
-- File purposes: other (18), widget (13), entry_point (1)
+- Class naming: PascalCase with suffixes (State, Page)
+- File purposes: other (18), widget (16), entry_point (1)
 
 ## Dependencies
 
-- flutter: 22 files
+- flutter: 24 files
 - flutter_riverpod: 4 files
 - go_router: 2 files
 - google_fonts: 2 files
@@ -90,12 +93,12 @@ lib/
 
 ## Code Health
 
-- 32 files, 2714 lines of Dart code
-- 37 classes, 66 methods
-- Average 85.8 LOC/file, 8.4% comment ratio
+- 35 files, 3075 lines of Dart code
+- 47 classes, 94 methods
+- Average 88.9 LOC/file, 7.6% comment ratio
 - 6 files without comments
 
 ### Technical Debt
 
-- Largest files: app_theme.dart (439), dashboard_page.dart (265), app_button.dart (220), settings_page.dart (211), app_text_styles.dart (168)
+- Largest files: app_theme.dart (330), dashboard_page.dart (265), app_button.dart (239), settings_page.dart (211), animated_metric_ring.dart (198)
 
