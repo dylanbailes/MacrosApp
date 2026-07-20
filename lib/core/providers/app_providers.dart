@@ -10,7 +10,7 @@ final appInitializationProvider = StateProvider<bool>((ref) => false);
 
 /// Provider for tracking if the app is in debug mode
 final debugModeProvider = Provider<bool>((ref) {
-  bool isDebug = false;
+  var isDebug = false;
   assert(() {
     isDebug = true;
     return true;

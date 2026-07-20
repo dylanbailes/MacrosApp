@@ -45,8 +45,8 @@ class AppCard extends StatelessWidget {
 
     // Extract borderRadius from CardTheme, with safe fallback
     // CardTheme.shape is ShapeBorder?, so we need to safely extract the radius
-    final BorderRadiusGeometry? themeBorderRadius = switch (cardTheme.shape) {
-      RoundedRectangleBorder rrect => rrect.borderRadius,
+    final themeBorderRadius = switch (cardTheme.shape) {
+      final RoundedRectangleBorder rrect => rrect.borderRadius,
       _ => null,
     };
     

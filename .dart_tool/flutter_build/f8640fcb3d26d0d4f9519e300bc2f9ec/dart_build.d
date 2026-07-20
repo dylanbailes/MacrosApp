@@ -1,0 +1,1 @@
+ D:\\MacrosApp\\MacrosApp\\.dart_tool\\flutter_build\\f8640fcb3d26d0d4f9519e300bc2f9ec\\dart_build_result.json:  D:\\MacrosApp\\MacrosApp\\.dart_tool\\package_config.json D:\\MacrosApp\\MacrosApp\\pubspec.yaml D:\\flutter\\bin\\cache\\dart-sdk\\version d:\\macrosapp\\macrosapp\\.dart_tool\\package_config.json
