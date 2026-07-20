@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
+import '../../features/home/presentation/pages/error_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 
@@ -36,8 +37,8 @@ final class AppRouter {
           GoRoute(
             path: 'dashboard',
             name: 'dashboard',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DashboardPage(),
+            pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: const DashboardPage(),
             ),
           ),
 
@@ -45,8 +46,8 @@ final class AppRouter {
           GoRoute(
             path: 'settings',
             name: 'settings',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SettingsPage(),
+            pageBuilder: (context, state) => NoTransitionPage<void>(
+              child: const SettingsPage(),
             ),
           ),
 
@@ -92,23 +93,6 @@ final class AppRouter {
         ],
       ),
     ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Page not found',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Route: ${state.uri.path}',
-              style: const TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    ),
+    errorBuilder: (context, state) => ErrorPage(routePath: state.uri.path),
   );
 }
