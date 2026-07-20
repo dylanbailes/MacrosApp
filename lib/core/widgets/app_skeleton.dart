@@ -56,6 +56,14 @@ class _AppSkeletonState extends State<AppSkeleton>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
+        // Use a finite track width so the shimmer offset never becomes NaN
+        // (widget.width may be double.infinity, and infinity * -1 = NaN).
+        final trackWidth = widget.width;
+        final shimmerWidth = (trackWidth != null && trackWidth.isFinite)
+            ? trackWidth
+            : 200.0;
+        final dx = _animation.value * shimmerWidth;
+
         return Container(
           width: widget.width,
           height: widget.height,
@@ -71,7 +79,7 @@ class _AppSkeletonState extends State<AppSkeleton>
             children: [
               // Shimmer sweep
               Positioned(
-                left: _animation.value * (widget.width ?? 200),
+                left: dx,
                 top: 0,
                 bottom: 0,
                 child: Container(
