@@ -1,0 +1,54 @@
+# Macro Tracker Cline Rules
+
+## Context
+
+This is a Flutter macro tracking application.
+
+Before making any changes, read:
+- PRODUCT_SPEC.md
+- CLAUDE.md
+- ui-blueprint.md
+- ARCHITECTURE.md
+- implementation-guide-for-ai-agents.md
+- visual-design-specification.md
+
+The implementation guide is the source of truth for coding decisions.
+
+## Development Rules
+
+- Follow existing architecture.
+- Use Riverpod for state management.
+- Use GoRouter for navigation.
+- Use Freezed where existing patterns require it.
+- Maintain Material 3.
+- Use existing theme constants instead of hardcoded values.
+
+## UI Rules
+
+- Follow UI_GUIDELINES.md.
+- Preserve the Nothing OS inspired design:
+  - minimal
+  - dark only
+  - high information density
+  - smooth animations
+  - clean typography
+
+Do not create generic Material UI.
+
+## Code Changes
+
+Before large changes:
+- Explain the plan.
+- List affected files.
+
+When editing:
+- Keep changes scoped.
+- Do not rewrite unrelated files.
+- Do not add dependencies without approval.
+
+## Validation
+
+After changes:
+- Run flutter analyze.
+- Fix introduced errors.
+- Verify the app builds.
