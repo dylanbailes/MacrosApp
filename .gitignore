@@ -63,9 +63,22 @@ ehthumbs.db
 Icon?
 .CFUserTextEncoding
 
-# Editors
-.vscode/
+# Logs
+*.log
+**/logs
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE specific
 .idea/
+.vscode/
 *.swp
 *.swo
 

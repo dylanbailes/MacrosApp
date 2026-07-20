@@ -68,7 +68,7 @@ class AppButton extends StatelessWidget {
       AppButtonSize.large => 16.0,
     };
 
-    var content = Row(
+    Widget content = Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
