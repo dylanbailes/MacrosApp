@@ -5,12 +5,11 @@ import '../constants/app_border_radius.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_durations.dart';
 import '../constants/app_spacing.dart';
-import '../theme/app_text_styles.dart';
 
-/// A reusable button widget with multiple variants.
+/// A reusable button widget with multiple variants and premium interactions.
 /// 
-/// Supports: primary, secondary, outline, ghost, and text variants.
-class AppButton extends StatelessWidget {
+/// Features: scale down on press, clean loading state, pill shape design.
+class AppButton extends StatefulWidget {
   const AppButton({
     required this.onPressed, super.key,
     this.label,
@@ -22,154 +21,196 @@ class AppButton extends StatelessWidget {
     this.disabled = false,
   });
 
-  /// Callback when the button is pressed
   final VoidCallback? onPressed;
-
-  /// Text label for the button
   final String? label;
-
-  /// Optional icon to display before the label
   final IconData? icon;
-
-  /// Button visual variant
   final AppButtonVariant variant;
-
-  /// Button size preset
   final AppButtonSize size;
-
-  /// Whether the button is in a loading state
   final bool isLoading;
-
-  /// Whether the button should expand to full width
   final bool isFullWidth;
-
-  /// Whether the button is disabled
   final bool disabled;
+
+  @override
+  State<AppButton> createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: AppDurations.xFast,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOutCubic,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool get _isEffectivelyDisabled => widget.disabled || widget.isLoading || widget.onPressed == null;
+
+  void _onTapDown(TapDownDetails details) {
+    if (!_isEffectivelyDisabled) _controller.forward();
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    if (!_isEffectivelyDisabled) {
+      _controller.reverse();
+      widget.onPressed!();
+    }
+  }
+
+  void _onTapCancel() {
+    if (!_isEffectivelyDisabled) _controller.reverse();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveOnPressed = (disabled || isLoading) ? null : onPressed;
 
-    final height = switch (size) {
+    final height = switch (widget.size) {
       AppButtonSize.small => 36.0,
       AppButtonSize.medium => AppSpacing.buttonHeight,
       AppButtonSize.large => 56.0,
     };
 
-    final horizontalPadding = switch (size) {
+    final horizontalPadding = switch (widget.size) {
       AppButtonSize.small => AppSpacing.md,
       AppButtonSize.medium => AppSpacing.lg,
       AppButtonSize.large => AppSpacing.xl,
     };
 
-    final fontSize = switch (size) {
+    final fontSize = switch (widget.size) {
       AppButtonSize.small => 13.0,
-      AppButtonSize.medium => 14.0,
-      AppButtonSize.large => 16.0,
+      AppButtonSize.medium => 15.0,
+      AppButtonSize.large => 17.0,
     };
 
+    final textColor = _getTextColor(theme);
+    
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (isLoading) ...[
+        if (widget.isLoading) ...[
           SizedBox(
-            width: 16,
-            height: 16,
+            width: 18,
+            height: 18,
             child: CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                _getTextColor(theme).withValues(alpha: 0.8),
-              ),
+              strokeWidth: 2.5,
+              valueColor: AlwaysStoppedAnimation<Color>(textColor.withValues(alpha: 0.8)),
             ),
           ),
-          if (label != null) ...[
-            const SizedBox(width: AppSpacing.sm),
+          if (widget.label != null) ...[
+            const SizedBox(width: AppSpacing.md),
             Text(
-              label!,
+              widget.label!,
               style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.w600,
-                color: _getTextColor(theme),
+                color: textColor.withValues(alpha: 0.8),
+                letterSpacing: 0.3,
               ),
             ),
           ],
         ] else ...[
-          if (icon != null) ...[
+          if (widget.icon != null) ...[
             Icon(
-              icon,
-              size: 18,
-              color: _getTextColor(theme),
+              widget.icon,
+              size: 20,
+              color: textColor,
             ),
-            if (label != null) const SizedBox(width: AppSpacing.sm),
+            if (widget.label != null) const SizedBox(width: AppSpacing.sm),
           ],
-          if (label != null)
+          if (widget.label != null)
             Text(
-              label!,
+              widget.label!,
               style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.w600,
-                color: _getTextColor(theme),
+                color: textColor,
+                letterSpacing: 0.3,
               ),
             ),
         ],
       ],
     );
 
-    content = Container(
+    final container = AnimatedContainer(
+      duration: AppDurations.fast,
       constraints: BoxConstraints(
-        minWidth: isFullWidth ? double.infinity : (height * 2.5),
+        minWidth: widget.isFullWidth ? double.infinity : (height * 2.5),
         minHeight: height,
       ),
-      child: content,
-    );
-
-    return AnimatedContainer(
-      duration: AppDurations.fast,
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       decoration: BoxDecoration(
+        color: _getBackgroundColor(theme),
         borderRadius: BorderRadius.circular(AppBorderRadius.button),
-        // _getBorderColor returns a nullable BorderSide; wrap it in Border for BoxDecoration
         border: (() {
           final borderSide = _getBorderColor(theme);
           return borderSide != null ? Border.fromBorderSide(borderSide) : null;
         })(),
       ),
-      child: Material(
-        color: _getBackgroundColor(theme),
-        borderRadius: BorderRadius.circular(AppBorderRadius.button),
-        child: InkWell(
-          onTap: effectiveOnPressed,
-          borderRadius: BorderRadius.circular(AppBorderRadius.button),
-          splashColor: _getSplashColor(theme),
-          highlightColor: Colors.transparent,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-            child: content,
-          ),
+      child: Center(child: content), // Center the Row
+    );
+
+    return MouseRegion(
+      cursor: _isEffectivelyDisabled ? SystemMouseCursors.basic : SystemMouseCursors.click,
+      onEnter: (_) {
+        if (!_isEffectivelyDisabled) setState(() => _isHovered = true);
+      },
+      onExit: (_) {
+        if (!_isEffectivelyDisabled) setState(() => _isHovered = false);
+      },
+      child: GestureDetector(
+        onTapDown: _onTapDown,
+        onTapUp: _onTapUp,
+        onTapCancel: _onTapCancel,
+        behavior: HitTestBehavior.opaque,
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: container,
         ),
       ),
     );
   }
 
   Color _getBackgroundColor(ThemeData theme) {
-    if (disabled) return AppColors.divider;
+    if (_isEffectivelyDisabled) {
+      if (widget.variant == AppButtonVariant.outline || widget.variant == AppButtonVariant.ghost || widget.variant == AppButtonVariant.text) {
+        return Colors.transparent;
+      }
+      return AppColors.divider;
+    }
 
-    return switch (variant) {
-      AppButtonVariant.primary => AppColors.primary,
-      AppButtonVariant.secondary => AppColors.secondary,
-      AppButtonVariant.outline => Colors.transparent,
-      AppButtonVariant.ghost => Colors.transparent,
-      AppButtonVariant.text => Colors.transparent,
+    return switch (widget.variant) {
+      AppButtonVariant.primary => _isHovered ? AppColors.primaryVariant : AppColors.primary,
+      AppButtonVariant.secondary => _isHovered ? AppColors.surfaceElevated : AppColors.surface,
+      AppButtonVariant.outline => _isHovered ? AppColors.divider : Colors.transparent,
+      AppButtonVariant.ghost => _isHovered ? AppColors.divider : Colors.transparent,
+      AppButtonVariant.text => _isHovered ? AppColors.primary.withValues(alpha: 0.1) : Colors.transparent,
     };
   }
 
   Color _getTextColor(ThemeData theme) {
-    if (disabled) return AppColors.onSurface.withValues(alpha: 0.4);
+    if (_isEffectivelyDisabled) return AppColors.textTertiary;
 
-    return switch (variant) {
+    return switch (widget.variant) {
       AppButtonVariant.primary => AppColors.textOnPrimary,
-      AppButtonVariant.secondary => AppColors.textOnPrimary,
+      AppButtonVariant.secondary => AppColors.onPrimary,
       AppButtonVariant.outline => AppColors.onPrimary,
       AppButtonVariant.ghost => AppColors.onPrimary,
       AppButtonVariant.text => AppColors.primary,
@@ -177,43 +218,21 @@ class AppButton extends StatelessWidget {
   }
 
   BorderSide? _getBorderColor(ThemeData theme) {
-    if (disabled) return const BorderSide(color: AppColors.dividerStrong);
+    if (_isEffectivelyDisabled && widget.variant == AppButtonVariant.outline) {
+      return const BorderSide(color: AppColors.divider);
+    }
 
-    final borderSide = switch (variant) {
+    final borderSide = switch (widget.variant) {
       AppButtonVariant.primary => BorderSide.none,
       AppButtonVariant.secondary => BorderSide.none,
-      AppButtonVariant.outline => const BorderSide(color: AppColors.dividerStrong),
+      AppButtonVariant.outline => const BorderSide(color: AppColors.dividerStrong, width: 1.5),
       AppButtonVariant.ghost => BorderSide.none,
       AppButtonVariant.text => BorderSide.none,
     };
 
-    // Convert BorderSide to BoxBorder for BoxDecoration.border
     return borderSide == BorderSide.none ? null : borderSide;
   }
-
-  Color _getSplashColor(ThemeData theme) {
-    return switch (variant) {
-      AppButtonVariant.primary => AppColors.primaryVariant,
-      AppButtonVariant.secondary => AppColors.success,
-      AppButtonVariant.outline => AppColors.divider,
-      AppButtonVariant.ghost => AppColors.divider,
-      AppButtonVariant.text => AppColors.primary.withValues(alpha: 0.1),
-    };
-  }
 }
 
-/// Button visual variants
-enum AppButtonVariant {
-  primary,
-  secondary,
-  outline,
-  ghost,
-  text,
-}
-
-/// Button size presets
-enum AppButtonSize {
-  small,
-  medium,
-  large,
-}
+enum AppButtonVariant { primary, secondary, outline, ghost, text }
+enum AppButtonSize { small, medium, large }

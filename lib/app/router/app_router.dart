@@ -2,94 +2,110 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/analytics/presentation/pages/analytics_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/home/presentation/pages/error_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/log/presentation/pages/log_page.dart';
+import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../features/coach/presentation/pages/coach_page.dart';
 
 /// Application route paths
 class AppRoutes {
   AppRoutes._();
 
-  static const String home = '/';
   static const String dashboard = '/dashboard';
-  static const String settings = '/settings';
-  static const String mealTracking = '/meal-tracking';
+  static const String log = '/log';
   static const String analytics = '/analytics';
+  static const String coach = '/coach';
+  static const String profile = '/profile';
+  static const String settings = '/settings';
 }
 
 /// Application router configuration using GoRouter.
 /// 
-/// Implements a feature-first navigation structure with smooth transitions.
+/// Implements a feature-first navigation structure using StatefulShellRoute
+/// to preserve state across main tabs.
 final class AppRouter {
   AppRouter._();
 
+  static final rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final dashboardNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboard');
+  static final logNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'log');
+  static final analyticsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'analytics');
+  static final profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
+
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.dashboard,
+    navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
-      // Home Route - Main entry point
-      GoRoute(
-        path: AppRoutes.home,
-        name: 'home',
-        builder: (context, state) => const HomePage(),
-        routes: [
-          // Dashboard - Child of home
-          GoRoute(
-            path: 'dashboard',
-            name: 'dashboard',
-            pageBuilder: (context, state) => const NoTransitionPage<void>(
-              child: DashboardPage(),
-            ),
-          ),
-
-          // Settings - Child of home
-          GoRoute(
-            path: 'settings',
-            name: 'settings',
-            pageBuilder: (context, state) => const NoTransitionPage<void>(
-              child: SettingsPage(),
-            ),
-          ),
-
-          // Meal Tracking - Placeholder route for future implementation
-          GoRoute(
-            path: 'meal-tracking',
-            name: 'meal_tracking',
-            pageBuilder: (context, state) => CustomTransitionPage<void>(
-              key: state.pageKey,
-              child: const Scaffold(
-                body: Center(
-                  child: Text('Meal Tracking - Coming Soon'),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return HomePage(navigationShell: navigationShell);
+        },
+        branches: [
+          // Branch 0: Dashboard
+          StatefulShellBranch(
+            navigatorKey: dashboardNavigatorKey,
+            routes: [
+              GoRoute(
+                path: AppRoutes.dashboard,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: DashboardPage(),
                 ),
               ),
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: child,
-                );
-              },
-            ),
+            ],
           ),
-
-          // Analytics - Placeholder route for future implementation
-          GoRoute(
-            path: 'analytics',
-            name: 'analytics',
-            pageBuilder: (context, state) => CustomTransitionPage<void>(
-              key: state.pageKey,
-              child: const Scaffold(
-                body: Center(
-                  child: Text('Analytics - Coming Soon'),
+          
+          // Branch 1: Log (Meal Tracking)
+          StatefulShellBranch(
+            navigatorKey: logNavigatorKey,
+            routes: [
+              GoRoute(
+                path: AppRoutes.log,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: LogPage(),
                 ),
               ),
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: child,
-                );
-              },
-            ),
+            ],
+          ),
+          
+          // Branch 2: Analytics
+          StatefulShellBranch(
+            navigatorKey: analyticsNavigatorKey,
+            routes: [
+              GoRoute(
+                path: AppRoutes.analytics,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: AnalyticsPage(),
+                ),
+              ),
+            ],
+          ),
+          
+          // Branch 3: Profile & Settings
+          StatefulShellBranch(
+            navigatorKey: profileNavigatorKey,
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: ProfilePage(),
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'settings', // -> /profile/settings
+                    builder: (context, state) => const SettingsPage(),
+                  ),
+                  GoRoute(
+                    path: 'coach', // -> /profile/coach
+                    builder: (context, state) => const CoachPage(),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -97,3 +113,4 @@ final class AppRouter {
     errorBuilder: (context, state) => ErrorPage(routePath: state.uri.path),
   );
 }
+

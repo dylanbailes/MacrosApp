@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_colors.dart';
-import '../constants/app_spacing.dart';
 
 /// Typography system for the Macro Tracker application.
 /// 
-/// Uses Inter font family for a clean, modern appearance inspired by Nothing OS.
-/// All text styles are optimized for dark mode readability.
+/// Uses Inter font family for a clean, modern appearance.
+/// All text styles are optimized for true dark mode readability.
 class AppTextStyles {
   AppTextStyles._();
 
@@ -16,79 +15,83 @@ class AppTextStyles {
   static TextTheme get textTheme {
     return GoogleFonts.interTextTheme().copyWith(
       displayLarge: const TextStyle(
-        fontSize: 32.0,
+        fontSize: 34.0,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -1.0,
+        color: AppColors.onPrimary,
+        height: 1.1,
+        fontFeatures: [FontFeature.tabularFigures()],
+      ),
+      displayMedium: const TextStyle(
+        fontSize: 28.0,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.5,
+        color: AppColors.onPrimary,
+        height: 1.2,
+        fontFeatures: [FontFeature.tabularFigures()],
+      ),
+      displaySmall: const TextStyle(
+        fontSize: 24.0,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.5,
         color: AppColors.onPrimary,
         height: 1.2,
       ),
-      displayMedium: const TextStyle(
-        fontSize: 28.0,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.3,
-        color: AppColors.onPrimary,
-        height: 1.25,
-      ),
-      displaySmall: const TextStyle(
-        fontSize: 24.0,
-        fontWeight: FontWeight.w600,
-        letterSpacing: -0.2,
-        color: AppColors.onPrimary,
-        height: 1.3,
-      ),
       headlineLarge: const TextStyle(
         fontSize: 22.0,
         fontWeight: FontWeight.w600,
-        letterSpacing: -0.1,
+        letterSpacing: -0.3,
         color: AppColors.onPrimary,
-        height: 1.35,
+        height: 1.3,
       ),
       headlineMedium: const TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w600,
+        letterSpacing: -0.3,
         color: AppColors.onPrimary,
-        height: 1.4,
+        height: 1.3,
       ),
       headlineSmall: const TextStyle(
         fontSize: 18.0,
         fontWeight: FontWeight.w600,
+        letterSpacing: -0.2,
         color: AppColors.onPrimary,
-        height: 1.45,
+        height: 1.4,
       ),
       titleLarge: const TextStyle(
         fontSize: 17.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
-        height: 1.5,
+        height: 1.4,
       ),
       titleMedium: const TextStyle(
-        fontSize: 16.0,
+        fontSize: 15.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
-        height: 1.5,
+        height: 1.4,
       ),
       titleSmall: const TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
-        height: 1.5,
+        height: 1.4,
       ),
       bodyLarge: const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w400,
-        color: AppColors.onPrimary,
+        color: AppColors.onSurface,
         height: 1.5,
       ),
-      bodyMedium: TextStyle(
-        fontSize: 14.0,
+      bodyMedium: const TextStyle(
+        fontSize: 15.0,
         fontWeight: FontWeight.w400,
-        color: AppColors.onSurface.withValues(alpha: 0.6),
+        color: AppColors.textSecondary,
         height: 1.5,
       ),
-      bodySmall: TextStyle(
-        fontSize: 12.0,
+      bodySmall: const TextStyle(
+        fontSize: 13.0,
         fontWeight: FontWeight.w400,
-        color: AppColors.onSurface.withValues(alpha: 0.4),
+        color: AppColors.textTertiary,
         height: 1.5,
       ),
       labelLarge: const TextStyle(
@@ -96,21 +99,21 @@ class AppTextStyles {
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
         color: AppColors.onPrimary,
-        height: 1.4,
+        height: 1.2,
       ),
-      labelMedium: TextStyle(
+      labelMedium: const TextStyle(
         fontSize: 12.0,
         fontWeight: FontWeight.w600,
-        letterSpacing: 0.1,
-        color: AppColors.onSurface.withValues(alpha: 0.6),
-        height: 1.4,
-      ),
-      labelSmall: TextStyle(
-        fontSize: 11.0,
-        fontWeight: FontWeight.w500,
         letterSpacing: 0.2,
-        color: AppColors.onSurface.withValues(alpha: 0.4),
-        height: 1.4,
+        color: AppColors.textSecondary,
+        height: 1.2,
+      ),
+      labelSmall: const TextStyle(
+        fontSize: 11.0,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.3,
+        color: AppColors.textTertiary,
+        height: 1.2,
       ),
     );
   }
@@ -139,29 +142,30 @@ class AppTextStyles {
 
   /// Numeric display style for macros and statistics
   static TextStyle get numericDisplay => const TextStyle(
-        fontSize: 36.0,
+        fontSize: 40.0,
         fontWeight: FontWeight.w700,
-        letterSpacing: -1.0,
+        letterSpacing: -1.5,
         color: AppColors.onPrimary,
-        height: 1.1,
+        height: 1.0,
         fontFeatures: [FontFeature.tabularFigures()],
       );
 
   /// Style for macro values (protein, carbs, fat)
   static TextStyle get macroValue => const TextStyle(
         fontSize: 24.0,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -0.5,
         color: AppColors.onPrimary,
-        height: 1.2,
+        height: 1.1,
         fontFeatures: [FontFeature.tabularFigures()],
       );
 
   /// Style for macro labels
-  static TextStyle get macroLabel => TextStyle(
+  static TextStyle get macroLabel => const TextStyle(
         fontSize: 13.0,
-        fontWeight: FontWeight.w500,
-        color: AppColors.onSurface.withValues(alpha: 0.6),
-        height: 1.4,
-        letterSpacing: 0.3,
+        fontWeight: FontWeight.w600,
+        color: AppColors.textSecondary,
+        height: 1.2,
+        letterSpacing: 0.2,
       );
 }
