@@ -12,6 +12,7 @@ import '../providers/dashboard_state.dart';
 /// Reference: Blueprint §2.3 — Macro Tile ×3. Composes the shared
 /// AppMetricTile (one library entry, color is the only difference across the
 /// three), 12px gap between tiles. Shows remaining grams as the target suffix.
+/// Alternates tile background colors for visual depth.
 class MacroOverviewRow extends StatelessWidget {
   const MacroOverviewRow({
     super.key,
@@ -34,6 +35,7 @@ class MacroOverviewRow extends StatelessWidget {
               color: Color(macros[i].color),
               progress: macros[i].progress,
               isOverTarget: macros[i].isOverTarget,
+              elevated: i.isEven,
             ),
           ),
           if (i < macros.length - 1) const SizedBox(width: AppSpacing.md),

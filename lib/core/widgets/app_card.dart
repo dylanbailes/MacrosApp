@@ -16,6 +16,10 @@ import '../constants/app_spacing.dart';
 /// - Hero: uses radius.lg (28px), reserved for the single most important card per screen
 /// - Interactive: adds tap/press treatment
 /// - Static: informational only, no press feedback
+/// 
+/// Hover Behavior:
+/// - Interactive cards transition to accent red overlay on hover (subtle)
+/// - Non-interactive cards maintain clean aesthetic
 class AppCard extends StatefulWidget {
   const AppCard({
     super.key,
@@ -43,6 +47,7 @@ class AppCard extends StatefulWidget {
 class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
+  late Animation<Color?> _hoverColorAnimation;
   bool _isHovered = false;
 
   @override
@@ -58,6 +63,10 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         curve: Curves.easeInOutCubic,
       ),
     );
+    _hoverColorAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: AppColors.primary.withValues(alpha: 0.08),
+    ).animate(_controller);
   }
 
   @override
@@ -111,9 +120,26 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
-        child: Padding(
-          padding: widget.padding ?? const EdgeInsets.all(AppSpacing.lg),
-          child: widget.child,
+        child: Stack(
+          children: [
+            Padding(
+              padding: widget.padding ?? const EdgeInsets.all(AppSpacing.lg),
+              child: widget.child,
+            ),
+            // Hover overlay with red accent
+            if (_isInteractive)
+              AnimatedBuilder(
+                animation: _hoverColorAnimation,
+                builder: (context, child) => Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: _hoverColorAnimation.value,
+                      borderRadius: BorderRadius.circular(radius),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -121,6 +147,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
     if (!_isInteractive) return card;
 
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(

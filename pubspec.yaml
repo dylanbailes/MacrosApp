@@ -59,7 +59,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: Nothing
+      fonts:
+        - asset: assets/fonts/NOTHING.otf.ttf
+
   assets:
     - .env
     - assets/images/
     - assets/icons/
+    - assets/fonts/

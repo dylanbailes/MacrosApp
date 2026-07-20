@@ -9,6 +9,7 @@ import '../providers/dashboard_state.dart';
 ///
 /// Reference: Blueprint §3.1 — Weekly Snapshot / Useful Statistics. A 2×2 grid
 /// of AppStatDisplay blocks (streak, goal-hit rate, avg calories, water).
+/// Alternates background colors for visual depth.
 class StatsGrid extends StatelessWidget {
   const StatsGrid({
     super.key,
@@ -27,12 +28,13 @@ class StatsGrid extends StatelessWidget {
       crossAxisSpacing: AppSpacing.md,
       childAspectRatio: 1.6,
       children: [
-        for (final stat in stats)
+        for (var i = 0; i < stats.length; i++)
           AppStatDisplay(
-            label: stat.label,
-            value: stat.value,
-            subValue: stat.unit,
-            icon: stat.icon,
+            label: stats[i].label,
+            value: stats[i].value,
+            subValue: stats[i].unit,
+            icon: stats[i].icon,
+            elevated: i.isEven,
           ),
       ],
     );

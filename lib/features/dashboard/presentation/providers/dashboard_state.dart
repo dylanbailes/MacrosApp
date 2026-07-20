@@ -60,14 +60,44 @@ class DashboardStat {
   final IconData? icon;
 }
 
+/// A single day in the weekly calorie overview.
+class WeeklyDay {
+  const WeeklyDay({
+    required this.label,
+    required this.calories,
+    this.isToday = false,
+  });
+
+  final String label;
+  final int calories;
+  final bool isToday;
+}
+
+/// Compact stat shown beneath the weekly overview graph.
+class WeeklyStat {
+  const WeeklyStat({
+    required this.label,
+    required this.value,
+    this.accent,
+  });
+
+  final String label;
+  final String value;
+  final int? accent;
+}
+
 class DashboardSummary {
   const DashboardSummary({
     required this.greeting,
     required this.dateLabel,
     required this.caloriesConsumed,
     required this.caloriesTarget,
+    required this.calorieTrendPct,
     required this.macros,
     required this.recentMeals,
+    required this.weekly,
+    required this.weeklyTarget,
+    required this.weeklyStats,
     required this.stats,
     required this.coachInsight,
   });
@@ -77,6 +107,9 @@ class DashboardSummary {
   final int caloriesConsumed;
   final int caloriesTarget;
 
+  /// Percent change vs yesterday (e.g. 8.0 means +8%).
+  final double calorieTrendPct;
+
   double get calorieProgress =>
       (caloriesTarget <= 0) ? 0.0 : (caloriesConsumed / caloriesTarget).clamp(0.0, 1.0);
   bool get isOverTarget => caloriesConsumed > caloriesTarget;
@@ -84,6 +117,9 @@ class DashboardSummary {
 
   final List<MacroProgress> macros;
   final List<RecentMeal> recentMeals;
+  final List<WeeklyDay> weekly;
+  final int weeklyTarget;
+  final List<WeeklyStat> weeklyStats;
   final List<DashboardStat> stats;
   final String coachInsight;
 }

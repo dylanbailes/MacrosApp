@@ -18,6 +18,7 @@ class AppStatDisplay extends StatelessWidget {
     this.valueColor,
     this.subValue,
     this.icon,
+    this.elevated = false,
   });
 
   /// The label text (e.g., "MEALS")
@@ -35,12 +36,17 @@ class AppStatDisplay extends StatelessWidget {
   /// Optional icon shown before the value
   final IconData? icon;
 
+  /// Whether to use elevated background (surfaceElevated vs surface)
+  final bool elevated;
+
   @override
   Widget build(BuildContext context) {
+    final bgColor = elevated ? AppColors.surfaceElevated : AppColors.surface;
+
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: bgColor,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.divider, width: 1),
       ),

@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 
+/// Nothing OS dot-matrix display font, used for hero numerals, section
+/// headers, and statistics to achieve the engineering-dashboard aesthetic.
+/// Body copy stays in Inter for legibility.
+const String kNothingFont = 'Nothing';
+
 /// Typography system for the Macro Tracker application.
 /// 
 /// Reference: Visual Design Specification §3 — Typography
 /// 
 /// Typeface roles:
-/// - Display (Ndot): Reserved for hero stats only (calories, streak, weigh-in)
+/// - Display (Nothing dot-matrix): hero numerals, section headers, stats
 /// - UI/Body (Inter): Everything else
 ///
 /// Type scale:
-/// - Display XL: Ndot 56/60  — Dashboard hero calorie number
-/// - Display L:  Ndot 34/38  — Streak days, check-in countdown, weigh-in stat
+/// - Display XL: Nothing 56/60  — Dashboard hero calorie number
+/// - Display L:  Nothing 34/38  — Streak days, check-in countdown, weigh-in stat
 /// - Title:      Inter SB 22/28 — Screen titles
 /// - Headline:   Inter SB 17/22 — Card titles, list item primary text
 /// - Body:       Inter Rg 15/20 — Primary content, descriptions
@@ -25,21 +30,21 @@ class AppTextStyles {
   /// Base text theme
   static TextTheme get textTheme {
     return TextTheme(
-      // Display XL — Ndot 56/60 (Hero calorie number)
+      // Display XL — Nothing 56/60 (Hero calorie number)
       displayLarge: const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: kNothingFont,
         fontSize: 56.0,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w400,
         height: 1.07,
         color: AppColors.onPrimary,
         fontFeatures: [FontFeature.tabularFigures()],
       ),
 
-      // Display L — Ndot 34/38 (Streak days, weigh-in)
+      // Display L — Nothing 34/38 (Streak days, weigh-in)
       displayMedium: const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: kNothingFont,
         fontSize: 34.0,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w400,
         height: 1.12,
         color: AppColors.onPrimary,
         fontFeatures: [FontFeature.tabularFigures()],
@@ -200,17 +205,17 @@ class AppTextStyles {
         color: AppColors.textTertiary,
       );
 
-  /// Macro value style (large number for the 3-tile row)
+  /// Macro value style (large number for the 3-tile row) — Nothing dot-matrix
   static TextStyle get macroValue => const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: kNothingFont,
         fontSize: 20.0,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
         height: 1.2,
         color: AppColors.onPrimary,
         fontFeatures: [FontFeature.tabularFigures()],
       );
 
-  /// Macro label style (caps label)
+  /// Macro label style (caps label) — Inter for legibility
   static TextStyle get macroLabel => const TextStyle(
         fontFamily: 'Inter',
         fontSize: 13.0,
@@ -220,14 +225,24 @@ class AppTextStyles {
         color: AppColors.textSecondary,
       );
 
-  /// Numeric display style for macros and statistics
+  /// Numeric display style for macros and statistics — Nothing dot-matrix
   static TextStyle get numericDisplay => const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: kNothingFont,
         fontSize: 40.0,
-        fontWeight: FontWeight.w700,
-        letterSpacing: -1.5,
+        fontWeight: FontWeight.w400,
+        letterSpacing: -1.0,
         color: AppColors.onPrimary,
         height: 1.0,
         fontFeatures: [FontFeature.tabularFigures()],
+      );
+
+  /// Section header label — Inter caps, used by DashboardSectionHeader etc.
+  static TextStyle get sectionHeader => const TextStyle(
+        fontFamily: kNothingFont,
+        fontSize: 13.0,
+        fontWeight: FontWeight.w400,
+        height: 1.23,
+        letterSpacing: 1.5,
+        color: AppColors.textSecondary,
       );
 }

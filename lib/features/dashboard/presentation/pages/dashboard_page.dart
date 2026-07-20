@@ -10,7 +10,7 @@ import '../../../../core/widgets/app_skeleton.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
 import '../widgets/ai_coach_entry_card.dart';
-import '../widgets/calorie_hero_card.dart';
+import '../widgets/analytics_hero_section.dart';
 import '../widgets/dashboard_header.dart';
 import '../widgets/macro_overview_row.dart';
 import '../widgets/quick_actions_row.dart';
@@ -84,9 +84,8 @@ class _DashboardContent extends StatelessWidget {
         const SizedBox(height: AppSpacing.xxxl),
         AiCoachEntryCard(insight: summary.coachInsight),
         const SizedBox(height: AppSpacing.xxxl),
-        CalorieHeroCard(
-          consumed: summary.caloriesConsumed,
-          target: summary.caloriesTarget,
+        AnalyticsHeroSection(
+          summary: summary,
           onTap: () => context.push('/profile/coach'),
         ),
         const SizedBox(height: AppSpacing.xxxl),
@@ -155,8 +154,21 @@ class _DashboardSkeleton extends StatelessWidget {
         // Header placeholder
         const AppSkeleton(width: 180, height: 28, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.xxxl),
-        // Hero card skeleton
-        const AppSkeleton(height: 320, borderRadius: AppBorderRadius.lg),
+      // Hero section skeleton (two-column)
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 35,
+            child: AppSkeleton(height: 200, borderRadius: AppBorderRadius.lg),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            flex: 65,
+            child: AppSkeleton(height: 200, borderRadius: AppBorderRadius.md),
+          ),
+        ],
+      ),
         const SizedBox(height: AppSpacing.xxxl),
         // Section label placeholder
         const AppSkeleton(width: 120, height: 16, borderRadius: AppBorderRadius.sm),

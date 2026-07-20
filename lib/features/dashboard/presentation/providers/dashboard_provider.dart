@@ -33,6 +33,7 @@ class DashboardNotifier extends AsyncNotifier<DashboardSummary> {
       dateLabel: dateLabel,
       caloriesConsumed: 1240,
       caloriesTarget: 2200,
+      calorieTrendPct: 8.0,
       macros: const [
         MacroProgress(
           label: 'Protein',
@@ -84,6 +85,22 @@ class DashboardNotifier extends AsyncNotifier<DashboardSummary> {
           fat: 5,
           timeLabel: '8:00 AM',
         ),
+      ],
+      weekly: const [
+        WeeklyDay(label: 'Mon', calories: 1980),
+        WeeklyDay(label: 'Tue', calories: 2100),
+        WeeklyDay(label: 'Wed', calories: 1850),
+        WeeklyDay(label: 'Thu', calories: 2200),
+        WeeklyDay(label: 'Fri', calories: 1750),
+        WeeklyDay(label: 'Sat', calories: 2400),
+        WeeklyDay(label: 'Sun', calories: 1240, isToday: true),
+      ],
+      weeklyTarget: 2200,
+      weeklyStats: const [
+        WeeklyStat(label: 'Avg Calories', value: '2,050'),
+        WeeklyStat(label: 'Avg Protein', value: '142g', accent: 0xFF3D8BFD),
+        WeeklyStat(label: 'Goal Days', value: '5/7'),
+        WeeklyStat(label: 'Streak', value: '12', accent: 0xFFFF6B5E),
       ],
       stats: const [
         DashboardStat(

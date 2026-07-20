@@ -16,6 +16,12 @@ import '../constants/app_spacing.dart';
 /// - Ghost: transparent text-only — cancel/dismiss, low-emphasis navigation
 /// - Icon: surface.01 circle, 44×44 — utility actions in toolbar or card corner
 /// - Destructive: dark-red surface with accent.signal text — irreversible actions only
+/// 
+/// Hover Behavior:
+/// - Primary: subtle red glow overlay
+/// - Secondary: elevate to glass surface
+/// - Icon: subtle red background
+/// - Ghost: subtle red text highlight
 class AppButton extends StatefulWidget {
   const AppButton({
     required this.onPressed, super.key,
@@ -44,7 +50,7 @@ class AppButton extends StatefulWidget {
 class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
-  bool _isHovered = false;
+  late Animation<Color?> _hoverOverlayAnimation;
 
   @override
   void initState() {
@@ -59,6 +65,10 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
         curve: Curves.easeInOutCubic,
       ),
     );
+    _hoverOverlayAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: AppColors.primary.withValues(alpha: 0.12),
+    ).animate(_controller);
   }
 
   @override
@@ -161,16 +171,35 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
             : BorderRadius.circular(AppBorderRadius.pill),
         border: _getBorder(),
       ),
-      child: Center(child: content),
+      child: Stack(
+        children: [
+          Center(child: content),
+          // Hover overlay
+          if (!_isEffectivelyDisabled && widget.variant != AppButtonVariant.primary)
+            AnimatedBuilder(
+              animation: _hoverOverlayAnimation,
+              builder: (context, child) => Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _hoverOverlayAnimation.value,
+                    borderRadius: isIconOnly
+                        ? BorderRadius.circular(height / 2)
+                        : BorderRadius.circular(AppBorderRadius.pill),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
 
     return MouseRegion(
       cursor: _isEffectivelyDisabled ? SystemMouseCursors.basic : SystemMouseCursors.click,
       onEnter: (_) {
-        if (!_isEffectivelyDisabled) setState(() => _isHovered = true);
+        if (!_isEffectivelyDisabled) _controller.forward();
       },
       onExit: (_) {
-        if (!_isEffectivelyDisabled) setState(() => _isHovered = false);
+        if (!_isEffectivelyDisabled) _controller.reverse();
       },
       child: GestureDetector(
         onTapDown: _onTapDown,
@@ -194,7 +223,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
 
     return switch (widget.variant) {
       AppButtonVariant.primary => AppColors.primary,
-      AppButtonVariant.secondary => _isHovered ? AppColors.surfaceGlass : AppColors.surfaceElevated,
+      AppButtonVariant.secondary => Colors.transparent,
       AppButtonVariant.ghost => Colors.transparent,
       AppButtonVariant.icon => AppColors.surface,
       AppButtonVariant.destructive => const Color(0xFF3A1015),

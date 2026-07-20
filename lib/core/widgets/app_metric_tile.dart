@@ -21,6 +21,7 @@ class AppMetricTile extends StatelessWidget {
     required this.color,
     this.progress = 0.0,
     this.isOverTarget = false,
+    this.elevated = false,
   });
 
   /// The label text (e.g., "PROTEIN")
@@ -41,15 +42,19 @@ class AppMetricTile extends StatelessWidget {
   /// Whether the value exceeds the target
   final bool isOverTarget;
 
+  /// Whether to use elevated background (surfaceElevated vs surface)
+  final bool elevated;
+
   @override
   Widget build(BuildContext context) {
     final displayColor = isOverTarget ? AppColors.error : color;
+    final bgColor = elevated ? AppColors.surfaceElevated : AppColors.surface;
 
     return Container(
       height: 92,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: bgColor,
         borderRadius: BorderRadius.circular(AppBorderRadius.md),
         border: Border.all(color: AppColors.divider, width: 1),
       ),
