@@ -171,11 +171,11 @@ class DashboardPage extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         Row(
           children: [
-            Expanded(child: _StatCard(label: 'Meals', value: '0')),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(child: _StatCard(label: 'Water', value: '0L')),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(child: _StatCard(label: 'Weight', value: '--')),
+            Expanded(child: const _StatCard(label: 'Meals', value: '0')),
+            const SizedBox(width: 12),
+            Expanded(child: const _StatCard(label: 'Water', value: '0L')),
+            const SizedBox(width: 12),
+            Expanded(child: const _StatCard(label: 'Weight', value: '--')),
           ],
         ),
       ],

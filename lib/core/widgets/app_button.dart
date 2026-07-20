@@ -11,8 +11,7 @@ import '../theme/app_text_styles.dart';
 /// Supports: primary, secondary, outline, ghost, and text variants.
 class AppButton extends StatelessWidget {
   const AppButton({
-    super.key,
-    required this.onPressed,
+    required this.onPressed, super.key,
     this.label,
     this.icon,
     this.variant = AppButtonVariant.primary,
@@ -69,7 +68,7 @@ class AppButton extends StatelessWidget {
       AppButtonSize.large => 16.0,
     };
 
-    Widget content = Row(
+    var content = Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

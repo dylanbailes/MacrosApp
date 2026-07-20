@@ -5,8 +5,7 @@ import '../constants/app_durations.dart';
 /// A reusable animated switcher for smooth page transitions.
 class AppAnimatedSwitcher extends StatelessWidget {
   const AppAnimatedSwitcher({
-    super.key,
-    required this.child,
+    required this.child, super.key,
     this.duration = const Duration(milliseconds: 200),
   });
 
