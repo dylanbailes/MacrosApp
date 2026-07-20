@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_spacing.dart';
+import '../constants/app_spacing.dart';
 
 /// A reusable card widget with consistent styling throughout the application.
 /// 
