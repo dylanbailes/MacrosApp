@@ -61,7 +61,7 @@ class DashboardPage extends StatelessWidget {
                     Icon(
                       Icons.construction_outlined,
                       size: 48,
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Text(
@@ -112,12 +112,12 @@ class DashboardPage extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: AppSpacing.md),
-        Row(
+        const Row(
           children: [
             Expanded(child: _MacroCard(label: 'Protein', value: '0g', color: Colors.blue)),
-            const SizedBox(width: AppSpacing.md),
+            SizedBox(width: AppSpacing.md),
             Expanded(child: _MacroCard(label: 'Carbs', value: '0g', color: Colors.orange)),
-            const SizedBox(width: AppSpacing.md),
+            SizedBox(width: AppSpacing.md),
             Expanded(child: _MacroCard(label: 'Fat', value: '0g', color: Colors.red)),
           ],
         ),
@@ -170,13 +170,13 @@ class DashboardPage extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: AppSpacing.md),
-        Row(
+        const Row(
           children: [
-            Expanded(child: const _StatCard(label: 'Meals', value: '0')),
-            const SizedBox(width: 12),
-            Expanded(child: const _StatCard(label: 'Water', value: '0L')),
-            const SizedBox(width: 12),
-            Expanded(child: const _StatCard(label: 'Weight', value: '--')),
+            Expanded(child: _StatCard(label: 'Meals', value: '0')),
+            SizedBox(width: 12),
+            Expanded(child: _StatCard(label: 'Water', value: '0L')),
+            SizedBox(width: 12),
+            Expanded(child: _StatCard(label: 'Weight', value: '--')),
           ],
         ),
       ],

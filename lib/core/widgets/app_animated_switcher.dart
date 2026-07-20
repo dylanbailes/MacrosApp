@@ -1,7 +1,6 @@
 // Path: widgets\app_animated_switcher.dart
 import 'package:flutter/material.dart';
 
-import '../constants/app_durations.dart';
 
 /// A reusable animated switcher for smooth page transitions.
 class AppAnimatedSwitcher extends StatelessWidget {

@@ -35,8 +35,6 @@ class AppTheme {
         onTertiary: AppColors.textOnPrimary,
         error: AppColors.error,
         onError: AppColors.textOnPrimary,
-        background: AppColors.background,
-        onBackground: AppColors.onPrimary,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,
         surfaceTint: Colors.transparent,
@@ -169,7 +167,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppBorderRadius.inputField),
           borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
-        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.onSurface.withOpacity(0.4)),
+        hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.onSurface.withValues(alpha: 0.4)),
         labelStyle: AppTextStyles.bodyMedium,
         errorStyle: AppTextStyles.labelSmall.copyWith(color: AppColors.error),
         prefixIconColor: AppColors.iconDefault,
@@ -233,7 +231,7 @@ class AppTheme {
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surface,
-        selectedColor: AppColors.primary.withOpacity(0.2),
+        selectedColor: AppColors.primary.withValues(alpha: 0.2),
         labelStyle: AppTextStyles.labelMedium,
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
@@ -264,7 +262,7 @@ class AppTheme {
           vertical: AppSpacing.sm,
         ),
         tileColor: Colors.transparent,
-        selectedTileColor: AppColors.primary.withOpacity(0.1),
+        selectedTileColor: AppColors.primary.withValues(alpha: 0.1),
         iconColor: AppColors.iconDefault,
         textColor: AppColors.onPrimary,
         titleTextStyle: const TextStyle(
@@ -277,7 +275,7 @@ class AppTheme {
           fontWeight: FontWeight.w400,
           color: Color(0x99FAFAFA), // AppColors.onSurface.withOpacity(0.6)
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.sm)),
         ),
       ),
@@ -291,15 +289,15 @@ class AppTheme {
 
       // Switch Theme
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
-          return AppColors.onSurface.withOpacity(0.4);
+          return AppColors.onSurface.withValues(alpha: 0.4);
         }),
-        trackColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.primary.withOpacity(0.5);
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.primary.withValues(alpha: 0.5);
           }
           return AppColors.divider;
         }),
@@ -307,13 +305,13 @@ class AppTheme {
 
       // Checkbox Theme
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
           return Colors.transparent;
         }),
-        checkColor: MaterialStateProperty.all(AppColors.textOnPrimary),
+        checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.xs),
         ),
@@ -321,11 +319,11 @@ class AppTheme {
 
       // Radio Theme
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
-          return AppColors.onSurface.withOpacity(0.4);
+          return AppColors.onSurface.withValues(alpha: 0.4);
         }),
       ),
 
@@ -334,7 +332,7 @@ class AppTheme {
         activeTrackColor: AppColors.primary,
         inactiveTrackColor: AppColors.divider,
         thumbColor: AppColors.primary,
-        overlayColor: AppColors.primary.withOpacity(0.1),
+        overlayColor: AppColors.primary.withValues(alpha: 0.1),
         trackShape: const RoundedRectSliderTrackShape(),
         thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
       ),
@@ -342,16 +340,16 @@ class AppTheme {
       // Navigation Bar Theme
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.primary.withOpacity(0.2),
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        indicatorColor: AppColors.primary.withValues(alpha: 0.2),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppTextStyles.labelMedium.copyWith(color: AppColors.primary);
           }
           return AppTextStyles.labelMedium;
         }),
-        iconTheme: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            return IconThemeData(color: AppColors.primary, size: AppSpacing.iconLg);
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.primary, size: AppSpacing.iconLg);
           }
           return const IconThemeData(color: AppColors.iconDefault, size: AppSpacing.iconLg);
         }),
@@ -360,19 +358,19 @@ class AppTheme {
       // Navigation Drawer Theme
       navigationDrawerTheme: NavigationDrawerThemeData(
         backgroundColor: AppColors.surface,
-        indicatorColor: AppColors.primary.withOpacity(0.2),
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
-            return TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600);
+        indicatorColor: AppColors.primary.withValues(alpha: 0.2),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600);
           }
-          return TextStyle(color: AppColors.onSurface.withOpacity(0.6));
+          return TextStyle(color: AppColors.onSurface.withValues(alpha: 0.6));
         }),
       ),
 
       // Tab Bar Theme
       tabBarTheme: TabBarThemeData(
         labelColor: AppColors.primary,
-        unselectedLabelColor: AppColors.onSurface.withOpacity(0.6),
+        unselectedLabelColor: AppColors.onSurface.withValues(alpha: 0.6),
         labelStyle: const TextStyle(fontWeight: FontWeight.w600),
         unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
         indicatorSize: TabBarIndicatorSize.label,

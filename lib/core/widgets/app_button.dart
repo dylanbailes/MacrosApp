@@ -80,7 +80,7 @@ class AppButton extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(
-                _getTextColor(theme).withOpacity(0.8),
+                _getTextColor(theme).withValues(alpha: 0.8),
               ),
             ),
           ),
@@ -165,7 +165,7 @@ class AppButton extends StatelessWidget {
   }
 
   Color _getTextColor(ThemeData theme) {
-    if (disabled) return AppColors.onSurface.withOpacity(0.4);
+    if (disabled) return AppColors.onSurface.withValues(alpha: 0.4);
 
     return switch (variant) {
       AppButtonVariant.primary => AppColors.textOnPrimary,
@@ -197,7 +197,7 @@ class AppButton extends StatelessWidget {
       AppButtonVariant.secondary => AppColors.success,
       AppButtonVariant.outline => AppColors.divider,
       AppButtonVariant.ghost => AppColors.divider,
-      AppButtonVariant.text => AppColors.primary.withOpacity(0.1),
+      AppButtonVariant.text => AppColors.primary.withValues(alpha: 0.1),
     };
   }
 }

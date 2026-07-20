@@ -61,7 +61,7 @@ class AppCard extends StatelessWidget {
 
     final widget = Card(
       margin: margin ?? EdgeInsets.zero,
-      color: elevated ? cardTheme.color?.withOpacity(0.8) : cardTheme.color,
+      color: elevated ? cardTheme.color?.withValues(alpha: 0.8) : cardTheme.color,
       surfaceTintColor: Colors.transparent,
       elevation: elevated ? 2 : 0,
       shape: RoundedRectangleBorder(

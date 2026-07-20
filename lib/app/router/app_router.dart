@@ -38,8 +38,8 @@ final class AppRouter {
           GoRoute(
             path: 'dashboard',
             name: 'dashboard',
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: const DashboardPage(),
+            pageBuilder: (context, state) => const NoTransitionPage<void>(
+              child: DashboardPage(),
             ),
           ),
 
@@ -47,8 +47,8 @@ final class AppRouter {
           GoRoute(
             path: 'settings',
             name: 'settings',
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-              child: const SettingsPage(),
+            pageBuilder: (context, state) => const NoTransitionPage<void>(
+              child: SettingsPage(),
             ),
           ),
 

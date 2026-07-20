@@ -15,65 +15,65 @@ class AppTextStyles {
   /// Base text theme using Google Fonts Inter
   static TextTheme get textTheme {
     return GoogleFonts.interTextTheme().copyWith(
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         fontSize: 32.0,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.5,
         color: AppColors.onPrimary,
         height: 1.2,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         fontSize: 28.0,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.3,
         color: AppColors.onPrimary,
         height: 1.25,
       ),
-      displaySmall: TextStyle(
+      displaySmall: const TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.2,
         color: AppColors.onPrimary,
         height: 1.3,
       ),
-      headlineLarge: TextStyle(
+      headlineLarge: const TextStyle(
         fontSize: 22.0,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.1,
         color: AppColors.onPrimary,
         height: 1.35,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: const TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
         height: 1.4,
       ),
-      headlineSmall: TextStyle(
+      headlineSmall: const TextStyle(
         fontSize: 18.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
         height: 1.45,
       ),
-      titleLarge: TextStyle(
+      titleLarge: const TextStyle(
         fontSize: 17.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
         height: 1.5,
       ),
-      titleMedium: TextStyle(
+      titleMedium: const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
         height: 1.5,
       ),
-      titleSmall: TextStyle(
+      titleSmall: const TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
         height: 1.5,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w400,
         color: AppColors.onPrimary,
@@ -82,16 +82,16 @@ class AppTextStyles {
       bodyMedium: TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w400,
-        color: AppColors.onSurface.withOpacity(0.6),
+        color: AppColors.onSurface.withValues(alpha: 0.6),
         height: 1.5,
       ),
       bodySmall: TextStyle(
         fontSize: 12.0,
         fontWeight: FontWeight.w400,
-        color: AppColors.onSurface.withOpacity(0.4),
+        color: AppColors.onSurface.withValues(alpha: 0.4),
         height: 1.5,
       ),
-      labelLarge: TextStyle(
+      labelLarge: const TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
@@ -102,14 +102,14 @@ class AppTextStyles {
         fontSize: 12.0,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
-        color: AppColors.onSurface.withOpacity(0.6),
+        color: AppColors.onSurface.withValues(alpha: 0.6),
         height: 1.4,
       ),
       labelSmall: TextStyle(
         fontSize: 11.0,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.2,
-        color: AppColors.onSurface.withOpacity(0.4),
+        color: AppColors.onSurface.withValues(alpha: 0.4),
         height: 1.4,
       ),
     );
@@ -138,7 +138,7 @@ class AppTextStyles {
   static TextStyle get labelSmall => textTheme.labelSmall!;
 
   /// Numeric display style for macros and statistics
-  static TextStyle get numericDisplay => TextStyle(
+  static TextStyle get numericDisplay => const TextStyle(
         fontSize: 36.0,
         fontWeight: FontWeight.w700,
         letterSpacing: -1.0,
@@ -148,7 +148,7 @@ class AppTextStyles {
       );
 
   /// Style for macro values (protein, carbs, fat)
-  static TextStyle get macroValue => TextStyle(
+  static TextStyle get macroValue => const TextStyle(
         fontSize: 24.0,
         fontWeight: FontWeight.w600,
         color: AppColors.onPrimary,
@@ -160,7 +160,7 @@ class AppTextStyles {
   static TextStyle get macroLabel => TextStyle(
         fontSize: 13.0,
         fontWeight: FontWeight.w500,
-        color: AppColors.onSurface.withOpacity(0.6),
+        color: AppColors.onSurface.withValues(alpha: 0.6),
         height: 1.4,
         letterSpacing: 0.3,
       );
