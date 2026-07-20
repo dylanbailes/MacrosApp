@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_spacing.dart';
+
 /// Placeholder page for the Log feature.
 /// 
 /// This page will eventually contain:
@@ -17,7 +19,7 @@ class LogPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -25,7 +27,7 @@ class LogPage extends StatelessWidget {
                 'Log',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               Expanded(
                 child: Center(
                   child: Column(
@@ -36,14 +38,14 @@ class LogPage extends StatelessWidget {
                         size: 64,
                         color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.xxl),
                       Text(
                         'Meal Logging',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.sm),
                       Text(
                         'Search, scan, and log your meals here',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(

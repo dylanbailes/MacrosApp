@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_spacing.dart';
+
 /// Placeholder page for the AI Coach feature.
 /// 
 /// This page will eventually contain:
@@ -16,7 +18,7 @@ class CoachPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -24,7 +26,7 @@ class CoachPage extends StatelessWidget {
                 'AI Coach',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxxl),
               Expanded(
                 child: Center(
                   child: Column(
@@ -35,14 +37,14 @@ class CoachPage extends StatelessWidget {
                         size: 64,
                         color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.xxl),
                       Text(
                         'AI Coach',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: AppSpacing.sm),
                       Text(
                         'Personalized nutrition guidance powered by AI',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(

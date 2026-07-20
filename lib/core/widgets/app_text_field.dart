@@ -66,7 +66,7 @@ class AppTextField extends StatelessWidget {
       onFieldSubmitted: onSubmitted,
       validator: validator,
       style: AppTextStyles.bodyLarge.copyWith(
-        color: enabled ? AppColors.textPrimary : AppColors.textTertiary,
+        color: enabled ? AppColors.onPrimary : AppColors.onSurface.withOpacity(0.4),
       ),
       decoration: InputDecoration(
         labelText: labelText,

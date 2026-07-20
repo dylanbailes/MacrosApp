@@ -165,13 +165,13 @@ class AppButton extends StatelessWidget {
   }
 
   Color _getTextColor(ThemeData theme) {
-    if (disabled) return AppColors.textTertiary;
+    if (disabled) return AppColors.onSurface.withOpacity(0.4);
 
     return switch (variant) {
       AppButtonVariant.primary => AppColors.textOnPrimary,
       AppButtonVariant.secondary => AppColors.textOnPrimary,
-      AppButtonVariant.outline => AppColors.textPrimary,
-      AppButtonVariant.ghost => AppColors.textPrimary,
+      AppButtonVariant.outline => AppColors.onPrimary,
+      AppButtonVariant.ghost => AppColors.onPrimary,
       AppButtonVariant.text => AppColors.primary,
     };
   }
