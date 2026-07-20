@@ -1,47 +1,52 @@
 ```
-# Build artifacts
-*.dart_tool/
-*.build/
-*.dist/
+# Dependency directories
+.dart_tool/
+.build/
+dependencies/
 
-# Dependencies
-pubspec.lock
+# Generated files
+lib/generated/
+android/.gradle/
+ios/Pods/
+ios/.symlinks/
+macos/Pods/
+macos/.symlinks/
+windows/Flutter/flutter_windows.dll
 
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
+# Environment variables
 .env
 .env.local
-*.env.*
+.env.*
+!.env.example
 
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
+# Logs
+*.log
+**/logs
 
 # Coverage
 coverage/
-*.lcov
 
-# Test results
-test/reports/
-*.xml
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
 
-# Local flutter tooling
-**/ios/.symlinks
-**/android/.gradle
-**/android/gradle.properties
-**/android/key.properties
-**/android/local.properties
-**/android/app/build/
-**/android/.settings/
-**/android/cmake_build/
-**/linux/flutter/ephemeral/
-**/linux/out/
-**/windows/flutter/ephemeral/
-**/windows/runner/Release/
-**/windows/runner/Debug/
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Distribution / packaging
+*.tar.gz
+*.zip
+*.tar
+*.dmg
+*.exe
+*.msi
+
+# Flutter build outputs
+build/
+**/build/
 ```

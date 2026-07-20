@@ -274,7 +274,7 @@ class AppTheme {
         subtitleTextStyle: const TextStyle(
           fontSize: 13.0,
           fontWeight: FontWeight.w400,
-          color: AppColors.onSurface.withOpacity(0.6),
+          color: Color(0x99FAFAFA), // AppColors.onSurface.withOpacity(0.6)
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppBorderRadius.sm)),
@@ -369,11 +369,11 @@ class AppTheme {
       ),
 
       // Tab Bar Theme
-      tabBarTheme: const TabBarThemeData(
+      tabBarTheme: TabBarThemeData(
         labelColor: AppColors.primary,
         unselectedLabelColor: AppColors.onSurface.withOpacity(0.6),
-        labelStyle: TextStyle(fontWeight: FontWeight.w600),
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+        labelStyle: const TextStyle(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
         indicatorSize: TabBarIndicatorSize.label,
         dividerColor: Colors.transparent,
       ),
@@ -413,13 +413,13 @@ class AppTheme {
       ),
 
       // Page Transitions Theme
-      pageTransitionsTheme: PageTransitionsTheme(
+      pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
-          TargetPlatform.android: const CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
-          TargetPlatform.windows: const CupertinoPageTransitionsBuilder(),
-          TargetPlatform.linux: const CupertinoPageTransitionsBuilder(),
-          TargetPlatform.macOS: const CupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
         },
       ),
 
