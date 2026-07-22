@@ -15,7 +15,7 @@ import '../widgets/dashboard_header.dart';
 import '../widgets/macro_overview_row.dart';
 import '../widgets/quick_actions_row.dart';
 import '../widgets/recent_meals_list.dart';
-import '../widgets/stats_grid.dart';
+import '../widgets/dashboard_stats_section.dart';
 
 /// The daily landing screen.
 ///
@@ -131,9 +131,7 @@ class _DashboardContent extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.xxxl),
-        const DashboardSectionHeader(label: 'Statistics'),
-        const SizedBox(height: AppSpacing.md),
-        StatsGrid(stats: summary.stats),
+        DashboardStatsSection(summary: summary),
       ],
     );
   }
@@ -154,35 +152,49 @@ class _DashboardSkeleton extends StatelessWidget {
         // Header placeholder
         const AppSkeleton(width: 180, height: 28, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.xxxl),
-      // Hero section skeleton (two-column)
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 35,
-            child: AppSkeleton(height: 200, borderRadius: AppBorderRadius.lg),
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            flex: 65,
-            child: AppSkeleton(height: 200, borderRadius: AppBorderRadius.md),
-          ),
-        ],
-      ),
-        const SizedBox(height: AppSpacing.xxxl),
+        
         // Section label placeholder
         const AppSkeleton(width: 120, height: 16, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.md),
-        // 3 macro tiles
+        
+        // Medium cards row: Streak, Goals, Avg Calories
         Row(
           children: [
             for (var i = 0; i < 3; i++) ...[
               Expanded(child: AppSkeletonShapes.metricTile()),
-              if (i < 2) const SizedBox(width: AppSpacing.md),
+              if (i < 2) const SizedBox(width: AppSpacing.lg),
+            ],
+          ],
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        
+        // Hero chart: 7-Day Calories
+        AppSkeleton(
+          width: double.infinity,
+          height: 200,
+          borderRadius: AppBorderRadius.md,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        
+        // Hero chart: Macros This Week
+        AppSkeleton(
+          width: double.infinity,
+          height: 160,
+          borderRadius: AppBorderRadius.md,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        
+        // Compact cards row: Water, Protein, Weight
+        Row(
+          children: [
+            for (var i = 0; i < 3; i++) ...[
+              Expanded(child: AppSkeletonShapes.metricTile()),
+              if (i < 2) const SizedBox(width: AppSpacing.lg),
             ],
           ],
         ),
         const SizedBox(height: AppSpacing.xxxl),
+        
         // Recent meals
         for (var i = 0; i < 3; i++) ...[
           AppSkeletonShapes.logRow(width: double.infinity),

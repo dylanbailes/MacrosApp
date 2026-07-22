@@ -7,6 +7,13 @@ import 'package:flutter/material.dart';
 /// Optimized for OLED displays with true blacks and high contrast accents.
 /// 
 /// Reference: Visual Design Specification §2 — Color Palette
+///
+/// Semantic color system:
+/// - ❤️ Calories: Red (#FF3B30)
+/// - 💙 Protein: Electric Blue (#3D8BFD)
+/// - 💧 Water: Cyan (#22D3EE)
+/// - 💚 Weight: Emerald (#34D399)
+/// - 🟡 Goals/Streak: Warm Amber (#F59E0B)
 class AppColors {
   AppColors._();
 
@@ -76,6 +83,17 @@ class AppColors {
   
   /// Flat trend, "holding" state
   static const Color warning = Color(0xFF9A9A9E);
+
+  // --- Semantic Metric Colors ---
+
+  /// Water metric accent — muted cyan
+  static const Color water = Color(0xFF22D3EE);
+  
+  /// Weight metric accent — muted emerald
+  static const Color weight = Color(0xFF34D399);
+  
+  /// Goals/Streak accent — warm amber
+  static const Color goal = Color(0xFFF59E0B);
 
   // --- Legacy compatibility aliases ---
   static const Color primaryVariant = Color(0xFFFF3B54);

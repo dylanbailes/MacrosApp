@@ -63,6 +63,26 @@ flutter:
     - family: Nothing
       fonts:
         - asset: assets/fonts/NOTHING.otf.ttf
+    - family: Geist
+      fonts:
+        - asset: assets/fonts/Geist/ttf/Geist-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Geist/ttf/Geist-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Geist/ttf/Geist-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Geist/ttf/Geist-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Geist/ttf/Geist-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Geist/ttf/Geist-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Geist/ttf/Geist-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Geist/ttf/Geist-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Geist/ttf/Geist-Black.ttf
+          weight: 900
 
   assets:
     - .env

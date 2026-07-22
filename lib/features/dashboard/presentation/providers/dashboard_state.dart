@@ -73,6 +73,23 @@ class WeeklyDay {
   final bool isToday;
 }
 
+/// A single day's macro breakdown for weekly macro chart.
+class WeeklyMacroDay {
+  const WeeklyMacroDay({
+    required this.label,
+    required this.protein,
+    required this.carbs,
+    required this.fat,
+    this.isToday = false,
+  });
+
+  final String label;
+  final int protein;
+  final int carbs;
+  final int fat;
+  final bool isToday;
+}
+
 /// Compact stat shown beneath the weekly overview graph.
 class WeeklyStat {
   const WeeklyStat({
@@ -100,14 +117,29 @@ class DashboardSummary {
     required this.weeklyStats,
     required this.stats,
     required this.coachInsight,
+    this.longestStreak = 30,
+    this.goalCompletionPct = 0.71,
+    this.weeklyGoalDays = const [true, true, true, true, false, true, false],
+    this.avgCaloriesLastWeek = 1900,
+    this.waterConsumed = 1.4,
+    this.waterTarget = 2.5,
+    this.waterDrinkCount = 4,
+    this.weeklyMacros = const [],
+    this.currentWeight = 174.5,
+    this.lastWeekWeight = 175.7,
+    this.lastMonthWeight = 178.0,
+    this.bmi = 24.2,
+    this.weightTrend = const [],
+    this.weightMovingAverage = const [],
+    this.sparklineData = const [],
+    this.proteinSparkline = const [],
+    this.proteinDailyConsistency = const [true, true, false, true, false, true, true],
   });
 
   final String greeting;
   final String dateLabel;
   final int caloriesConsumed;
   final int caloriesTarget;
-
-  /// Percent change vs yesterday (e.g. 8.0 means +8%).
   final double calorieTrendPct;
 
   double get calorieProgress =>
@@ -122,4 +154,30 @@ class DashboardSummary {
   final List<WeeklyStat> weeklyStats;
   final List<DashboardStat> stats;
   final String coachInsight;
+
+  // Statistics section fields
+  final int longestStreak;
+  final double goalCompletionPct;
+  final List<bool> weeklyGoalDays;
+  final double avgCaloriesLastWeek;
+  final double waterConsumed;
+  final double waterTarget;
+  final int waterDrinkCount;
+  final List<WeeklyMacroDay> weeklyMacros;
+  final double currentWeight;
+  final double lastWeekWeight;
+  final double lastMonthWeight;
+  final double? bmi;
+  final List<double> weightTrend;
+  final List<double> weightMovingAverage;
+  final List<double> sparklineData;
+  final List<double> proteinSparkline;
+  final List<bool> proteinDailyConsistency;
+
+  double get weightChange => currentWeight - lastWeekWeight;
+  double get monthlyWeightChange => currentWeight - lastMonthWeight;
+  double get waterProgress => waterTarget > 0 ? (waterConsumed / waterTarget).clamp(0.0, 1.0) : 0.0;
+  double get waterProjected => waterDrinkCount > 0
+      ? (waterConsumed / waterDrinkCount) * 6 // estimate 6 drinking sessions/day
+      : 0.0;
 }

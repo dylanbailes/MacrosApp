@@ -18,10 +18,9 @@ import '../constants/app_spacing.dart';
 /// - Destructive: dark-red surface with accent.signal text — irreversible actions only
 /// 
 /// Hover Behavior:
-/// - Primary: subtle red glow overlay
-/// - Secondary: elevate to glass surface
-/// - Icon: subtle red background
-/// - Ghost: subtle red text highlight
+/// - All buttons show subtle red overlay on hover (perfectly clipped to pill shape)
+/// - Scale animation on press for tactile feedback
+/// - Smooth 150ms transition
 class AppButton extends StatefulWidget {
   const AppButton({
     required this.onPressed, super.key,
@@ -79,18 +78,18 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
 
   bool get _isEffectivelyDisabled => widget.disabled || widget.isLoading || widget.onPressed == null;
 
-  void _onTapDown(TapDownDetails details) {
+  void _handleTapDown(TapDownDetails details) {
     if (!_isEffectivelyDisabled) _controller.forward();
   }
 
-  void _onTapUp(TapUpDetails details) {
+  void _handleTapUp(TapUpDetails details) {
     if (!_isEffectivelyDisabled) {
       _controller.reverse();
       widget.onPressed!();
     }
   }
 
-  void _onTapCancel() {
+  void _handleTapCancel() {
     if (!_isEffectivelyDisabled) _controller.reverse();
   }
 
@@ -116,6 +115,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
 
     final textColor = _getTextColor();
     final isIconOnly = widget.variant == AppButtonVariant.icon || (widget.icon != null && widget.label == null);
+    final pillRadius = isIconOnly ? height / 2 : AppBorderRadius.pill;
     
     Widget content;
     if (isIconOnly) {
@@ -137,61 +137,25 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
       content = Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (widget.icon != null) ...[
             Icon(widget.icon, size: 20, color: textColor),
-            if (widget.label != null) const SizedBox(width: AppSpacing.sm),
+            const SizedBox(width: AppSpacing.sm),
           ],
-          if (widget.label != null)
-            Text(
-              widget.label!,
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: fontSize,
-                fontWeight: FontWeight.w600,
-                color: textColor,
-                letterSpacing: 0.3,
-              ),
+          Text(
+            widget.label ?? '',
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: fontSize,
+              fontWeight: FontWeight.w600,
+              color: textColor,
+              letterSpacing: 0.3,
             ),
+          ),
         ],
       );
     }
-
-    final container = AnimatedContainer(
-      duration: AppDurations.fast,
-      constraints: BoxConstraints(
-        minWidth: isIconOnly ? height : (widget.isFullWidth ? double.infinity : height * 2.5),
-        minHeight: height,
-      ),
-      padding: isIconOnly ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: horizontalPadding),
-      decoration: BoxDecoration(
-        color: _getBackgroundColor(),
-        borderRadius: isIconOnly
-            ? BorderRadius.circular(height / 2)
-            : BorderRadius.circular(AppBorderRadius.pill),
-        border: _getBorder(),
-      ),
-      child: Stack(
-        children: [
-          Center(child: content),
-          // Hover overlay
-          if (!_isEffectivelyDisabled && widget.variant != AppButtonVariant.primary)
-            AnimatedBuilder(
-              animation: _hoverOverlayAnimation,
-              builder: (context, child) => Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: _hoverOverlayAnimation.value,
-                    borderRadius: isIconOnly
-                        ? BorderRadius.circular(height / 2)
-                        : BorderRadius.circular(AppBorderRadius.pill),
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
 
     return MouseRegion(
       cursor: _isEffectivelyDisabled ? SystemMouseCursors.basic : SystemMouseCursors.click,
@@ -202,13 +166,46 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
         if (!_isEffectivelyDisabled) _controller.reverse();
       },
       child: GestureDetector(
-        onTapDown: _onTapDown,
-        onTapUp: _onTapUp,
-        onTapCancel: _onTapCancel,
+        onTapDown: _handleTapDown,
+        onTapUp: _handleTapUp,
+        onTapCancel: _handleTapCancel,
         behavior: HitTestBehavior.opaque,
         child: ScaleTransition(
           scale: _scaleAnimation,
-          child: container,
+          child: AnimatedBuilder(
+            animation: _hoverOverlayAnimation,
+            builder: (context, child) {
+              return Container(
+                constraints: BoxConstraints(
+                  minWidth: isIconOnly ? height : (widget.isFullWidth ? double.infinity : height * 2.5),
+                  minHeight: height,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                decoration: BoxDecoration(
+                  color: _getBackgroundColor(),
+                  borderRadius: BorderRadius.circular(pillRadius),
+                  border: _getBorder(),
+                ),
+                alignment: Alignment.center,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    content,
+                    // Hover overlay - perfectly clipped to pill shape
+                    if (!_isEffectivelyDisabled)
+                      Positioned.fill(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: _hoverOverlayAnimation.value,
+                            borderRadius: BorderRadius.circular(pillRadius),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

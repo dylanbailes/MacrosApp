@@ -90,8 +90,8 @@ class AppBottomNavBar extends StatelessWidget {
   }
 }
 
-/// A single navigation bar item
-class _NavBarItem extends StatelessWidget {
+/// A single navigation bar item with hover interaction
+class _NavBarItem extends StatefulWidget {
   const _NavBarItem({
     required this.icon,
     required this.activeIcon,
@@ -107,41 +107,92 @@ class _NavBarItem extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
+  State<_NavBarItem> createState() => _NavBarItemState();
+}
+
+class _NavBarItemState extends State<_NavBarItem> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<Color?> _hoverColorAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: AppDurations.xFast,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutCubic),
+    );
+    _hoverColorAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: AppColors.primary.withValues(alpha: 0.08),
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: AppDurations.fast,
-        curve: AppDurations.springCurve,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.surfaceElevated : Colors.transparent,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isSelected ? activeIcon : icon,
-              color: isSelected ? AppColors.primary : AppColors.iconDefault,
-              size: 22,
-            ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected ? AppColors.primary : AppColors.textTertiary,
-              ),
-            ),
-          ],
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() {
+        _isHovered = true;
+        _controller.forward();
+      }),
+      onExit: (_) => setState(() {
+        _isHovered = false;
+        _controller.reverse();
+      }),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        behavior: HitTestBehavior.opaque,
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: AnimatedBuilder(
+            animation: _hoverColorAnimation,
+            builder: (context, child) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  color: widget.isSelected 
+                      ? AppColors.surfaceElevated 
+                      : (_isHovered ? _hoverColorAnimation.value : Colors.transparent),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      widget.isSelected ? widget.activeIcon : widget.icon,
+                      color: widget.isSelected ? AppColors.primary : AppColors.iconDefault,
+                      size: 22,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      widget.label,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 11,
+                        fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.w500,
+                        color: widget.isSelected ? AppColors.primary : AppColors.textTertiary,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -151,7 +202,7 @@ class _NavBarItem extends StatelessWidget {
 /// Floating Action Button for the Log action.
 /// 
 /// Reference: Blueprint §2.5 — breaks the top edge of the bottom nav bar
-class AppNavFab extends StatelessWidget {
+class AppNavFab extends StatefulWidget {
   const AppNavFab({
     super.key,
     this.onTap,
@@ -162,29 +213,93 @@ class AppNavFab extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   @override
+  State<AppNavFab> createState() => _AppNavFabState();
+}
+
+class _AppNavFabState extends State<AppNavFab> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<Color?> _hoverOverlayAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: AppDurations.xFast,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.93).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutCubic),
+    );
+    _hoverOverlayAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: AppColors.primary.withValues(alpha: 0.2),
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      onLongPress: onLongPress,
-      child: Container(
-        width: 64,
-        height: 64,
-        margin: const EdgeInsets.only(bottom: 32),
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.primary.withValues(alpha: 0.2),
-              blurRadius: 24,
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        child: const Icon(
-          Icons.add,
-          color: AppColors.textOnPrimary,
-          size: 28,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() {
+        _isHovered = true;
+        _controller.forward();
+      }),
+      onExit: (_) => setState(() {
+        _isHovered = false;
+        _controller.reverse();
+      }),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                margin: const EdgeInsets.only(bottom: 32),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: _isHovered ? 0.4 : 0.2),
+                      blurRadius: 24,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+              ),
+              // Hover overlay
+              if (_isHovered)
+                Container(
+                  width: 64,
+                  height: 64,
+                  margin: const EdgeInsets.only(bottom: 32),
+                  decoration: BoxDecoration(
+                    color: _hoverOverlayAnimation.value,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              const Positioned(
+                child: Icon(
+                  Icons.add,
+                  color: AppColors.textOnPrimary,
+                  size: 28,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

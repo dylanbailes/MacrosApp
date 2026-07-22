@@ -130,6 +130,32 @@ class DashboardNotifier extends AsyncNotifier<DashboardSummary> {
       ],
       coachInsight:
           'Your protein has been low 3 days running — want a suggestion?',
+      // Extended statistics data
+      longestStreak: 30,
+      goalCompletionPct: 0.71,
+      weeklyGoalDays: const [true, true, true, true, false, true, false],
+      avgCaloriesLastWeek: 1900,
+      waterConsumed: 1.4,
+      waterTarget: 2.5,
+      waterDrinkCount: 4,
+      weeklyMacros: const [
+        WeeklyMacroDay(label: 'Mon', protein: 120, carbs: 180, fat: 65),
+        WeeklyMacroDay(label: 'Tue', protein: 145, carbs: 200, fat: 70),
+        WeeklyMacroDay(label: 'Wed', protein: 110, carbs: 160, fat: 55),
+        WeeklyMacroDay(label: 'Thu', protein: 155, carbs: 210, fat: 75),
+        WeeklyMacroDay(label: 'Fri', protein: 100, carbs: 150, fat: 50),
+        WeeklyMacroDay(label: 'Sat', protein: 160, carbs: 220, fat: 80),
+        WeeklyMacroDay(label: 'Sun', protein: 96, carbs: 132, fat: 41, isToday: true),
+      ],
+      currentWeight: 174.5,
+      lastWeekWeight: 175.7,
+      lastMonthWeight: 178.0,
+      bmi: 24.2,
+      weightTrend: const [176.2, 175.8, 175.5, 175.0, 174.8, 174.6, 174.5],
+      weightMovingAverage: const [175.9, 175.7, 175.5, 175.3, 175.1, 174.9, 174.7],
+      sparklineData: const [2100, 1980, 2050, 2200, 1850, 2400, 1240],
+      proteinSparkline: const [140, 132, 128, 145, 118, 150, 96],
+      proteinDailyConsistency: const [true, true, false, true, false, true, true],
     );
   }
 
