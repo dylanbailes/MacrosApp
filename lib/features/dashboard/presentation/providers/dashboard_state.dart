@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/providers/dashboard_state.dart
+// Path: providers\dashboard_state.dart
 import 'package:flutter/material.dart';
 
 /// Immutable domain model for the Dashboard's daily summary.

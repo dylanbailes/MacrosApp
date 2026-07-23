@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/dashboard_stats_section.dart
+// Path: widgets\dashboard_stats_section.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_spacing.dart';

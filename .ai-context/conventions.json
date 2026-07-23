@@ -1,14 +1,18 @@
 {
   "fileSuffixes": {
-    "_page": 8
+    "_page": 8,
+    "_provider": 1,
+    "_state": 1
   },
   "classSuffixes": {
-    "State": 4,
+    "State": 18,
     "Page": 8
   },
   "filePurposes": {
     "other": 18,
-    "widget": 16,
+    "widget": 47,
+    "provider": 1,
+    "state": 1,
     "entry_point": 1
   }
 }

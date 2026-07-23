@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/macro_overview_row.dart
+// Path: widgets\macro_overview_row.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

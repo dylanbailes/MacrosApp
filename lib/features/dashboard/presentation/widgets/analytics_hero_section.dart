@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/analytics_hero_section.dart
+// Path: widgets\analytics_hero_section.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

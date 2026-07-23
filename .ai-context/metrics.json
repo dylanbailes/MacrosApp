@@ -1,34 +1,34 @@
 {
   "summary": {
-    "totalFiles": 35,
-    "dartFiles": 35,
-    "totalLines": 3075,
-    "averageLocPerFile": 88.9,
-    "averageCommentRatio": 7.6,
-    "totalClasses": 47,
-    "totalMethods": 94,
-    "filesWithoutComments": 6
+    "totalFiles": 68,
+    "dartFiles": 68,
+    "totalLines": 8534,
+    "averageLocPerFile": 125.9,
+    "averageCommentRatio": 6.3,
+    "totalClasses": 123,
+    "totalMethods": 237,
+    "filesWithoutComments": 5
   },
   "largestFiles": [
     {
-      "file": "lib\\theme\\app_theme.dart",
-      "lines": 330
+      "file": "lib\\pages\\log_page.dart",
+      "lines": 398
     },
     {
-      "file": "lib\\pages\\dashboard_page.dart",
-      "lines": 265
+      "file": "lib\\theme\\app_theme.dart",
+      "lines": 352
+    },
+    {
+      "file": "lib\\widgets\\app_bottom_nav_bar.dart",
+      "lines": 307
+    },
+    {
+      "file": "lib\\theme\\app_text_styles.dart",
+      "lines": 293
     },
     {
       "file": "lib\\widgets\\app_button.dart",
-      "lines": 239
-    },
-    {
-      "file": "lib\\pages\\settings_page.dart",
-      "lines": 211
-    },
-    {
-      "file": "lib\\widgets\\animated_metric_ring.dart",
-      "lines": 198
+      "lines": 278
     }
   ],
   "smallestFile": {

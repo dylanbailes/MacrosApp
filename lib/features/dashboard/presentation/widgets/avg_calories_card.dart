@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/avg_calories_card.dart
+// Path: widgets\avg_calories_card.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 

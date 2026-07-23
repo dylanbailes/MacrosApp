@@ -1,4 +1,4 @@
-// Path: widgets/log_day_summary.dart
+// Path: widgets\log_day_summary.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';

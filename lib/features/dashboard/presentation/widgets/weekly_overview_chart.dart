@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/weekly_overview_chart.dart
+// Path: widgets\weekly_overview_chart.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

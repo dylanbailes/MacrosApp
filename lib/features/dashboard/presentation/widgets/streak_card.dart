@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/streak_card.dart
+// Path: widgets\streak_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';

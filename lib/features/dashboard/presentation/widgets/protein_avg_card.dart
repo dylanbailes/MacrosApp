@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/protein_avg_card.dart
+// Path: widgets\protein_avg_card.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 

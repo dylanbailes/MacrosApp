@@ -1,4 +1,4 @@
-// Path: widgets/log_meal_section.dart
+// Path: widgets\log_meal_section.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

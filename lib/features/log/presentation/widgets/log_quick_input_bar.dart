@@ -1,4 +1,4 @@
-// Path: widgets/log_quick_input_bar.dart
+// Path: widgets\log_quick_input_bar.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';

@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/weekly_macros_chart.dart
+// Path: widgets\weekly_macros_chart.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 

@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/water_card.dart
+// Path: widgets\water_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';

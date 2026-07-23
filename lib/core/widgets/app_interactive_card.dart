@@ -1,4 +1,4 @@
-// Path: core/widgets/app_interactive_card.dart
+// Path: widgets\app_interactive_card.dart
 import 'package:flutter/material.dart';
 
 import '../constants/app_border_radius.dart';

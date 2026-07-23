@@ -9,23 +9,56 @@
   ],
   "layers": {
     "Provider": {
-      "fileCount": 2,
+      "fileCount": 4,
       "files": [
         "lib\\providers\\app_providers.dart",
-        "lib\\providers\\providers.dart"
+        "lib\\providers\\providers.dart",
+        "lib\\providers\\dashboard_provider.dart",
+        "lib\\providers\\dashboard_state.dart"
       ]
     },
     "Widget": {
-      "fileCount": 8,
+      "fileCount": 39,
       "files": [
         "lib\\widgets\\animated_list_item.dart",
         "lib\\widgets\\animated_metric_ring.dart",
+        "lib\\widgets\\app_animated_counter.dart",
         "lib\\widgets\\app_animated_switcher.dart",
+        "lib\\widgets\\app_bottom_nav_bar.dart",
         "lib\\widgets\\app_button.dart",
         "lib\\widgets\\app_card.dart",
         "lib\\widgets\\app_glass_container.dart",
+        "lib\\widgets\\app_interactive_card.dart",
+        "lib\\widgets\\app_metric_tile.dart",
+        "lib\\widgets\\app_progress_ring.dart",
+        "lib\\widgets\\app_section_header.dart",
+        "lib\\widgets\\app_skeleton.dart",
+        "lib\\widgets\\app_stat_display.dart",
+        "lib\\widgets\\app_surface.dart",
         "lib\\widgets\\app_text_field.dart",
-        "lib\\widgets\\widgets.dart"
+        "lib\\widgets\\app_toast.dart",
+        "lib\\widgets\\widgets.dart",
+        "lib\\widgets\\ai_coach_entry_card.dart",
+        "lib\\widgets\\analytics_hero_section.dart",
+        "lib\\widgets\\avg_calories_card.dart",
+        "lib\\widgets\\calorie_hero_card.dart",
+        "lib\\widgets\\dashboard_header.dart",
+        "lib\\widgets\\dashboard_stats_section.dart",
+        "lib\\widgets\\goal_completion_card.dart",
+        "lib\\widgets\\macro_overview_row.dart",
+        "lib\\widgets\\protein_avg_card.dart",
+        "lib\\widgets\\quick_actions_row.dart",
+        "lib\\widgets\\recent_meals_list.dart",
+        "lib\\widgets\\streak_card.dart",
+        "lib\\widgets\\water_card.dart",
+        "lib\\widgets\\weekly_calories_chart.dart",
+        "lib\\widgets\\weekly_macros_chart.dart",
+        "lib\\widgets\\weekly_overview_chart.dart",
+        "lib\\widgets\\weight_trend_card.dart",
+        "lib\\widgets\\log_day_summary.dart",
+        "lib\\widgets\\log_food_row.dart",
+        "lib\\widgets\\log_meal_section.dart",
+        "lib\\widgets\\log_quick_input_bar.dart"
       ]
     },
     "Page": {
@@ -52,7 +85,13 @@
   },
   "layerDependencies": {
     "Page": [
-      "Core"
+      "Core",
+      "Provider",
+      "Widget"
+    ],
+    "Widget": [
+      "Core",
+      "Provider"
     ]
   }
 }

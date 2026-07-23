@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/quick_actions_row.dart
+// Path: widgets\quick_actions_row.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_spacing.dart';

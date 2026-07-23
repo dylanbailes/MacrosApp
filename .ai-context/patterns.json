@@ -2,19 +2,25 @@
   "frameworks": {
     "Riverpod": {
       "inPubspec": true,
-      "fileCount": 4,
+      "fileCount": 7,
       "files": [
         "lib\\app\\macro_tracker_app.dart",
         "lib\\providers\\app_providers.dart",
         "lib\\providers\\providers.dart",
+        "lib\\pages\\dashboard_page.dart",
+        "lib\\providers\\dashboard_provider.dart",
+        "lib\\widgets\\weekly_calories_chart.dart",
         "lib\\lib\\main.dart"
       ]
     },
     "GoRouter": {
       "inPubspec": true,
-      "fileCount": 2,
+      "fileCount": 5,
       "files": [
         "lib\\router\\app_router.dart",
+        "lib\\pages\\dashboard_page.dart",
+        "lib\\widgets\\ai_coach_entry_card.dart",
+        "lib\\widgets\\dashboard_header.dart",
         "lib\\pages\\home_page.dart"
       ]
     },

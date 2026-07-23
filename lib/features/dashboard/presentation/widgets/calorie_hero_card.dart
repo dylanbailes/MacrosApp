@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/calorie_hero_card.dart
+// Path: widgets\calorie_hero_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';

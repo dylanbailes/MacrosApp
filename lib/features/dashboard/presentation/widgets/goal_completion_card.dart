@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/goal_completion_card.dart
+// Path: widgets\goal_completion_card.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
 

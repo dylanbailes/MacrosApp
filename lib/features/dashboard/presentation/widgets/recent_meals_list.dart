@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/widgets/recent_meals_list.dart
+// Path: widgets\recent_meals_list.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';

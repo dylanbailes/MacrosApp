@@ -1,4 +1,4 @@
-// Path: features/dashboard/presentation/providers/dashboard_provider.dart
+// Path: providers\dashboard_provider.dart
 import 'dart:async';
 
 import 'package:flutter/material.dart';
