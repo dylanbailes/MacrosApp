@@ -7,6 +7,7 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/widgets/app_skeleton.dart';
+import '../../../../core/widgets/app_section_header.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
 import '../widgets/ai_coach_entry_card.dart';
@@ -15,15 +16,18 @@ import '../widgets/dashboard_header.dart';
 import '../widgets/macro_overview_row.dart';
 import '../widgets/quick_actions_row.dart';
 import '../widgets/recent_meals_list.dart';
-import '../widgets/dashboard_stats_section.dart';
+import '../widgets/metric_carousel.dart';
+import '../widgets/streak_card.dart';
 
 /// The daily landing screen.
 ///
 /// Reference: Blueprint §3.1 — Dashboard (Home). Prioritizes fast logging,
 /// remaining calories/macros, today's progress, recent meals, and useful
 /// statistics. The bottom nav + FAB are provided by the app shell (HomePage),
-/// so this screen renders only its content. Mock data is supplied by
-/// [dashboardProvider] until a backend exists.
+/// so this screen renders only its content.
+///
+/// Simplified to show only major stats: calories, macros, protein, fat,
+/// carbs, water, and streak. Detailed analytics are on the Analytics page.
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({super.key});
 
@@ -89,14 +93,24 @@ class _DashboardContent extends StatelessWidget {
           onTap: () => context.push('/profile/coach'),
         ),
         const SizedBox(height: AppSpacing.xxxl),
-        const DashboardSectionHeader(label: 'Macros'),
+        const AppSectionHeader(label: 'Macros'),
         const SizedBox(height: AppSpacing.md),
         MacroOverviewRow(macros: summary.macros),
         const SizedBox(height: AppSpacing.xxxl),
-        DashboardSectionHeader(
-          label: 'Recent Meals',
-          actionLabel: 'View all',
-          onAction: () => context.go('/log'),
+        Row(
+          children: [
+            const AppSectionHeader(label: 'Recent Meals'),
+            const Spacer(),
+            GestureDetector(
+              onTap: () => context.go('/log'),
+              child: Text(
+                'View all',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.primary,
+                    ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSpacing.md),
         RecentMealsList(
@@ -104,7 +118,47 @@ class _DashboardContent extends StatelessWidget {
           onTapMeal: (_) => context.push('/log'),
         ),
         const SizedBox(height: AppSpacing.xxxl),
-        DashboardSectionHeader(label: 'Quick Actions'),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Metrics carousel takes ~65% width
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AppSectionHeader(label: 'Metrics'),
+                  const SizedBox(height: AppSpacing.md),
+                  MetricCarousel(
+                    macros: summary.macros,
+                    waterConsumed: summary.waterConsumed,
+                    waterTarget: summary.waterTarget,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            // Streak card takes ~35% width
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AppSectionHeader(label: 'Streak'),
+                  const SizedBox(height: AppSpacing.md),
+                  StreakCard(
+                    currentStreak: summary.currentStreak,
+                    longestStreak: summary.longestStreak,
+                    weeklyGoalDays: summary.weeklyGoalDays,
+                    onTap: () => context.push('/analytics'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.xxxl),
+        const AppSectionHeader(label: 'Quick Actions'),
         const SizedBox(height: AppSpacing.md),
         QuickActionsRow(
           actions: [
@@ -130,17 +184,12 @@ class _DashboardContent extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSpacing.xxxl),
-        DashboardStatsSection(summary: summary),
       ],
     );
   }
 }
 
 /// Skeleton loading state matching the dashboard's content shape.
-///
-/// Reference: Blueprint §4.2 — Dashboard shows a skeleton hero, 3 skeleton
-/// macro tiles, and 3 skeleton log rows on first paint.
 class _DashboardSkeleton extends StatelessWidget {
   const _DashboardSkeleton();
 
@@ -157,34 +206,15 @@ class _DashboardSkeleton extends StatelessWidget {
         const AppSkeleton(width: 120, height: 16, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.md),
         
-        // Medium cards row: Streak, Goals, Avg Calories
-        Row(
-          children: [
-            for (var i = 0; i < 3; i++) ...[
-              Expanded(child: AppSkeletonShapes.metricTile()),
-              if (i < 2) const SizedBox(width: AppSpacing.lg),
-            ],
-          ],
-        ),
-        const SizedBox(height: AppSpacing.xl),
-        
-        // Hero chart: 7-Day Calories
-        AppSkeleton(
+        // Hero chart
+        const AppSkeleton(
           width: double.infinity,
           height: 200,
           borderRadius: AppBorderRadius.md,
         ),
         const SizedBox(height: AppSpacing.xl),
         
-        // Hero chart: Macros This Week
-        AppSkeleton(
-          width: double.infinity,
-          height: 160,
-          borderRadius: AppBorderRadius.md,
-        ),
-        const SizedBox(height: AppSpacing.xl),
-        
-        // Compact cards row: Water, Protein, Weight
+        // Macro tiles row
         Row(
           children: [
             for (var i = 0; i < 3; i++) ...[
@@ -193,7 +223,7 @@ class _DashboardSkeleton extends StatelessWidget {
             ],
           ],
         ),
-        const SizedBox(height: AppSpacing.xxxl),
+        const SizedBox(height: AppSpacing.xl),
         
         // Recent meals
         for (var i = 0; i < 3; i++) ...[

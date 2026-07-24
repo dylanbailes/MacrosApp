@@ -117,6 +117,7 @@ class DashboardSummary {
     required this.weeklyStats,
     required this.stats,
     required this.coachInsight,
+    this.currentStreak = 12,
     this.longestStreak = 30,
     this.goalCompletionPct = 0.71,
     this.weeklyGoalDays = const [true, true, true, true, false, true, false],
@@ -156,6 +157,7 @@ class DashboardSummary {
   final String coachInsight;
 
   // Statistics section fields
+  final int currentStreak;
   final int longestStreak;
   final double goalCompletionPct;
   final List<bool> weeklyGoalDays;
