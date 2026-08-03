@@ -1,4 +1,4 @@
-// Path: widgets\weekly_calories_chart.dart
+// Path: features/dashboard/presentation/widgets/weekly_calories_chart.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -7,7 +7,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/dashboard_state.dart';
 
 /// Hero 7-day calorie chart with smooth curved line, red accent,
@@ -17,9 +17,7 @@ import '../providers/dashboard_state.dart';
 /// Nothing OS style: premium visualization, restrained red, Geist labels.
 class WeeklyCaloriesChart extends ConsumerStatefulWidget {
   const WeeklyCaloriesChart({
-    super.key,
-    required this.days,
-    required this.target,
+    required this.days, required this.target, super.key,
   });
 
   final List<WeeklyDay> days;
@@ -67,7 +65,12 @@ class _WeeklyCaloriesChartState extends ConsumerState<WeeklyCaloriesChart>
         .map((d) => d.calories)
         .reduce((a, b) => a > b ? a : b);
 
-    return AppInteractiveCard(
+    return AppCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      borderRadius: AppBorderRadius.md,
+      level: 2,
+      accentColor: AppColors.primary,
+      clip: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -258,11 +261,6 @@ class _WeeklyCaloriesChartState extends ConsumerState<WeeklyCaloriesChart>
           ),
         ],
       ),
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      borderRadius: AppBorderRadius.md,
-      level: 2,
-      accentColor: AppColors.primary,
-      clip: false,
     );
   }
 }

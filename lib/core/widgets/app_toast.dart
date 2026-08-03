@@ -3,7 +3,33 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_border_radius.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_durations.dart';
 import '../constants/app_spacing.dart';
+import '../theme/app_text_styles.dart';
+
+/// Shows an [AppToast] in the root overlay with an entrance animation and
+/// auto-dismiss. Safe to call from any page (the entry is inserted into the
+/// root overlay so it survives route pops).
+void showAppToast(
+  BuildContext context, {
+  required String message,
+  AppToastVariant variant = AppToastVariant.confirmation,
+  VoidCallback? onUndo,
+}) {
+  final overlay = Overlay.of(context, rootOverlay: true);
+  late final OverlayEntry entry;
+  entry = OverlayEntry(
+    builder: (_) => AppToastHost(
+      toast: AppToast(
+        message: message,
+        variant: variant,
+        onUndo: onUndo,
+      ),
+      onDismissed: () => entry.remove(),
+    ),
+  );
+  overlay.insert(entry);
+}
 
 /// A toast notification for confirming transient, low-stakes actions.
 ///
@@ -15,8 +41,7 @@ import '../constants/app_spacing.dart';
 /// - Error: small status.negative icon
 class AppToast extends StatelessWidget {
   const AppToast({
-    super.key,
-    required this.message,
+    required this.message, super.key,
     this.variant = AppToastVariant.confirmation,
     this.onUndo,
     this.duration = const Duration(seconds: 4),
@@ -61,7 +86,7 @@ class AppToast extends StatelessWidget {
             child: Text(
               message,
               style: const TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: kGeistFont,
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
                 color: AppColors.onPrimary,
@@ -76,7 +101,7 @@ class AppToast extends StatelessWidget {
               child: const Text(
                 'Undo',
                 style: TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: kGeistFont,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
@@ -107,3 +132,65 @@ class AppToast extends StatelessWidget {
 }
 
 enum AppToastVariant { confirmation, undoable, error }
+
+/// Hosts a single [AppToast] with an entrance animation and auto-dismiss.
+class AppToastHost extends StatefulWidget {
+  const AppToastHost({
+    required this.toast,
+    required this.onDismissed,
+    super.key,
+  });
+
+  final AppToast toast;
+  final VoidCallback onDismissed;
+
+  @override
+  State<AppToastHost> createState() => _AppToastHostState();
+}
+
+class _AppToastHostState extends State<AppToastHost>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Offset> _slide;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: AppDurations.fast,
+    );
+    _slide = Tween<Offset>(
+      begin: const Offset(0, 0.3),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
+    );
+    _controller.forward();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        _controller.reverse().then((_) => widget.onDismissed());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: AppSpacing.xxl,
+      left: AppSpacing.lg,
+      right: AppSpacing.lg,
+      child: SlideTransition(
+        position: _slide,
+        child: widget.toast,
+      ),
+    );
+  }
+}

@@ -1,0 +1,799 @@
+{
+  "version": 1,
+  "foods": [
+    {
+      "id": "seed_chicken_breast",
+      "name": "Chicken Breast (cooked)",
+      "category": "Protein",
+      "popularity": 100,
+      "caloriesPer100g": 165,
+      "proteinPer100g": 31.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 3.6,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "1 breast (150g)", "grams": 150 },
+        { "label": "6 oz (170g)", "grams": 170 }
+      ]
+    },
+    {
+      "id": "seed_whey_protein",
+      "name": "Whey Protein Powder",
+      "category": "Protein",
+      "popularity": 98,
+      "caloriesPer100g": 380,
+      "proteinPer100g": 75.0,
+      "carbsPer100g": 8.0,
+      "fatPer100g": 5.0,
+      "servings": [
+        { "label": "1 scoop (30g)", "grams": 30 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_salmon",
+      "name": "Salmon (cooked)",
+      "category": "Protein",
+      "popularity": 95,
+      "caloriesPer100g": 208,
+      "proteinPer100g": 20.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 13.0,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "1 fillet (170g)", "grams": 170 },
+        { "label": "6 oz (170g)", "grams": 170 }
+      ]
+    },
+    {
+      "id": "seed_eggs",
+      "name": "Eggs (whole)",
+      "category": "Protein",
+      "popularity": 97,
+      "caloriesPer100g": 155,
+      "proteinPer100g": 13.0,
+      "carbsPer100g": 1.1,
+      "fatPer100g": 11.0,
+      "servings": [
+        { "label": "1 egg (50g)", "grams": 50 },
+        { "label": "2 eggs (100g)", "grams": 100 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_egg_whites",
+      "name": "Egg Whites",
+      "category": "Protein",
+      "popularity": 70,
+      "caloriesPer100g": 52,
+      "proteinPer100g": 11.0,
+      "carbsPer100g": 0.7,
+      "fatPer100g": 0.2,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "1 white (33g)", "grams": 33 }
+      ]
+    },
+    {
+      "id": "seed_ground_beef_90",
+      "name": "Ground Beef 90/10 (cooked)",
+      "category": "Protein",
+      "popularity": 85,
+      "caloriesPer100g": 217,
+      "proteinPer100g": 26.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 11.8,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "4 oz (113g)", "grams": 113 },
+        { "label": "1 patty (150g)", "grams": 150 }
+      ]
+    },
+    {
+      "id": "seed_ground_turkey",
+      "name": "Ground Turkey 93/7 (cooked)",
+      "category": "Protein",
+      "popularity": 78,
+      "caloriesPer100g": 176,
+      "proteinPer100g": 24.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 8.3,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "4 oz (113g)", "grams": 113 }
+      ]
+    },
+    {
+      "id": "seed_lean_pork_loin",
+      "name": "Pork Loin (lean, cooked)",
+      "category": "Protein",
+      "popularity": 60,
+      "caloriesPer100g": 143,
+      "proteinPer100g": 27.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 3.5,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "4 oz (113g)", "grams": 113 }
+      ]
+    },
+    {
+      "id": "seed_sirloin_steak",
+      "name": "Sirloin Steak (cooked)",
+      "category": "Protein",
+      "popularity": 65,
+      "caloriesPer100g": 206,
+      "proteinPer100g": 29.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 9.3,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "8 oz (227g)", "grams": 227 }
+      ]
+    },
+    {
+      "id": "seed_tuna_canned",
+      "name": "Tuna (canned in water)",
+      "category": "Protein",
+      "popularity": 72,
+      "caloriesPer100g": 116,
+      "proteinPer100g": 26.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 0.8,
+      "servings": [
+        { "label": "1 can (113g drained)", "grams": 113 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_shrimp",
+      "name": "Shrimp (cooked)",
+      "category": "Protein",
+      "popularity": 55,
+      "caloriesPer100g": 99,
+      "proteinPer100g": 24.0,
+      "carbsPer100g": 0.2,
+      "fatPer100g": 0.3,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "6 oz (170g)", "grams": 170 }
+      ]
+    },
+    {
+      "id": "seed_tofu",
+      "name": "Tofu (firm)",
+      "category": "Protein",
+      "popularity": 58,
+      "caloriesPer100g": 76,
+      "proteinPer100g": 8.0,
+      "carbsPer100g": 1.9,
+      "fatPer100g": 4.8,
+      "servings": [
+        { "label": "100g", "grams": 100 },
+        { "label": "1/2 block (170g)", "grams": 170 }
+      ]
+    },
+    {
+      "id": "seed_greek_yogurt",
+      "name": "Greek Yogurt (0%)",
+      "category": "Dairy",
+      "popularity": 92,
+      "caloriesPer100g": 59,
+      "proteinPer100g": 10.0,
+      "carbsPer100g": 3.6,
+      "fatPer100g": 0.4,
+      "servings": [
+        { "label": "1 container (170g)", "grams": 170 },
+        { "label": "100g", "grams": 100 },
+        { "label": "3/4 cup (170g)", "grams": 170 }
+      ]
+    },
+    {
+      "id": "seed_cottage_cheese",
+      "name": "Cottage Cheese (2%)",
+      "category": "Dairy",
+      "popularity": 62,
+      "caloriesPer100g": 98,
+      "proteinPer100g": 11.0,
+      "carbsPer100g": 3.4,
+      "fatPer100g": 4.3,
+      "servings": [
+        { "label": "1/2 cup (113g)", "grams": 113 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_whole_milk",
+      "name": "Milk (whole)",
+      "category": "Dairy",
+      "popularity": 68,
+      "caloriesPer100g": 61,
+      "proteinPer100g": 3.2,
+      "carbsPer100g": 4.8,
+      "fatPer100g": 3.3,
+      "servings": [
+        { "label": "1 cup (244g)", "grams": 244 },
+        { "label": "100ml (103g)", "grams": 103 }
+      ]
+    },
+    {
+      "id": "seed_skim_milk",
+      "name": "Milk (skim)",
+      "category": "Dairy",
+      "popularity": 52,
+      "caloriesPer100g": 34,
+      "proteinPer100g": 3.4,
+      "carbsPer100g": 5.0,
+      "fatPer100g": 0.1,
+      "servings": [
+        { "label": "1 cup (245g)", "grams": 245 },
+        { "label": "100ml (103g)", "grams": 103 }
+      ]
+    },
+    {
+      "id": "seed_cheddar",
+      "name": "Cheddar Cheese",
+      "category": "Dairy",
+      "popularity": 60,
+      "caloriesPer100g": 403,
+      "proteinPer100g": 25.0,
+      "carbsPer100g": 1.3,
+      "fatPer100g": 33.0,
+      "servings": [
+        { "label": "1 oz (28g)", "grams": 28 },
+        { "label": "1 slice (20g)", "grams": 20 }
+      ]
+    },
+    {
+      "id": "seed_mozzarella",
+      "name": "Mozzarella",
+      "category": "Dairy",
+      "popularity": 48,
+      "caloriesPer100g": 280,
+      "proteinPer100g": 28.0,
+      "carbsPer100g": 3.1,
+      "fatPer100g": 17.0,
+      "servings": [
+        { "label": "1 oz (28g)", "grams": 28 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_butter",
+      "name": "Butter",
+      "category": "Dairy",
+      "popularity": 45,
+      "caloriesPer100g": 717,
+      "proteinPer100g": 0.9,
+      "carbsPer100g": 0.1,
+      "fatPer100g": 81.0,
+      "servings": [
+        { "label": "1 tbsp (14g)", "grams": 14 },
+        { "label": "1 tsp (5g)", "grams": 5 }
+      ]
+    },
+    {
+      "id": "seed_oats",
+      "name": "Oats (rolled)",
+      "category": "Grains & Carbs",
+      "popularity": 96,
+      "caloriesPer100g": 389,
+      "proteinPer100g": 16.9,
+      "carbsPer100g": 66.0,
+      "fatPer100g": 6.9,
+      "fiberPer100g": 10.6,
+      "servings": [
+        { "label": "1/2 cup dry (40g)", "grams": 40 },
+        { "label": "1 cup dry (80g)", "grams": 80 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_white_rice",
+      "name": "White Rice (cooked)",
+      "category": "Grains & Carbs",
+      "popularity": 90,
+      "caloriesPer100g": 130,
+      "proteinPer100g": 2.7,
+      "carbsPer100g": 28.0,
+      "fatPer100g": 0.3,
+      "servings": [
+        { "label": "1 cup (158g)", "grams": 158 },
+        { "label": "1/2 cup (79g)", "grams": 79 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_brown_rice",
+      "name": "Brown Rice (cooked)",
+      "category": "Grains & Carbs",
+      "popularity": 74,
+      "caloriesPer100g": 112,
+      "proteinPer100g": 2.6,
+      "carbsPer100g": 23.5,
+      "fatPer100g": 0.9,
+      "fiberPer100g": 1.8,
+      "servings": [
+        { "label": "1 cup (195g)", "grams": 195 },
+        { "label": "1/2 cup (98g)", "grams": 98 }
+      ]
+    },
+    {
+      "id": "seed_quinoa",
+      "name": "Quinoa (cooked)",
+      "category": "Grains & Carbs",
+      "popularity": 76,
+      "caloriesPer100g": 120,
+      "proteinPer100g": 4.4,
+      "carbsPer100g": 21.3,
+      "fatPer100g": 1.9,
+      "fiberPer100g": 2.8,
+      "servings": [
+        { "label": "1 cup (185g)", "grams": 185 },
+        { "label": "1/2 cup (93g)", "grams": 93 }
+      ]
+    },
+    {
+      "id": "seed_sweet_potato",
+      "name": "Sweet Potato (baked)",
+      "category": "Grains & Carbs",
+      "popularity": 88,
+      "caloriesPer100g": 86,
+      "proteinPer100g": 1.6,
+      "carbsPer100g": 20.0,
+      "fatPer100g": 0.1,
+      "fiberPer100g": 3.0,
+      "servings": [
+        { "label": "1 medium (150g)", "grams": 150 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_white_potato",
+      "name": "Potato (boiled)",
+      "category": "Grains & Carbs",
+      "popularity": 66,
+      "caloriesPer100g": 77,
+      "proteinPer100g": 2.0,
+      "carbsPer100g": 17.0,
+      "fatPer100g": 0.1,
+      "fiberPer100g": 2.2,
+      "servings": [
+        { "label": "1 medium (170g)", "grams": 170 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_whole_wheat_bread",
+      "name": "Whole Wheat Bread",
+      "category": "Grains & Carbs",
+      "popularity": 82,
+      "caloriesPer100g": 247,
+      "proteinPer100g": 13.0,
+      "carbsPer100g": 41.0,
+      "fatPer100g": 3.4,
+      "fiberPer100g": 7.0,
+      "servings": [
+        { "label": "1 slice (32g)", "grams": 32 },
+        { "label": "2 slices (64g)", "grams": 64 }
+      ]
+    },
+    {
+      "id": "seed_pasta",
+      "name": "Pasta (cooked)",
+      "category": "Grains & Carbs",
+      "popularity": 70,
+      "caloriesPer100g": 158,
+      "proteinPer100g": 5.8,
+      "carbsPer100g": 31.0,
+      "fatPer100g": 0.9,
+      "servings": [
+        { "label": "1 cup (140g)", "grams": 140 },
+        { "label": "2 cups (280g)", "grams": 280 }
+      ]
+    },
+    {
+      "id": "seed_banana",
+      "name": "Banana",
+      "category": "Fruits",
+      "popularity": 93,
+      "caloriesPer100g": 89,
+      "proteinPer100g": 1.1,
+      "carbsPer100g": 23.0,
+      "fatPer100g": 0.3,
+      "fiberPer100g": 2.6,
+      "servings": [
+        { "label": "1 medium (118g)", "grams": 118 },
+        { "label": "1 large (136g)", "grams": 136 }
+      ]
+    },
+    {
+      "id": "seed_apple",
+      "name": "Apple",
+      "category": "Fruits",
+      "popularity": 80,
+      "caloriesPer100g": 52,
+      "proteinPer100g": 0.3,
+      "carbsPer100g": 14.0,
+      "fatPer100g": 0.2,
+      "fiberPer100g": 2.4,
+      "servings": [
+        { "label": "1 medium (182g)", "grams": 182 },
+        { "label": "1 small (150g)", "grams": 150 }
+      ]
+    },
+    {
+      "id": "seed_blueberries",
+      "name": "Blueberries",
+      "category": "Fruits",
+      "popularity": 64,
+      "caloriesPer100g": 57,
+      "proteinPer100g": 0.7,
+      "carbsPer100g": 14.5,
+      "fatPer100g": 0.3,
+      "fiberPer100g": 2.4,
+      "servings": [
+        { "label": "1 cup (148g)", "grams": 148 },
+        { "label": "1/2 cup (74g)", "grams": 74 }
+      ]
+    },
+    {
+      "id": "seed_strawberries",
+      "name": "Strawberries",
+      "category": "Fruits",
+      "popularity": 56,
+      "caloriesPer100g": 32,
+      "proteinPer100g": 0.7,
+      "carbsPer100g": 7.7,
+      "fatPer100g": 0.3,
+      "fiberPer100g": 2.0,
+      "servings": [
+        { "label": "1 cup (152g)", "grams": 152 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_orange",
+      "name": "Orange",
+      "category": "Fruits",
+      "popularity": 50,
+      "caloriesPer100g": 47,
+      "proteinPer100g": 0.9,
+      "carbsPer100g": 12.0,
+      "fatPer100g": 0.1,
+      "fiberPer100g": 2.4,
+      "servings": [
+        { "label": "1 medium (131g)", "grams": 131 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_almonds",
+      "name": "Almonds",
+      "category": "Fats & Nuts",
+      "popularity": 84,
+      "caloriesPer100g": 579,
+      "proteinPer100g": 21.0,
+      "carbsPer100g": 22.0,
+      "fatPer100g": 50.0,
+      "fiberPer100g": 12.5,
+      "servings": [
+        { "label": "1 oz (28g)", "grams": 28 },
+        { "label": "1/4 cup (35g)", "grams": 35 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_peanut_butter",
+      "name": "Peanut Butter",
+      "category": "Fats & Nuts",
+      "popularity": 91,
+      "caloriesPer100g": 588,
+      "proteinPer100g": 25.0,
+      "carbsPer100g": 20.0,
+      "fatPer100g": 50.0,
+      "fiberPer100g": 6.0,
+      "servings": [
+        { "label": "1 tbsp (16g)", "grams": 16 },
+        { "label": "2 tbsp (32g)", "grams": 32 }
+      ]
+    },
+    {
+      "id": "seed_walnuts",
+      "name": "Walnuts",
+      "category": "Fats & Nuts",
+      "popularity": 54,
+      "caloriesPer100g": 654,
+      "proteinPer100g": 15.0,
+      "carbsPer100g": 14.0,
+      "fatPer100g": 65.0,
+      "fiberPer100g": 6.7,
+      "servings": [
+        { "label": "1 oz (28g)", "grams": 28 },
+        { "label": "1/4 cup (30g)", "grams": 30 }
+      ]
+    },
+    {
+      "id": "seed_avocado",
+      "name": "Avocado",
+      "category": "Fats & Nuts",
+      "popularity": 86,
+      "caloriesPer100g": 160,
+      "proteinPer100g": 2.0,
+      "carbsPer100g": 9.0,
+      "fatPer100g": 15.0,
+      "fiberPer100g": 6.7,
+      "servings": [
+        { "label": "1/2 avocado (75g)", "grams": 75 },
+        { "label": "1 whole (150g)", "grams": 150 }
+      ]
+    },
+    {
+      "id": "seed_olive_oil",
+      "name": "Olive Oil",
+      "category": "Fats & Nuts",
+      "popularity": 79,
+      "caloriesPer100g": 884,
+      "proteinPer100g": 0.0,
+      "carbsPer100g": 0.0,
+      "fatPer100g": 100.0,
+      "servings": [
+        { "label": "1 tbsp (14g)", "grams": 14 },
+        { "label": "1 tsp (5g)", "grams": 5 }
+      ]
+    },
+    {
+      "id": "seed_chia_seeds",
+      "name": "Chia Seeds",
+      "category": "Fats & Nuts",
+      "popularity": 44,
+      "caloriesPer100g": 486,
+      "proteinPer100g": 17.0,
+      "carbsPer100g": 42.0,
+      "fatPer100g": 31.0,
+      "fiberPer100g": 34.0,
+      "servings": [
+        { "label": "1 tbsp (12g)", "grams": 12 },
+        { "label": "2 tbsp (24g)", "grams": 24 }
+      ]
+    },
+    {
+      "id": "seed_broccoli",
+      "name": "Broccoli (steamed)",
+      "category": "Vegetables",
+      "popularity": 75,
+      "caloriesPer100g": 34,
+      "proteinPer100g": 2.8,
+      "carbsPer100g": 7.0,
+      "fatPer100g": 0.4,
+      "fiberPer100g": 3.3,
+      "servings": [
+        { "label": "1 cup (156g)", "grams": 156 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_spinach",
+      "name": "Spinach (raw)",
+      "category": "Vegetables",
+      "popularity": 58,
+      "caloriesPer100g": 23,
+      "proteinPer100g": 2.9,
+      "carbsPer100g": 3.6,
+      "fatPer100g": 0.4,
+      "fiberPer100g": 2.2,
+      "servings": [
+        { "label": "1 cup (30g)", "grams": 30 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_asparagus",
+      "name": "Asparagus (cooked)",
+      "category": "Vegetables",
+      "popularity": 42,
+      "caloriesPer100g": 20,
+      "proteinPer100g": 2.2,
+      "carbsPer100g": 3.9,
+      "fatPer100g": 0.1,
+      "fiberPer100g": 2.0,
+      "servings": [
+        { "label": "1 cup (134g)", "grams": 134 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_carrots",
+      "name": "Carrots (raw)",
+      "category": "Vegetables",
+      "popularity": 46,
+      "caloriesPer100g": 41,
+      "proteinPer100g": 0.9,
+      "carbsPer100g": 10.0,
+      "fatPer100g": 0.2,
+      "fiberPer100g": 2.8,
+      "servings": [
+        { "label": "1 medium (61g)", "grams": 61 },
+        { "label": "1 cup (128g)", "grams": 128 }
+      ]
+    },
+    {
+      "id": "seed_bell_pepper",
+      "name": "Bell Pepper (red)",
+      "category": "Vegetables",
+      "popularity": 40,
+      "caloriesPer100g": 31,
+      "proteinPer100g": 1.0,
+      "carbsPer100g": 6.0,
+      "fatPer100g": 0.3,
+      "fiberPer100g": 2.1,
+      "servings": [
+        { "label": "1 medium (119g)", "grams": 119 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_cucumber",
+      "name": "Cucumber",
+      "category": "Vegetables",
+      "popularity": 38,
+      "caloriesPer100g": 15,
+      "proteinPer100g": 0.7,
+      "carbsPer100g": 3.6,
+      "fatPer100g": 0.1,
+      "servings": [
+        { "label": "1 cup (104g)", "grams": 104 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_tomato",
+      "name": "Tomato",
+      "category": "Vegetables",
+      "popularity": 48,
+      "caloriesPer100g": 18,
+      "proteinPer100g": 0.9,
+      "carbsPer100g": 3.9,
+      "fatPer100g": 0.2,
+      "fiberPer100g": 1.2,
+      "servings": [
+        { "label": "1 medium (123g)", "grams": 123 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_mushrooms",
+      "name": "Mushrooms (raw)",
+      "category": "Vegetables",
+      "popularity": 36,
+      "caloriesPer100g": 22,
+      "proteinPer100g": 3.1,
+      "carbsPer100g": 3.3,
+      "fatPer100g": 0.3,
+      "fiberPer100g": 1.0,
+      "servings": [
+        { "label": "1 cup (70g)", "grams": 70 },
+        { "label": "100g", "grams": 100 }
+      ]
+    },
+    {
+      "id": "seed_black_beans",
+      "name": "Black Beans (cooked)",
+      "category": "Legumes",
+      "popularity": 62,
+      "caloriesPer100g": 132,
+      "proteinPer100g": 8.9,
+      "carbsPer100g": 24.0,
+      "fatPer100g": 0.5,
+      "fiberPer100g": 8.7,
+      "servings": [
+        { "label": "1/2 cup (86g)", "grams": 86 },
+        { "label": "1 cup (172g)", "grams": 172 }
+      ]
+    },
+    {
+      "id": "seed_lentils",
+      "name": "Lentils (cooked)",
+      "category": "Legumes",
+      "popularity": 60,
+      "caloriesPer100g": 116,
+      "proteinPer100g": 9.0,
+      "carbsPer100g": 20.0,
+      "fatPer100g": 0.4,
+      "fiberPer100g": 7.9,
+      "servings": [
+        { "label": "1/2 cup (99g)", "grams": 99 },
+        { "label": "1 cup (198g)", "grams": 198 }
+      ]
+    },
+    {
+      "id": "seed_chickpeas",
+      "name": "Chickpeas (cooked)",
+      "category": "Legumes",
+      "popularity": 57,
+      "caloriesPer100g": 164,
+      "proteinPer100g": 8.9,
+      "carbsPer100g": 27.0,
+      "fatPer100g": 2.6,
+      "fiberPer100g": 7.6,
+      "servings": [
+        { "label": "1/2 cup (82g)", "grams": 82 },
+        { "label": "1 cup (164g)", "grams": 164 }
+      ]
+    },
+    {
+      "id": "seed_hummus",
+      "name": "Hummus",
+      "category": "Legumes",
+      "popularity": 68,
+      "caloriesPer100g": 166,
+      "proteinPer100g": 7.9,
+      "carbsPer100g": 14.0,
+      "fatPer100g": 9.6,
+      "fiberPer100g": 6.0,
+      "servings": [
+        { "label": "2 tbsp (30g)", "grams": 30 },
+        { "label": "1/4 cup (60g)", "grams": 60 }
+      ]
+    },
+    {
+      "id": "seed_dark_chocolate",
+      "name": "Dark Chocolate (70%)",
+      "category": "Snacks",
+      "popularity": 72,
+      "caloriesPer100g": 598,
+      "proteinPer100g": 7.8,
+      "carbsPer100g": 46.0,
+      "fatPer100g": 43.0,
+      "fiberPer100g": 11.0,
+      "servings": [
+        { "label": "1 square (10g)", "grams": 10 },
+        { "label": "1 oz (28g)", "grams": 28 }
+      ]
+    },
+    {
+      "id": "seed_protein_bar",
+      "name": "Protein Bar (generic)",
+      "category": "Snacks",
+      "popularity": 83,
+      "caloriesPer100g": 400,
+      "proteinPer100g": 30.0,
+      "carbsPer100g": 40.0,
+      "fatPer100g": 12.0,
+      "fiberPer100g": 5.0,
+      "servings": [
+        { "label": "1 bar (60g)", "grams": 60 },
+        { "label": "1 bar (75g)", "grams": 75 }
+      ]
+    },
+    {
+      "id": "seed_honey",
+      "name": "Honey",
+      "category": "Snacks",
+      "popularity": 30,
+      "caloriesPer100g": 304,
+      "proteinPer100g": 0.3,
+      "carbsPer100g": 82.0,
+      "fatPer100g": 0.0,
+      "servings": [
+        { "label": "1 tbsp (21g)", "grams": 21 },
+        { "label": "1 tsp (7g)", "grams": 7 }
+      ]
+    },
+    {
+      "id": "seed_mixed_nuts",
+      "name": "Mixed Nuts",
+      "category": "Fats & Nuts",
+      "popularity": 49,
+      "caloriesPer100g": 607,
+      "proteinPer100g": 20.0,
+      "carbsPer100g": 20.0,
+      "fatPer100g": 54.0,
+      "fiberPer100g": 8.0,
+      "servings": [
+        { "label": "1 oz (28g)", "grams": 28 },
+        { "label": "1/4 cup (35g)", "grams": 35 }
+      ]
+    }
+  ]
+}

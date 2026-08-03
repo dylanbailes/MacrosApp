@@ -106,7 +106,6 @@ class WeeklyStat {
 class DashboardSummary {
   const DashboardSummary({
     required this.greeting,
-    required this.dateLabel,
     required this.caloriesConsumed,
     required this.caloriesTarget,
     required this.calorieTrendPct,
@@ -138,7 +137,6 @@ class DashboardSummary {
   });
 
   final String greeting;
-  final String dateLabel;
   final int caloriesConsumed;
   final int caloriesTarget;
   final double calorieTrendPct;
@@ -182,4 +180,71 @@ class DashboardSummary {
   double get waterProjected => waterDrinkCount > 0
       ? (waterConsumed / waterDrinkCount) * 6 // estimate 6 drinking sessions/day
       : 0.0;
+
+  /// Returns a copy with the given fields replaced. Used by the dashboard
+  /// provider to overlay real food-log data onto the mock base summary.
+  DashboardSummary copyWith({
+    String? greeting,
+    int? caloriesConsumed,
+    int? caloriesTarget,
+    double? calorieTrendPct,
+    List<MacroProgress>? macros,
+    List<RecentMeal>? recentMeals,
+    List<WeeklyDay>? weekly,
+    int? weeklyTarget,
+    List<WeeklyStat>? weeklyStats,
+    List<DashboardStat>? stats,
+    String? coachInsight,
+    int? currentStreak,
+    int? longestStreak,
+    double? goalCompletionPct,
+    List<bool>? weeklyGoalDays,
+    double? avgCaloriesLastWeek,
+    double? waterConsumed,
+    double? waterTarget,
+    int? waterDrinkCount,
+    List<WeeklyMacroDay>? weeklyMacros,
+    double? currentWeight,
+    double? lastWeekWeight,
+    double? lastMonthWeight,
+    double? bmi,
+    List<double>? weightTrend,
+    List<double>? weightMovingAverage,
+    List<double>? sparklineData,
+    List<double>? proteinSparkline,
+    List<bool>? proteinDailyConsistency,
+  }) {
+    return DashboardSummary(
+      greeting: greeting ?? this.greeting,
+      caloriesConsumed: caloriesConsumed ?? this.caloriesConsumed,
+      caloriesTarget: caloriesTarget ?? this.caloriesTarget,
+      calorieTrendPct: calorieTrendPct ?? this.calorieTrendPct,
+      macros: macros ?? this.macros,
+      recentMeals: recentMeals ?? this.recentMeals,
+      weekly: weekly ?? this.weekly,
+      weeklyTarget: weeklyTarget ?? this.weeklyTarget,
+      weeklyStats: weeklyStats ?? this.weeklyStats,
+      stats: stats ?? this.stats,
+      coachInsight: coachInsight ?? this.coachInsight,
+      currentStreak: currentStreak ?? this.currentStreak,
+      longestStreak: longestStreak ?? this.longestStreak,
+      goalCompletionPct: goalCompletionPct ?? this.goalCompletionPct,
+      weeklyGoalDays: weeklyGoalDays ?? this.weeklyGoalDays,
+      avgCaloriesLastWeek: avgCaloriesLastWeek ?? this.avgCaloriesLastWeek,
+      waterConsumed: waterConsumed ?? this.waterConsumed,
+      waterTarget: waterTarget ?? this.waterTarget,
+      waterDrinkCount: waterDrinkCount ?? this.waterDrinkCount,
+      weeklyMacros: weeklyMacros ?? this.weeklyMacros,
+      currentWeight: currentWeight ?? this.currentWeight,
+      lastWeekWeight: lastWeekWeight ?? this.lastWeekWeight,
+      lastMonthWeight: lastMonthWeight ?? this.lastMonthWeight,
+      bmi: bmi ?? this.bmi,
+      weightTrend: weightTrend ?? this.weightTrend,
+      weightMovingAverage: weightMovingAverage ?? this.weightMovingAverage,
+      sparklineData: sparklineData ?? this.sparklineData,
+      proteinSparkline: proteinSparkline ?? this.proteinSparkline,
+      proteinDailyConsistency:
+          proteinDailyConsistency ?? this.proteinDailyConsistency,
+    );
+  }
 }

@@ -7,7 +7,7 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_durations.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_glass_container.dart';
+import '../../../../core/widgets/app_card.dart';
 
 /// The main navigation shell of the application.
 /// 
@@ -16,8 +16,7 @@ import '../../../../core/widgets/app_glass_container.dart';
 /// - Desktop/Tablet: Navigation rail (can be added later)
 class HomePage extends StatelessWidget {
   const HomePage({
-    super.key,
-    required this.navigationShell,
+    required this.navigationShell, super.key,
   });
 
   /// The navigation shell and state.
@@ -64,14 +63,15 @@ class _GlassBottomNavigationBar extends StatelessWidget {
         right: AppSpacing.lg,
         bottom: AppSpacing.lg,
       ),
-      child: AppGlassContainer(
-        borderRadius: BorderRadius.circular(32),
+      child: AppCard(
+        glass: true,
+        borderRadius: 32,
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
         blur: 24,
-        opacity: 0.65,
+        glassOpacity: 0.65,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

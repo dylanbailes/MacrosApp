@@ -10,7 +10,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/analytics_state.dart';
 
 /// A line chart showing calorie trend over time with target reference.
@@ -77,11 +77,10 @@ class _AnalyticsCalorieChartState extends State<AnalyticsCalorieChart>
       return FlSpot(i.toDouble(), widget.data[i].value);
     });
 
-    final maxVal = widget.data
-        .map((d) => d.value)
-        .reduce((a, b) => a > b ? a : b);
+    final maxVal =
+        widget.data.map((d) => d.value).reduce((a, b) => a > b ? a : b);
 
-    return AppInteractiveCard(
+    return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -133,7 +132,12 @@ class _AnalyticsCalorieChartState extends State<AnalyticsCalorieChart>
                           getTitlesWidget: (value, meta) {
                             return Text(
                               '${value.toInt()}',
-                              style: AppTextStyles.tiny,
+                              // Tabular figures so axis numerals align.
+                              style: AppTextStyles.tiny.copyWith(
+                                fontFeatures: const [
+                                  FontFeature.tabularFigures(),
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -142,7 +146,9 @@ class _AnalyticsCalorieChartState extends State<AnalyticsCalorieChart>
                         sideTitles: SideTitles(
                           showTitles: true,
                           reservedSize: 24,
-                          interval: (widget.data.length / 5).ceilToDouble().toDouble(),
+                          interval: (widget.data.length / 5)
+                              .ceilToDouble()
+                              .toDouble(),
                           getTitlesWidget: (value, meta) {
                             final index = value.toInt();
                             if (index < 0 || index >= widget.data.length) {
@@ -170,24 +176,30 @@ class _AnalyticsCalorieChartState extends State<AnalyticsCalorieChart>
                     lineTouchData: LineTouchData(
                       touchTooltipData: LineTouchTooltipData(
                         tooltipBgColor: AppColors.surfaceElevated,
+                        tooltipBorder: BorderSide(
+                          color: AppColors.dividerStrong,
+                        ),
+                        tooltipRoundedRadius: 8,
                         getTooltipItems: (touchedSpots) {
                           return touchedSpots.map((spot) {
                             final index = spot.x.toInt();
-                            final label = index >= 0 &&
-                                    index < widget.data.length
-                                ? widget.data[index].label
-                                : '';
+                            final label =
+                                index >= 0 && index < widget.data.length
+                                    ? widget.data[index].label
+                                    : '';
                             final cal = spot.y.toInt();
                             final diff = cal - widget.target;
-                            final diffStr = diff >= 0
-                                ? '+$diff over'
-                                : '$diff under';
+                            final diffStr =
+                                diff >= 0 ? '+$diff over' : '$diff under';
                             return LineTooltipItem(
                               '$label\n${cal} kcal\n$diffStr target',
                               const TextStyle(
                                 fontFamily: 'Geist',
                                 color: AppColors.onPrimary,
                                 fontSize: 11,
+                                fontFeatures: [
+                                  FontFeature.tabularFigures(),
+                                ],
                               ),
                             );
                           }).toList();

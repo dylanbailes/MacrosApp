@@ -10,7 +10,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/analytics_state.dart';
 
 /// A chart showing 3 overlaid macro trend lines with a legend row.
@@ -93,7 +93,7 @@ class _AnalyticsMacroChartState extends State<AnalyticsMacroChart> {
         ),
     ];
 
-    return AppInteractiveCard(
+    return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -157,7 +157,12 @@ class _AnalyticsMacroChartState extends State<AnalyticsMacroChart> {
                       getTitlesWidget: (value, meta) {
                         return Text(
                           '${value.toInt()}g',
-                          style: AppTextStyles.tiny,
+                          // Tabular figures so axis numerals align.
+                          style: AppTextStyles.tiny.copyWith(
+                            fontFeatures: const [
+                              FontFeature.tabularFigures(),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -166,7 +171,8 @@ class _AnalyticsMacroChartState extends State<AnalyticsMacroChart> {
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 24,
-                      interval: (widget.data.length / 5).ceilToDouble().toDouble(),
+                      interval:
+                          (widget.data.length / 5).ceilToDouble().toDouble(),
                       getTitlesWidget: (value, meta) {
                         final index = value.toInt();
                         if (index < 0 || index >= widget.data.length) {
@@ -184,11 +190,14 @@ class _AnalyticsMacroChartState extends State<AnalyticsMacroChart> {
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
                     tooltipBgColor: AppColors.surfaceElevated,
+                    tooltipBorder: BorderSide(
+                      color: AppColors.dividerStrong,
+                    ),
+                    tooltipRoundedRadius: 8,
                     getTooltipItems: (touchedSpots) {
                       return touchedSpots.map((spot) {
                         final index = spot.x.toInt();
-                        final label = index >= 0 &&
-                                index < widget.data.length
+                        final label = index >= 0 && index < widget.data.length
                             ? widget.data[index].label
                             : '';
                         Color lineColor;
@@ -206,6 +215,9 @@ class _AnalyticsMacroChartState extends State<AnalyticsMacroChart> {
                             fontFamily: 'Geist',
                             color: lineColor,
                             fontSize: 11,
+                            fontFeatures: const [
+                              FontFeature.tabularFigures(),
+                            ],
                           ),
                         );
                       }).toList();

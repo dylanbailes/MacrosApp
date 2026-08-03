@@ -1,4 +1,4 @@
-// Path: widgets\ai_coach_entry_card.dart
+// Path: features/dashboard/presentation/widgets/ai_coach_entry_card.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,8 +15,7 @@ import '../../../../core/widgets/app_card.dart';
 /// trailing chevron. Full-card tap → AI Coach screen.
 class AiCoachEntryCard extends StatelessWidget {
   const AiCoachEntryCard({
-    super.key,
-    required this.insight,
+    required this.insight, super.key,
   });
 
   final String insight;

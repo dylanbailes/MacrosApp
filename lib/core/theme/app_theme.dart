@@ -20,7 +20,7 @@ class AppTheme {
 
   /// Dark theme data — the only theme for this application
   static ThemeData get darkTheme {
-    final colorScheme = ColorScheme.dark(
+    const colorScheme = ColorScheme.dark(
       // Brand accent (signal red)
       primary: AppColors.primary,
       onPrimary: AppColors.textOnPrimary,
@@ -120,7 +120,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(AppBorderRadius.pill),
           ),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: kGeistFont,
             fontSize: 15.0,
             fontWeight: FontWeight.w600,
             height: 1.33,
@@ -143,7 +143,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(AppBorderRadius.pill),
           ),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: kGeistFont,
             fontSize: 15.0,
             fontWeight: FontWeight.w600,
             height: 1.33,
@@ -168,7 +168,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(AppBorderRadius.pill),
           ),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: kGeistFont,
             fontSize: 15.0,
             fontWeight: FontWeight.w600,
             height: 1.33,

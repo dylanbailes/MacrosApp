@@ -5,6 +5,7 @@ import '../constants/app_border_radius.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_durations.dart';
 import '../constants/app_spacing.dart';
+import '../theme/app_text_styles.dart';
 
 /// A reusable button widget with multiple variants and premium interactions.
 ///
@@ -146,7 +147,7 @@ class _AppButtonState extends State<AppButton> with SingleTickerProviderStateMix
           Text(
             widget.label ?? '',
             style: TextStyle(
-              fontFamily: 'Inter',
+              fontFamily: kGeistFont,
               fontSize: fontSize,
               fontWeight: FontWeight.w600,
               color: textColor,

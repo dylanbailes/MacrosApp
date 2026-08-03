@@ -1,4 +1,4 @@
-// Path: widgets\dashboard_stats_section.dart
+// Path: features/dashboard/presentation/widgets/dashboard_stats_section.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_spacing.dart';
@@ -28,8 +28,7 @@ import 'weight_trend_card.dart';
 /// Nothing OS inspired: asymmetric, information-dense, clean geometry.
 class DashboardStatsSection extends StatelessWidget {
   const DashboardStatsSection({
-    super.key,
-    required this.summary,
+    required this.summary, super.key,
   });
 
   final DashboardSummary summary;

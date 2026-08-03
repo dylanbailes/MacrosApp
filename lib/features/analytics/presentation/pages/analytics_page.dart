@@ -10,26 +10,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
-import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_screen_header.dart';
+import '../../../../core/widgets/app_section_header.dart';
+import '../../../../core/widgets/app_segmented_control.dart';
 import '../../../../core/widgets/app_skeleton.dart';
+import '../../../../core/widgets/app_stat_display.dart';
+import '../../../../core/widgets/app_toast.dart';
 import '../providers/analytics_provider.dart';
 import '../providers/analytics_state.dart';
 import '../widgets/analytics_calorie_chart.dart';
 import '../widgets/analytics_heatmap.dart';
 import '../widgets/analytics_macro_chart.dart';
-import '../widgets/analytics_range_tabs.dart';
 import '../widgets/analytics_recent_entries.dart';
 import '../widgets/analytics_search_bar.dart';
-import '../widgets/analytics_segmented_control.dart';
-import '../widgets/analytics_stat_card.dart';
 import '../widgets/analytics_weigh_in_headline.dart';
 import '../widgets/analytics_weight_chart.dart';
 
+/// Nutrition / Weight segment switch options.
+const _segmentOptions = [
+  AppSegmentedOption(value: AnalyticsSegment.nutrition, label: 'Nutrition'),
+  AppSegmentedOption(value: AnalyticsSegment.weight, label: 'Weight'),
+];
+
+/// Chart range-tab options (Blueprint §2.8 — Range Tabs).
+const _rangeOptions = [
+  AppSegmentedOption(value: AnalyticsRange.week1, label: '1W'),
+  AppSegmentedOption(value: AnalyticsRange.month1, label: '1M'),
+  AppSegmentedOption(value: AnalyticsRange.month3, label: '3M'),
+  AppSegmentedOption(value: AnalyticsRange.month6, label: '6M'),
+  AppSegmentedOption(value: AnalyticsRange.year1, label: '1Y'),
+  AppSegmentedOption(value: AnalyticsRange.all, label: 'ALL'),
+];
+
 /// The Analytics page.
 ///
-/// Composed of a segmented control (Nutrition / Weight), search bar,
-/// and varied data presentations: line charts, multi-line charts,
-/// scatter charts, heatmaps, stat cards, and weigh-in headlines.
+/// Composed of a shared [AppScreenHeader], the kit [AppSegmentedControl] for
+/// both the Nutrition/Weight switch and the chart range tabs, and varied data
+/// presentations: line charts, multi-line charts, heatmaps, stat cards via
+/// [AppStatDisplay], and weigh-in headlines.
 class AnalyticsPage extends ConsumerStatefulWidget {
   const AnalyticsPage({super.key});
 
@@ -62,29 +81,27 @@ class _AnalyticsPageState extends ConsumerState<AnalyticsPage> {
                 sliver: SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      // Page Header
-                      Text(
-                        'Analytics',
-                        style: AppTextStyles.titleLarge,
+                      // Page header (the page sliver provides the margin).
+                      const AppScreenHeader(
+                        title: 'Analytics',
+                        padding: EdgeInsets.zero,
                       ),
                       const SizedBox(height: AppSpacing.lg),
 
-                      // Search Bar
+                      // Search bar
                       AnalyticsSearchBar(
                         onChanged: (query, range) {
-                          setState(() {
-                            _searchQuery = query;
-                          });
+                          setState(() => _searchQuery = query);
                         },
                       ),
                       const SizedBox(height: AppSpacing.lg),
 
-                      // Segmented Control
-                      AnalyticsSegmentedControl(
-                        segment: _segment,
-                        onChanged: (segment) {
-                          setState(() => _segment = segment);
-                        },
+                      // Nutrition / Weight segment switch
+                      AppSegmentedControl<AnalyticsSegment>(
+                        options: _segmentOptions,
+                        value: _segment,
+                        onChanged: (segment) =>
+                            setState(() => _segment = segment),
                       ),
                       const SizedBox(height: AppSpacing.xl),
 
@@ -99,9 +116,8 @@ class _AnalyticsPageState extends ConsumerState<AnalyticsPage> {
                           segment: _segment,
                           range: _range,
                           searchQuery: _searchQuery,
-                          onRangeChanged: (range) {
-                            setState(() => _range = range);
-                          },
+                          onRangeChanged: (range) =>
+                              setState(() => _range = range),
                         ),
 
                       // Bottom padding for nav bar
@@ -137,30 +153,30 @@ class _AnalyticsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Apply search filter - simple implementation
-    final showCalories = searchQuery.isEmpty ||
-        searchQuery.toLowerCase().contains('calorie');
+    final showCalories =
+        searchQuery.isEmpty || searchQuery.toLowerCase().contains('calorie');
     final showMacros = searchQuery.isEmpty ||
         searchQuery.toLowerCase().contains('macro') ||
         searchQuery.toLowerCase().contains('protein') ||
         searchQuery.toLowerCase().contains('carbs') ||
         searchQuery.toLowerCase().contains('fat');
-    final showWeight = searchQuery.isEmpty ||
-        searchQuery.toLowerCase().contains('weight');
+    final showWeight =
+        searchQuery.isEmpty || searchQuery.toLowerCase().contains('weight');
 
     if (segment == AnalyticsSegment.nutrition) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Nutrition content
-          AnalyticsRangeTabs(
-            range: range,
+          // Range tabs
+          AppSegmentedControl<AnalyticsRange>(
+            options: _rangeOptions,
+            value: range,
             onChanged: onRangeChanged,
           ),
           const SizedBox(height: AppSpacing.lg),
 
+          // The charts carry their own header row.
           if (showCalories) ...[
-            Text('CALORIE TREND', style: AppTextStyles.tinyMedium),
-            const SizedBox(height: AppSpacing.sm),
             AnalyticsCalorieChart(
               data: data.calorieTrend,
               target: data.calorieTarget,
@@ -169,20 +185,18 @@ class _AnalyticsContent extends StatelessWidget {
           ],
 
           if (showMacros) ...[
-            Text('MACRO TREND', style: AppTextStyles.tinyMedium),
-            const SizedBox(height: AppSpacing.sm),
             AnalyticsMacroChart(data: data.macroTrend),
             const SizedBox(height: AppSpacing.xxxl),
           ],
 
           // Weekly Averages
-          Text('WEEKLY AVERAGES', style: AppTextStyles.tinyMedium),
+          const AppSectionHeader(label: 'Weekly Averages'),
           const SizedBox(height: AppSpacing.sm),
           _buildWeeklyAverages(data),
           const SizedBox(height: AppSpacing.xxxl),
 
           // Logging Heatmap
-          Text('LOGGING ACTIVITY', style: AppTextStyles.tinyMedium),
+          const AppSectionHeader(label: 'Logging Activity'),
           const SizedBox(height: AppSpacing.sm),
           AnalyticsHeatmap(days: data.heatmapDays),
         ],
@@ -202,55 +216,24 @@ class _AnalyticsContent extends StatelessWidget {
           ],
 
           if (showWeight) ...[
-            AnalyticsRangeTabs(
-              range: range,
+            AppSegmentedControl<AnalyticsRange>(
+              options: _rangeOptions,
+              value: range,
               onChanged: onRangeChanged,
             ),
             const SizedBox(height: AppSpacing.lg),
-
-            Text('WEIGHT TREND', style: AppTextStyles.tinyMedium),
-            const SizedBox(height: AppSpacing.sm),
             AnalyticsWeightChart(entries: data.weightEntries),
             const SizedBox(height: AppSpacing.xl),
           ],
 
           // Log Weight button
-          SizedBox(
-            width: double.infinity,
-            child: GestureDetector(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('Weight logging coming soon'),
-                    backgroundColor: AppColors.surfaceGlass,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppBorderRadius.sm),
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl,
-                  vertical: AppSpacing.md,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(AppBorderRadius.pill),
-                ),
-                child: const Text(
-                  'Log Weight',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Geist',
-                    color: AppColors.textOnPrimary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
+          AppButton(
+            label: 'Log Weight',
+            icon: Icons.monitor_weight_outlined,
+            variant: AppButtonVariant.primary,
+            isFullWidth: true,
+            onPressed: () =>
+                showAppToast(context, message: 'Weight logging coming soon'),
           ),
           const SizedBox(height: AppSpacing.xl),
 
@@ -273,11 +256,11 @@ class _AnalyticsContent extends StatelessWidget {
             padding: const EdgeInsets.only(right: AppSpacing.sm),
             child: SizedBox(
               width: 140,
-              child: AnalyticsStatCard(
+              child: AppStatDisplay(
                 label: avg.label,
                 value: avg.value,
                 unit: avg.unit,
-                color: avg.color,
+                valueColor: avg.color,
               ),
             ),
           );
@@ -297,7 +280,8 @@ class _AnalyticsSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Range tabs skeleton
-        const AppSkeleton(width: 300, height: 32, borderRadius: AppBorderRadius.pill),
+        const AppSkeleton(
+            width: 300, height: 32, borderRadius: AppBorderRadius.pill),
         const SizedBox(height: AppSpacing.lg),
         // Chart skeleton
         const AppSkeleton(

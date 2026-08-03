@@ -10,7 +10,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/analytics_state.dart';
 
 /// A weight trend chart showing raw entries as dots and a smoothed trend line.
@@ -40,16 +40,19 @@ class AnalyticsWeightChart extends StatelessWidget {
       final start = (i - 3).clamp(0, entries.length);
       final end = (i + 4).clamp(0, entries.length);
       final slice = entries.sublist(start, end);
-      final avg = slice.map((e) => e.weight).reduce((a, b) => a + b) / slice.length;
+      final avg =
+          slice.map((e) => e.weight).reduce((a, b) => a + b) / slice.length;
       return FlSpot(i.toDouble(), avg);
     });
 
-    final minWeight = entries.map((e) => e.weight).reduce((a, b) => a < b ? a : b);
-    final maxWeight = entries.map((e) => e.weight).reduce((a, b) => a > b ? a : b);
+    final minWeight =
+        entries.map((e) => e.weight).reduce((a, b) => a < b ? a : b);
+    final maxWeight =
+        entries.map((e) => e.weight).reduce((a, b) => a > b ? a : b);
     final weightRange = maxWeight - minWeight;
     final padding = weightRange * 0.15;
 
-    return AppInteractiveCard(
+    return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -82,7 +85,12 @@ class AnalyticsWeightChart extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         return Text(
                           '${value.toStringAsFixed(1)}',
-                          style: AppTextStyles.tiny,
+                          // Tabular figures so axis numerals align.
+                          style: AppTextStyles.tiny.copyWith(
+                            fontFeatures: const [
+                              FontFeature.tabularFigures(),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -109,6 +117,10 @@ class AnalyticsWeightChart extends StatelessWidget {
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
                     tooltipBgColor: AppColors.surfaceElevated,
+                    tooltipBorder: BorderSide(
+                      color: AppColors.dividerStrong,
+                    ),
+                    tooltipRoundedRadius: 8,
                     getTooltipItems: (touchedSpots) {
                       return touchedSpots.map((spot) {
                         final index = spot.x.toInt();
@@ -121,6 +133,9 @@ class AnalyticsWeightChart extends StatelessWidget {
                             fontFamily: 'Geist',
                             color: AppColors.onPrimary,
                             fontSize: 11,
+                            fontFeatures: [
+                              FontFeature.tabularFigures(),
+                            ],
                           ),
                         );
                       }).toList();

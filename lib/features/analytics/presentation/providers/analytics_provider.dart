@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../features/settings/presentation/providers/settings_providers.dart';
 import 'analytics_state.dart';
 
 /// Provides analytics data with mock data until a backend exists.
@@ -20,10 +21,10 @@ class AnalyticsNotifier extends AsyncNotifier<AnalyticsData> {
   @override
   Future<AnalyticsData> build() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    return _mockData();
+    return _mockData(ref.watch(settingsProvider).calorieTarget);
   }
 
-  AnalyticsData _mockData() {
+  AnalyticsData _mockData(int calorieTarget) {
     final now = DateTime.now();
 
     // Generate 30 days of calorie data
@@ -91,14 +92,23 @@ class AnalyticsNotifier extends AsyncNotifier<AnalyticsData> {
     return AnalyticsData(
       calorieTrend: calorieTrend,
       macroTrend: macroTrend,
-      calorieTarget: 2200,
+      calorieTarget: calorieTarget,
       weightEntries: weightEntries,
       heatmapDays: heatmapDays,
       weeklyAverages: [
-        const WeeklyAverage(label: 'Avg Calories', value: '2,050', unit: 'kcal'),
-        WeeklyAverage(label: 'Avg Protein', value: '142', unit: 'g', color: const Color(0xFF3D8BFD)),
+        const WeeklyAverage(
+            label: 'Avg Calories', value: '2,050', unit: 'kcal'),
+        WeeklyAverage(
+            label: 'Avg Protein',
+            value: '142',
+            unit: 'g',
+            color: const Color(0xFF3D8BFD)),
         const WeeklyAverage(label: 'Goal Days', value: '5', unit: '/7'),
-        WeeklyAverage(label: 'Goal Completion', value: '71', unit: '%', color: const Color(0xFF34D399)),
+        WeeklyAverage(
+            label: 'Goal Completion',
+            value: '71',
+            unit: '%',
+            color: const Color(0xFF34D399)),
       ],
       currentWeight: 174.5,
       weightTrendValue: -0.8,
@@ -110,6 +120,8 @@ class AnalyticsNotifier extends AsyncNotifier<AnalyticsData> {
   /// Re-fetch analytics data (used by pull-to-refresh).
   Future<void> refresh() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() async => _mockData());
+    state = await AsyncValue.guard(
+      () async => _mockData(ref.read(settingsProvider).calorieTarget),
+    );
   }
 }

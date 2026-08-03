@@ -203,10 +203,33 @@ This document outlines the complete development roadmap for Macro Tracker, organ
 
 ---
 
-## Phase 3: Core Features
+## ACTIVE: Food Logging Implementation (Phases A–H)
+
+**Timeline:** Ongoing (started 2026-08)  
+**Status:** 🔄 In Progress  
+**Source of truth:** `docs/food-logging-implementation-plan.md`
+
+The food-logging backlog (fast search, barcode scanning, large food database, custom foods, custom recipes, favorites, recents, copy/duplicate helpers, quick-add, adjustable servings, meal categories) is broken into small shippable phases. The strategy is **local-first offline**: Drift/SQLite for all data, a bundled seed food database for instant offline search, and the free Open Food Facts API for barcode lookup and long-tail search.
+
+| Phase | Focus | Status |
+|-------|-------|--------|
+| **A** | Data foundation — domain models, Drift schema, seeded local DB, food search repository, providers | 🔄 In progress |
+| **B** | Search & logging UI — food search screen, serving selector, log-to-meal sheet, wire Log page to real data | ⏳ Planned |
+| **C** | Personalization — custom foods, recent foods, favorites, quick-add macros, edit/delete with undo, ranking v1 | ⏳ Planned |
+| **D** | Productivity — move foods between meals, copy previous meal, duplicate previous day, meal templates, date nav | ⏳ Planned |
+| **E** | Custom recipes — recipe entity, builder UI, scaling, log recipes | ⏳ Planned |
+| **F** | Barcode scanning — OF-Facts lookup, manual entry, `flutter_zxing` camera scan, cache & fallback | ⏳ Planned |
+| **G** | Large database — FTS5 search, bundled OF-Facts export, live API fallback, smart ranking | ⏳ Planned |
+| **H** | App-wide integration — real goals, dashboard/analytics real data, weight & water, notes, export/import, sync readiness | ⏳ Planned |
+
+Task-level breakdown, acceptance criteria, and architecture decisions live in the implementation plan document. The older Phase 3–9 blocks below remain as historical reference but are superseded for food-logging work by the phases above.
+
+---
+
+## Phase 3: Core Features (Superseded — see ACTIVE section above)
 
 **Timeline:** Q3 2024  
-**Status:** ⏳ Upcoming
+**Status:** 🔄 Superseded
 
 ### Milestone 3.1: Food Database
 
@@ -749,7 +772,7 @@ The following features are explicitly NOT part of Version 1:
 |---------|------|--------|----------------|
 | 0.1.0 | TBD | 🔄 In Development | Foundation, Architecture, Theme |
 | 0.2.0 | TBD | ⏳ Planned | Backend, Authentication |
-| 0.3.0 | TBD | ⏳ Planned | Core Features (Food, Logging, Dashboard) |
+| 0.3.0 | 2026 | 🔄 In Development | Food Logging (Phases A–D: data foundation, search, custom foods, productivity) |
 | 0.4.0 | TBD | ⏳ Planned | Analytics & Charts |
 | 0.5.0 | TBD | ⏳ Planned | AI Features |
 | 1.0.0 | TBD | ⏳ Planned | Production Release |

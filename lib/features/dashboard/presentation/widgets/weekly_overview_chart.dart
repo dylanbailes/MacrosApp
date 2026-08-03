@@ -1,7 +1,8 @@
-// Path: widgets\weekly_overview_chart.dart
+// Path: features/dashboard/presentation/widgets/weekly_overview_chart.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../providers/dashboard_state.dart';
 
 /// Weekly calorie overview chart.
@@ -11,9 +12,7 @@ import '../providers/dashboard_state.dart';
 /// Uses Nothing OS red accent for highlights, monochrome white for data.
 class WeeklyOverviewChart extends StatelessWidget {
   const WeeklyOverviewChart({
-    super.key,
-    required this.days,
-    required this.target,
+    required this.days, required this.target, super.key,
   });
 
   final List<WeeklyDay> days;
@@ -54,10 +53,11 @@ class _WeeklyChartPainter extends CustomPainter {
       ..color = AppColors.primary
       ..style = PaintingStyle.fill;
 
-    // Find max calories for scaling
+    // Find max calories for scaling. With an empty week (all days 0) the
+    // target becomes the axis ceiling so the chart still lays out cleanly.
     final maxCalories = days.map((d) => d.calories).reduce((a, b) => a > b ? a : b);
-    final chartMax = (maxCalories * 1.1).toDouble(); // 10% headroom
-    final chartMin = 0.0;
+    final chartMax = ((maxCalories > 0 ? maxCalories : target) * 1.1).toDouble(); // 10% headroom
+    const chartMin = 0.0;
 
     // Padding
     const left = 24.0;
@@ -71,7 +71,7 @@ class _WeeklyChartPainter extends CustomPainter {
     const gridLines = 4;
     for (var i = 0; i <= gridLines; i++) {
       final y = top + (chartHeight / gridLines) * i;
-      final dashWidth = 4.0;
+      const dashWidth = 4.0;
       var dashX = left;
       while (dashX < size.width - right) {
         canvas.drawCircle(Offset(dashX, y), 1.5, dotPaint);
@@ -124,8 +124,9 @@ class _WeeklyChartPainter extends CustomPainter {
       final builder = TextSpan(
         text: day.label,
         style: TextStyle(
-          fontFamily: 'Nothing',
+          fontFamily: kGeistFont,
           fontSize: 12,
+          fontWeight: FontWeight.w500,
           color: day.isToday ? AppColors.onPrimary : AppColors.textTertiary,
         ),
       );

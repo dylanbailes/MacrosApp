@@ -1,4 +1,4 @@
-// Path: widgets\macro_overview_row.dart
+// Path: features/dashboard/presentation/widgets/macro_overview_row.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -15,8 +15,7 @@ import '../providers/dashboard_state.dart';
 /// Alternates tile background colors for visual depth.
 class MacroOverviewRow extends StatelessWidget {
   const MacroOverviewRow({
-    super.key,
-    required this.macros,
+    required this.macros, super.key,
   });
 
   final List<MacroProgress> macros;
@@ -51,8 +50,7 @@ class MacroOverviewRow extends StatelessWidget {
 /// (e.g., a "View all" link). Keeps the Nothing OS scannable hierarchy.
 class DashboardSectionHeader extends StatelessWidget {
   const DashboardSectionHeader({
-    super.key,
-    required this.label,
+    required this.label, super.key,
     this.actionLabel,
     this.onAction,
   });

@@ -1,4 +1,4 @@
-// Path: widgets\weekly_macros_chart.dart
+// Path: features/dashboard/presentation/widgets/weekly_macros_chart.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -6,7 +6,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/dashboard_state.dart';
 
 /// Weekly macros stacked bar chart showing Protein/Carbs/Fat per day.
@@ -15,8 +15,7 @@ import '../providers/dashboard_state.dart';
 /// monochrome labels.
 class WeeklyMacrosChart extends StatefulWidget {
   const WeeklyMacrosChart({
-    super.key,
-    required this.macroDays,
+    required this.macroDays, super.key,
   });
 
   final List<WeeklyMacroDay> macroDays;
@@ -59,7 +58,12 @@ class _WeeklyMacrosChartState extends State<WeeklyMacrosChart>
         .reduce((a, b) => a > b ? a : b)
         .toDouble();
 
-    return AppInteractiveCard(
+    return AppCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      borderRadius: AppBorderRadius.md,
+      level: 2,
+      accentColor: AppColors.primary,
+      clip: false,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -191,11 +195,6 @@ class _WeeklyMacrosChartState extends State<WeeklyMacrosChart>
           ),
         ],
       ),
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      borderRadius: AppBorderRadius.md,
-      level: 2,
-      accentColor: AppColors.primary,
-      clip: false,
     );
   }
 }

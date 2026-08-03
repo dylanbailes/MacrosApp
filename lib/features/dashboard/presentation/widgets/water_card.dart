@@ -1,11 +1,11 @@
-// Path: widgets\water_card.dart
+// Path: features/dashboard/presentation/widgets/water_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 
 /// Water intake card with vertical dot fill gauge, progress %, drink count,
 /// projected completion, cyan accent, and ambient glow.
@@ -13,11 +13,7 @@ import '../../../../core/widgets/app_interactive_card.dart';
 /// Nothing OS style: dot matrix for numbers, Geist for labels, cyan accent.
 class WaterCard extends StatefulWidget {
   const WaterCard({
-    super.key,
-    required this.consumed,
-    required this.goal,
-    required this.drinkCount,
-    required this.projected,
+    required this.consumed, required this.goal, required this.drinkCount, required this.projected, super.key,
   });
 
   final double consumed;
@@ -68,7 +64,7 @@ class _WaterCardState extends State<WaterCard>
         : 0.0;
     const totalDots = 10;
 
-    return AppInteractiveCard(
+    return AppCard(
       padding: EdgeInsets.zero,
       borderRadius: AppBorderRadius.md,
       level: 2,

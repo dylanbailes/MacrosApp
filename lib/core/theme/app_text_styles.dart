@@ -18,7 +18,7 @@ const String kGeistFont = 'Geist';
 /// Reference: Visual Design Specification §3 — Typography
 ///
 /// Typeface roles:
-/// - Nothing Dot Matrix: Hero numerals, large metric numbers ONLY (≥20px)
+/// - Nothing Dot Matrix: Hero numerals, large metric numbers ONLY (≥24px)
 /// - Geist: Everything else — labels, body, captions, chart text
 ///
 /// Type scale:
@@ -36,9 +36,9 @@ class AppTextStyles {
 
   /// Base text theme
   static TextTheme get textTheme {
-    return TextTheme(
+    return const TextTheme(
       // Display XL — Nothing 56/60 (Hero calorie number)
-      displayLarge: const TextStyle(
+      displayLarge: TextStyle(
         fontFamily: kNothingFont,
         fontSize: 56.0,
         fontWeight: FontWeight.w400,
@@ -48,7 +48,7 @@ class AppTextStyles {
       ),
 
       // Display L — Nothing 34/38 (Streak days, weigh-in)
-      displayMedium: const TextStyle(
+      displayMedium: TextStyle(
         fontFamily: kNothingFont,
         fontSize: 34.0,
         fontWeight: FontWeight.w400,
@@ -58,7 +58,7 @@ class AppTextStyles {
       ),
 
       // Display S — Nothing 24/28 (Card metric numbers, large %)
-      displaySmall: const TextStyle(
+      displaySmall: TextStyle(
         fontFamily: kNothingFont,
         fontSize: 24.0,
         fontWeight: FontWeight.w400,
@@ -68,7 +68,7 @@ class AppTextStyles {
       ),
 
       // Title — Geist SemiBold 22/28 (Screen titles)
-      headlineLarge: const TextStyle(
+      headlineLarge: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 22.0,
         fontWeight: FontWeight.w600,
@@ -77,7 +77,7 @@ class AppTextStyles {
       ),
 
       // Headline — Geist SemiBold 17/22 (Card titles, list items)
-      headlineMedium: const TextStyle(
+      headlineMedium: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 17.0,
         fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class AppTextStyles {
       ),
 
       // Sub-headline — Geist SemiBold 15/20
-      headlineSmall: const TextStyle(
+      headlineSmall: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 15.0,
         fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class AppTextStyles {
       ),
 
       // Title Large — Geist SemiBold 20/26 (screen headers)
-      titleLarge: const TextStyle(
+      titleLarge: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 20.0,
         fontWeight: FontWeight.w600,
@@ -104,7 +104,7 @@ class AppTextStyles {
       ),
 
       // Title Medium — Geist SemiBold 17/22
-      titleMedium: const TextStyle(
+      titleMedium: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 17.0,
         fontWeight: FontWeight.w600,
@@ -113,7 +113,7 @@ class AppTextStyles {
       ),
 
       // Title Small — Geist SemiBold 15/20
-      titleSmall: const TextStyle(
+      titleSmall: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 15.0,
         fontWeight: FontWeight.w600,
@@ -122,7 +122,7 @@ class AppTextStyles {
       ),
 
       // Body — Geist Regular 15/20 (Primary content)
-      bodyLarge: const TextStyle(
+      bodyLarge: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 15.0,
         fontWeight: FontWeight.w400,
@@ -131,7 +131,7 @@ class AppTextStyles {
       ),
 
       // Body Medium — Geist Regular 15/20 (Secondary)
-      bodyMedium: const TextStyle(
+      bodyMedium: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 15.0,
         fontWeight: FontWeight.w400,
@@ -140,7 +140,7 @@ class AppTextStyles {
       ),
 
       // Body Small — Geist Regular 13/18
-      bodySmall: const TextStyle(
+      bodySmall: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 13.0,
         fontWeight: FontWeight.w400,
@@ -149,7 +149,7 @@ class AppTextStyles {
       ),
 
       // Label — Geist Medium 13/16 +4% tracking, ALL CAPS (Micro-labels)
-      labelLarge: const TextStyle(
+      labelLarge: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 13.0,
         fontWeight: FontWeight.w500,
@@ -159,7 +159,7 @@ class AppTextStyles {
       ),
 
       // Label Medium — Geist Medium 11/14
-      labelMedium: const TextStyle(
+      labelMedium: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 11.0,
         fontWeight: FontWeight.w500,
@@ -169,7 +169,7 @@ class AppTextStyles {
       ),
 
       // Label Small — Geist Regular 11/14
-      labelSmall: const TextStyle(
+      labelSmall: TextStyle(
         fontFamily: kGeistFont,
         fontSize: 11.0,
         fontWeight: FontWeight.w400,
@@ -230,11 +230,13 @@ class AppTextStyles {
         color: AppColors.textTertiary,
       );
 
-  /// Macro value style (large number for the 3-tile row) — Nothing dot-matrix
+  /// Macro value style (large number for the 3-tile row) — Geist SemiBold
+  /// with tabular figures, so three tiles' values align on one line at any
+  /// 0–999g value (Blueprint §2.3). Kept under the 24px Ndot floor on purpose.
   static TextStyle get macroValue => const TextStyle(
-        fontFamily: kNothingFont,
+        fontFamily: kGeistFont,
         fontSize: 20.0,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         height: 1.2,
         color: AppColors.onPrimary,
         fontFeatures: [FontFeature.tabularFigures()],
@@ -281,13 +283,36 @@ class AppTextStyles {
         fontFeatures: [FontFeature.tabularFigures()],
       );
 
-  /// Card metric small — Nothing 20/24 (for smaller card metrics)
+  /// Card metric small — Geist SemiBold 20/24 (for smaller card metrics).
+  /// Kept under the 24px Ndot floor so small numerals stay legible.
   static TextStyle get cardMetricSmall => const TextStyle(
-        fontFamily: kNothingFont,
+        fontFamily: kGeistFont,
         fontSize: 20.0,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         height: 1.2,
         color: AppColors.onPrimary,
+        fontFeatures: [FontFeature.tabularFigures()],
+      );
+
+  /// Tabular numeric body — Geist with tabular figures for in-list numbers
+  /// (log rows, stat lists, chart labels) so columns align.
+  static TextStyle get tabularNumeric => const TextStyle(
+        fontFamily: kGeistFont,
+        fontSize: 15.0,
+        fontWeight: FontWeight.w400,
+        height: 1.33,
+        color: AppColors.onPrimary,
+        fontFeatures: [FontFeature.tabularFigures()],
+      );
+
+  /// Numeric unit suffix — small Geist caption for units beside large
+  /// numerals ("of 2,400 kcal", "180g").
+  static TextStyle get numericUnit => const TextStyle(
+        fontFamily: kGeistFont,
+        fontSize: 11.0,
+        fontWeight: FontWeight.w400,
+        height: 1.27,
+        color: AppColors.textTertiary,
         fontFeatures: [FontFeature.tabularFigures()],
       );
 }

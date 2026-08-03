@@ -14,11 +14,7 @@ import '../theme/app_text_styles.dart';
 /// Fixed height 92px so the row never staggers.
 class AppMetricTile extends StatelessWidget {
   const AppMetricTile({
-    super.key,
-    required this.label,
-    required this.value,
-    required this.target,
-    required this.color,
+    required this.label, required this.value, required this.target, required this.color, super.key,
     this.progress = 0.0,
     this.isOverTarget = false,
     this.elevated = false,

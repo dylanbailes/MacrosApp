@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
+import '../../../../core/formatting/app_formatters.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/app_progress_ring.dart';
 import '../providers/dashboard_state.dart';
@@ -143,9 +144,7 @@ class _MetricCarouselCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              consumed.toStringAsFixed(
-                                consumed == consumed.roundToDouble() ? 0 : 1,
-                              ),
+                              AppFormatters.grams(consumed),
                               style: AppTextStyles.displaySmall.copyWith(
                                 color: displayColor,
                                 fontSize: 28,

@@ -5,7 +5,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_progress_ring.dart';
 
 /// Streak card showing current streak, longest streak, flame icon,
@@ -90,7 +90,7 @@ class _StreakCardState extends State<StreakCard>
     final milestoneLabel = _milestoneLabel(widget.currentStreak);
     final completedDays = widget.weeklyGoalDays.where((d) => d).length;
 
-    return AppInteractiveCard(
+    return AppCard(
       onTap: widget.onTap,
       accentColor: AppColors.primary,
       child: Container(
@@ -174,10 +174,11 @@ class _StreakCardState extends State<StreakCard>
                     child: Text(
                       '${widget.currentStreak}',
                       style: const TextStyle(
-                        fontFamily: 'Nothing',
+                        fontFamily: kNothingFont,
                         fontSize: 28,
                         fontWeight: FontWeight.w400,
                         color: AppColors.onPrimary,
+                        fontFeatures: [FontFeature.tabularFigures()],
                       ),
                     ),
                   ),

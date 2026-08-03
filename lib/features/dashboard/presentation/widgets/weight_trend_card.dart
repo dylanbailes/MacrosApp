@@ -1,4 +1,4 @@
-// Path: widgets\weight_trend_card.dart
+// Path: features/dashboard/presentation/widgets/weight_trend_card.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -6,7 +6,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 
 /// Weight trend card with mini line chart, latest weight, weekly change,
 /// monthly trend, moving average, and BMI.
@@ -14,12 +14,7 @@ import '../../../../core/widgets/app_interactive_card.dart';
 /// Nothing OS style: numbers in dot matrix, labels in Geist.
 class WeightTrendCard extends StatelessWidget {
   const WeightTrendCard({
-    super.key,
-    required this.currentWeight,
-    required this.weightChange,
-    required this.monthlyWeightChange,
-    required this.weightTrend,
-    required this.weightMovingAverage,
+    required this.currentWeight, required this.weightChange, required this.monthlyWeightChange, required this.weightTrend, required this.weightMovingAverage, super.key,
     this.bmi,
   });
 
@@ -35,7 +30,7 @@ class WeightTrendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppInteractiveCard(
+    return AppCard(
       padding: EdgeInsets.zero,
       borderRadius: AppBorderRadius.md,
       level: 1,
@@ -60,11 +55,11 @@ class WeightTrendCard extends StatelessWidget {
                 children: [
                   Text(currentWeight.toStringAsFixed(1), style: AppTextStyles.cardMetric),
                   const SizedBox(width: 2),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 3),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 3),
                     child: Text(
                       'lb',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Geist',
                         fontSize: 11,
                         color: AppColors.textTertiary,

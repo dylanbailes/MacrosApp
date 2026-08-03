@@ -1,4 +1,4 @@
-// Path: widgets\quick_actions_row.dart
+// Path: features/dashboard/presentation/widgets/quick_actions_row.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_spacing.dart';
@@ -10,8 +10,7 @@ import '../../../../core/widgets/app_button.dart';
 /// style). Keeps fast food logging one tap away without leaving the screen.
 class QuickActionsRow extends StatelessWidget {
   const QuickActionsRow({
-    super.key,
-    required this.actions,
+    required this.actions, super.key,
   });
 
   final List<QuickAction> actions;

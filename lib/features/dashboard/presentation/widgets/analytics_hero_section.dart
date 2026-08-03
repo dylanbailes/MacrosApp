@@ -1,4 +1,4 @@
-// Path: widgets\analytics_hero_section.dart
+// Path: features/dashboard/presentation/widgets/analytics_hero_section.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -16,8 +16,7 @@ import 'weekly_overview_chart.dart';
 /// Mobile/narrow: stacked top-to-bottom.
 class AnalyticsHeroSection extends StatelessWidget {
   const AnalyticsHeroSection({
-    super.key,
-    required this.summary,
+    required this.summary, super.key,
     this.onTap,
   });
 
@@ -114,9 +113,15 @@ class _CalorieColumn extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AppAnimatedCounter(
-                      value: caloriesConsumed,
-                      style: AppTextStyles.displayLarge,
+                    // Scale down wide numerals instead of wrapping them inside
+                    // the ring (a 4-digit number at displayLarge exceeds the
+                    // ring's inner width).
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: AppAnimatedCounter(
+                        value: caloriesConsumed,
+                        style: AppTextStyles.displayLarge,
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
@@ -245,23 +250,15 @@ class _WeeklyStatVertical extends StatelessWidget {
       children: [
         Text(
           value,
-          style: TextStyle(
-            fontFamily: 'Nothing',
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+          style: AppTextStyles.titleSmall.copyWith(
             color: color,
+            fontFeatures: const [FontFeature.tabularFigures()],
           ),
         ),
         const SizedBox(height: 2),
         Text(
           label.toUpperCase(),
-          style: TextStyle(
-            fontFamily: 'Nothing',
-            fontSize: 9,
-            color: AppColors.textTertiary,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 1.0,
-          ),
+          style: AppTextStyles.tiny.copyWith(letterSpacing: 1.0),
         ),
       ],
     );

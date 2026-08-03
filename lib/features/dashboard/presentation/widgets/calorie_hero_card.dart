@@ -1,4 +1,4 @@
-// Path: widgets\calorie_hero_card.dart
+// Path: features/dashboard/presentation/widgets/calorie_hero_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
@@ -14,9 +14,7 @@ import '../../../../core/widgets/app_progress_ring.dart';
 /// Uses the ONE permitted ring on this screen. Tap opens a breakdown bottom sheet.
 class CalorieHeroCard extends StatelessWidget {
   const CalorieHeroCard({
-    super.key,
-    required this.consumed,
-    required this.target,
+    required this.consumed, required this.target, super.key,
     this.onTap,
   });
 
@@ -30,7 +28,7 @@ class CalorieHeroCard extends StatelessWidget {
     final isOver = consumed > target;
     final remaining = (target - consumed).clamp(0, target);
 
-    final Color ringColor = isOver ? AppColors.error : AppColors.energyNeutral;
+    final ringColor = isOver ? AppColors.error : AppColors.energyNeutral;
 
     return AppCard(
       variant: AppCardVariant.hero,

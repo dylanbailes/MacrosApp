@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 /// Degrades to instant display when system reduced motion is enabled.
 class AppAnimatedCounter extends StatefulWidget {
   const AppAnimatedCounter({
-    super.key,
-    required this.value,
-    required this.style,
+    required this.value, required this.style, super.key,
     this.duration = const Duration(milliseconds: 400),
     this.curve = Curves.easeOutCubic,
   });

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_durations.dart';
 import '../constants/app_spacing.dart';
+import '../theme/app_text_styles.dart';
 
 /// A floating pill-shaped bottom navigation bar with a raised FAB.
 ///
@@ -16,9 +17,7 @@ import '../constants/app_spacing.dart';
 /// - Cross-fade animation on tab switch, 150ms
 class AppBottomNavBar extends StatelessWidget {
   const AppBottomNavBar({
-    super.key,
-    required this.currentIndex,
-    required this.onTap,
+    required this.currentIndex, required this.onTap, super.key,
   });
 
   final int currentIndex;
@@ -182,7 +181,7 @@ class _NavBarItemState extends State<_NavBarItem> with SingleTickerProviderState
                     Text(
                       widget.label,
                       style: TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: kGeistFont,
                         fontSize: 11,
                         fontWeight: widget.isSelected ? FontWeight.w600 : FontWeight.w500,
                         color: widget.isSelected ? AppColors.primary : AppColors.textTertiary,

@@ -8,6 +8,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/widgets/app_skeleton.dart';
 import '../../../../core/widgets/app_section_header.dart';
+import '../../../../features/log/presentation/providers/food_providers.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
 import '../widgets/ai_coach_entry_card.dart';
@@ -35,6 +36,9 @@ class DashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final summaryAsync = ref.watch(dashboardProvider);
     final notifier = ref.read(dashboardProvider.notifier);
+    // Shared viewed date (also used by the Log page); the header arrows move
+    // it and the dashboard follows via [dashboardProvider].
+    final date = ref.watch(selectedDateProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -56,7 +60,17 @@ class DashboardPage extends ConsumerWidget {
                       else if (summaryAsync.hasError)
                         _ErrorState(onRetry: notifier.refresh)
                       else if (summaryAsync.hasValue)
-                        _DashboardContent(summary: summaryAsync.value!),
+                        _DashboardContent(
+                          summary: summaryAsync.value!,
+                          date: date,
+                          onPreviousDay: () =>
+                              ref.read(selectedDateProvider.notifier).shift(-1),
+                          onNextDay: () =>
+                              ref.read(selectedDateProvider.notifier).shift(1),
+                          onToday: () => ref
+                              .read(selectedDateProvider.notifier)
+                              .jumpToToday(),
+                        ),
                       // Bottom padding so content clears the floating nav bar
                       const SizedBox(height: AppSpacing.quadXl),
                     ],
@@ -72,9 +86,19 @@ class DashboardPage extends ConsumerWidget {
 }
 
 class _DashboardContent extends StatelessWidget {
-  const _DashboardContent({required this.summary});
+  const _DashboardContent({
+    required this.summary,
+    required this.date,
+    required this.onPreviousDay,
+    required this.onNextDay,
+    required this.onToday,
+  });
 
   final DashboardSummary summary;
+  final DateTime date;
+  final VoidCallback onPreviousDay;
+  final VoidCallback onNextDay;
+  final VoidCallback onToday;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +107,10 @@ class _DashboardContent extends StatelessWidget {
       children: [
         DashboardHeader(
           greeting: summary.greeting,
-          dateLabel: summary.dateLabel,
+          date: date,
+          onPreviousDay: onPreviousDay,
+          onNextDay: onNextDay,
+          onToday: onToday,
         ),
         const SizedBox(height: AppSpacing.xxxl),
         AiCoachEntryCard(insight: summary.coachInsight),
@@ -97,12 +124,13 @@ class _DashboardContent extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         MacroOverviewRow(macros: summary.macros),
         const SizedBox(height: AppSpacing.xxxl),
-        Row(
-          children: [
-            const AppSectionHeader(label: 'Recent Meals'),
-            const Spacer(),
-            GestureDetector(
-              onTap: () => context.go('/log'),
+        AppSectionHeader(
+          label: 'Recent Meals',
+          trailing: GestureDetector(
+            onTap: () => context.go('/log'),
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
               child: Text(
                 'View all',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -110,12 +138,13 @@ class _DashboardContent extends StatelessWidget {
                     ),
               ),
             ),
-          ],
+          ),
         ),
         const SizedBox(height: AppSpacing.md),
         RecentMealsList(
           meals: summary.recentMeals,
           onTapMeal: (_) => context.push('/log'),
+          onSearchFoods: () => context.push('/log/search'),
         ),
         const SizedBox(height: AppSpacing.xxxl),
         Row(
@@ -199,13 +228,15 @@ class _DashboardSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Header placeholder
-        const AppSkeleton(width: 180, height: 28, borderRadius: AppBorderRadius.sm),
+        const AppSkeleton(
+            width: 180, height: 28, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.xxxl),
-        
+
         // Section label placeholder
-        const AppSkeleton(width: 120, height: 16, borderRadius: AppBorderRadius.sm),
+        const AppSkeleton(
+            width: 120, height: 16, borderRadius: AppBorderRadius.sm),
         const SizedBox(height: AppSpacing.md),
-        
+
         // Hero chart
         const AppSkeleton(
           width: double.infinity,
@@ -213,7 +244,7 @@ class _DashboardSkeleton extends StatelessWidget {
           borderRadius: AppBorderRadius.md,
         ),
         const SizedBox(height: AppSpacing.xl),
-        
+
         // Macro tiles row
         Row(
           children: [
@@ -224,7 +255,7 @@ class _DashboardSkeleton extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.xl),
-        
+
         // Recent meals
         for (var i = 0; i < 3; i++) ...[
           AppSkeletonShapes.logRow(width: double.infinity),

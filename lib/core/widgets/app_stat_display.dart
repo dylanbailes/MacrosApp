@@ -12,10 +12,11 @@ import '../theme/app_text_styles.dart';
 /// and label in macro-label style beneath it.
 class AppStatDisplay extends StatelessWidget {
   const AppStatDisplay({
-    super.key,
     required this.label,
     required this.value,
+    super.key,
     this.valueColor,
+    this.unit,
     this.subValue,
     this.icon,
     this.elevated = false,
@@ -29,6 +30,9 @@ class AppStatDisplay extends StatelessWidget {
 
   /// Optional color for the value (defaults to onPrimary)
   final Color? valueColor;
+
+  /// Optional unit suffix rendered beside the value (e.g. "kcal", "g").
+  final String? unit;
 
   /// Optional secondary value shown alongside the primary
   final String? subValue;
@@ -69,8 +73,20 @@ class AppStatDisplay extends StatelessWidget {
                 value,
                 style: AppTextStyles.titleLarge.copyWith(
                   color: valueColor ?? AppColors.onPrimary,
+                  fontFeatures: const [FontFeature.tabularFigures()],
                 ),
               ),
+              if (unit != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 2.0, left: 2.0),
+                  child: Text(
+                    unit!,
+                    style: AppTextStyles.caption.copyWith(
+                      color: AppColors.textTertiary,
+                    ),
+                  ),
+                ),
+              ],
               if (subValue != null)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 2.0, left: 2.0),

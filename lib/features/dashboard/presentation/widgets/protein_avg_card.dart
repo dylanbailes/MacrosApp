@@ -1,4 +1,4 @@
-// Path: widgets\protein_avg_card.dart
+// Path: features/dashboard/presentation/widgets/protein_avg_card.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -6,7 +6,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../providers/dashboard_state.dart';
 
 /// Protein average card with target, 7-day sparkline, and daily consistency dots.
@@ -14,10 +14,7 @@ import '../providers/dashboard_state.dart';
 /// Nothing OS style: number in dot matrix, labels in Geist, protein blue accent.
 class ProteinAvgCard extends StatelessWidget {
   const ProteinAvgCard({
-    super.key,
-    required this.protein,
-    required this.proteinSparkline,
-    required this.proteinDailyConsistency,
+    required this.protein, required this.proteinSparkline, required this.proteinDailyConsistency, super.key,
   });
 
   final MacroProgress protein;
@@ -26,7 +23,12 @@ class ProteinAvgCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppInteractiveCard(
+    return AppCard(
+      padding: EdgeInsets.zero,
+      borderRadius: AppBorderRadius.md,
+      level: 1,
+      accentColor: AppColors.protein,
+      clip: false,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
@@ -115,11 +117,6 @@ class ProteinAvgCard extends StatelessWidget {
           ],
         ),
       ),
-      padding: EdgeInsets.zero,
-      borderRadius: AppBorderRadius.md,
-      level: 1,
-      accentColor: AppColors.protein,
-      clip: false,
     );
   }
 }

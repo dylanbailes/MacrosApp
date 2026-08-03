@@ -1,4 +1,4 @@
-// Path: widgets\avg_calories_card.dart
+// Path: features/dashboard/presentation/widgets/avg_calories_card.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -6,7 +6,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 
 /// Average calories card with trend arrow, +/-, "vs last week" label,
 /// and tiny sparkline.
@@ -14,10 +14,7 @@ import '../../../../core/widgets/app_interactive_card.dart';
 /// Nothing OS style: numbers in dot matrix, labels in Geist.
 class AvgCaloriesCard extends StatelessWidget {
   const AvgCaloriesCard({
-    super.key,
-    required this.avgCalories,
-    required this.avgCaloriesLastWeek,
-    required this.sparklineData,
+    required this.avgCalories, required this.avgCaloriesLastWeek, required this.sparklineData, super.key,
   });
 
   final int avgCalories;
@@ -33,7 +30,7 @@ class AvgCaloriesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppInteractiveCard(
+    return AppCard(
       padding: EdgeInsets.zero,
       borderRadius: AppBorderRadius.md,
       level: 1,

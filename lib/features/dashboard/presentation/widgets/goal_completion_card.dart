@@ -1,4 +1,4 @@
-// Path: widgets\goal_completion_card.dart
+// Path: features/dashboard/presentation/widgets/goal_completion_card.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -6,7 +6,7 @@ import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../core/widgets/app_interactive_card.dart';
+import '../../../../core/widgets/app_card.dart';
 
 /// Goal completion card with radial progress indicator, percentage,
 /// weekly mini calendar with days highlighted in red.
@@ -14,11 +14,7 @@ import '../../../../core/widgets/app_interactive_card.dart';
 /// Nothing OS style: minimal, clean geometric spacing, red accent.
 class GoalCompletionCard extends StatefulWidget {
   const GoalCompletionCard({
-    super.key,
-    required this.percentage,
-    required this.daysCompleted,
-    required this.daysTotal,
-    required this.weeklyGoalDays,
+    required this.percentage, required this.daysCompleted, required this.daysTotal, required this.weeklyGoalDays, super.key,
   });
 
   final double percentage;
@@ -67,7 +63,12 @@ class _GoalCompletionCardState extends State<GoalCompletionCard>
 
   @override
   Widget build(BuildContext context) {
-    return AppInteractiveCard(
+    return AppCard(
+      padding: EdgeInsets.zero,
+      borderRadius: AppBorderRadius.md,
+      level: 1,
+      accentColor: AppColors.primary,
+      clip: false,
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
@@ -122,11 +123,6 @@ class _GoalCompletionCardState extends State<GoalCompletionCard>
           ],
         ),
       ),
-      padding: EdgeInsets.zero,
-      borderRadius: AppBorderRadius.md,
-      level: 1,
-      accentColor: AppColors.primary,
-      clip: false,
     );
   }
 }
@@ -155,11 +151,8 @@ class _RadialGoalProgress extends StatelessWidget {
         child: Center(
           child: Text(
             '${(progress * 100).round()}%',
-            style: const TextStyle(
-              fontFamily: 'Nothing',
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: AppColors.onPrimary,
+            style: AppTextStyles.titleSmall.copyWith(
+              fontFeatures: const [FontFeature.tabularFigures()],
             ),
           ),
         ),

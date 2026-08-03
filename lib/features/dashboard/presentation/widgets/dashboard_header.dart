@@ -1,66 +1,58 @@
-// Path: widgets\dashboard_header.dart
+// Path: features/dashboard/presentation/widgets/dashboard_header.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_spacing.dart';
-import '../../../../core/theme/app_text_styles.dart';
+import '../../../../app/router/app_router.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_date_navigator.dart';
+import '../../../../core/widgets/app_screen_header.dart';
 
-/// Dashboard page header: greeting + date on the left, settings gear on the right.
+/// Dashboard page header: greeting + settings gear, with a date navigator
+/// (◀ today ▶) underneath so the whole dashboard can be viewed for past days.
 ///
 /// Reference: Blueprint §3.1 — Page Header (date + greeting, settings-gear shortcut)
+/// Composes the shared [AppScreenHeader] chrome.
 class DashboardHeader extends StatelessWidget {
   const DashboardHeader({
-    super.key,
     required this.greeting,
-    required this.dateLabel,
+    required this.date,
+    required this.onPreviousDay,
+    required this.onNextDay,
+    this.onToday,
+    super.key,
   });
 
   final String greeting;
-  final String dateLabel;
+
+  /// The day currently being viewed (shared with the Log page).
+  final DateTime date;
+  final VoidCallback onPreviousDay;
+  final VoidCallback onNextDay;
+  final VoidCallback? onToday;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                greeting,
-                style: AppTextStyles.headlineLarge,
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                dateLabel,
-                style: AppTextStyles.caption.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
+    return AppScreenHeader(
+      // The dashboard page already applies the screen margin via
+      // SliverPadding, so the header must not re-add horizontal padding.
+      padding: EdgeInsets.zero,
+      title: greeting,
+      // Settings gear — 48px touch target (Blueprint Rule 16), pushed on
+      // the root navigator so it covers the shell (no bottom nav).
+      trailing: Semantics(
+        label: 'Open settings',
+        child: AppButton(
+          onPressed: () => context.push(AppRoutes.settings),
+          icon: Icons.settings_outlined,
+          variant: AppButtonVariant.icon,
         ),
-        // Settings gear — 48px touch target (Blueprint Rule 16)
-        Semantics(
-          label: 'Open settings',
-          child: GestureDetector(
-            onTap: () => context.push('/profile/settings'),
-            behavior: HitTestBehavior.opaque,
-            child: Container(
-              width: AppSpacing.buttonHeight,
-              height: AppSpacing.buttonHeight,
-              alignment: Alignment.center,
-              child: const Icon(
-                Icons.settings_outlined,
-                size: AppSpacing.iconLg,
-                color: AppColors.iconDefault,
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
+      bottom: AppDateNavigator(
+        date: date,
+        onPrevious: onPreviousDay,
+        onNext: onNextDay,
+        onToday: onToday,
+      ),
     );
   }
 }
