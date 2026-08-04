@@ -101,12 +101,6 @@ final class AppRouter {
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: ProfilePage(),
                 ),
-                routes: [
-                  GoRoute(
-                    path: 'coach', // -> /profile/coach
-                    builder: (context, state) => const CoachPage(),
-                  ),
-                ],
               ),
             ],
           ),
@@ -129,6 +123,15 @@ final class AppRouter {
         path: AppRoutes.settings,
         pageBuilder: (context, state) => const MaterialPage(
           child: SettingsPage(),
+        ),
+      ),
+
+      // Full-screen AI Coach — pushed on the root navigator so it covers the
+      // shell (Blueprint §3.8: back-arrow header on a dedicated screen).
+      GoRoute(
+        path: AppRoutes.coach,
+        pageBuilder: (context, state) => const MaterialPage(
+          child: CoachPage(),
         ),
       ),
     ],

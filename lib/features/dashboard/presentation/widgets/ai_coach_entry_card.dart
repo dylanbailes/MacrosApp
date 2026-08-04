@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/router/app_router.dart';
 import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
@@ -15,7 +16,8 @@ import '../../../../core/widgets/app_card.dart';
 /// trailing chevron. Full-card tap → AI Coach screen.
 class AiCoachEntryCard extends StatelessWidget {
   const AiCoachEntryCard({
-    required this.insight, super.key,
+    required this.insight,
+    super.key,
   });
 
   final String insight;
@@ -24,7 +26,7 @@ class AiCoachEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCard(
       variant: AppCardVariant.hero,
-      onTap: () => context.push('/profile/coach'),
+      onTap: () => context.push(AppRoutes.coach),
       padding: const EdgeInsets.all(AppSpacing.xl),
       child: Row(
         children: [

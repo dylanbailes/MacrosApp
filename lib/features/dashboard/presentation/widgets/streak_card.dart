@@ -1,4 +1,4 @@
-// Path: widgets\streak_card.dart
+// Path: widgets/streak_card.dart
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_border_radius.dart';
@@ -10,9 +10,11 @@ import '../../../../core/widgets/app_progress_ring.dart';
 
 /// Streak card showing current streak, longest streak, flame icon,
 /// circular progress ring, weekly activity dots, milestone badge,
-/// and subtle pulse + glow animation.
+/// and a subtle pulse + glow animation.
 ///
-/// Nothing OS style: high information density, red accent, dot matrix numbers.
+/// Nothing OS style: high information density, amber accent (streak semantics),
+/// Ndot numerals. Rendered on the single shared [AppCard] shell — the hover
+/// lift, border glow, and press squash come from the kit, not a local copy.
 /// Interactive: tapping navigates to the analytics page for detailed history.
 class StreakCard extends StatefulWidget {
   const StreakCard({
@@ -86,180 +88,164 @@ class _StreakCardState extends State<StreakCard>
         : 0.0;
 
     final nextMilestone = _nextMilestone(widget.currentStreak);
-    final daysToNext = (nextMilestone - widget.currentStreak).clamp(0, nextMilestone);
+    final daysToNext =
+        (nextMilestone - widget.currentStreak).clamp(0, nextMilestone);
     final milestoneLabel = _milestoneLabel(widget.currentStreak);
     final completedDays = widget.weeklyGoalDays.where((d) => d).length;
 
     return AppCard(
       onTap: widget.onTap,
-      accentColor: AppColors.primary,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppBorderRadius.md),
-          border: Border.all(color: AppColors.divider, width: 1),
-        ),
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Top row: label + milestone badge + flame icon with glow
-            Row(
-              children: [
-                Text('STREAK', style: AppTextStyles.tinyMedium),
-                const Spacer(),
-                // Milestone badge
-                if (widget.currentStreak >= 7)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.xs,
-                      vertical: 2,
+      accentColor: AppColors.goal,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Top row: label + milestone badge + flame icon with glow
+          Row(
+            children: [
+              Text('STREAK', style: AppTextStyles.macroLabel),
+              const Spacer(),
+              // Milestone badge
+              if (widget.currentStreak >= 7)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xs,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.goal.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(AppBorderRadius.sm),
+                  ),
+                  child: Text(
+                    milestoneLabel,
+                    style: AppTextStyles.tiny.copyWith(
+                      color: AppColors.goal,
+                      fontWeight: FontWeight.w600,
                     ),
-                    decoration: BoxDecoration(
-                      color: AppColors.goal.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(AppBorderRadius.sm),
-                    ),
-                    child: Text(
-                      milestoneLabel,
-                      style: AppTextStyles.tiny.copyWith(
+                  ),
+                ),
+              const SizedBox(width: AppSpacing.sm),
+              // Flame icon with animated glow
+              AnimatedBuilder(
+                animation: _glowAnimation,
+                builder: (context, child) => Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.goal
+                            .withValues(alpha: _glowAnimation.value),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: AnimatedBuilder(
+                    animation: _pulseAnimation,
+                    builder: (context, child) => Transform.scale(
+                      scale: _pulseAnimation.value,
+                      child: const Icon(
+                        Icons.local_fire_department,
+                        size: 18,
                         color: AppColors.goal,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
-                const SizedBox(width: AppSpacing.sm),
-                // Flame icon with animated glow
-                AnimatedBuilder(
-                  animation: _glowAnimation,
-                  builder: (context, child) => Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary
-                              .withValues(alpha: _glowAnimation.value),
-                          blurRadius: 8,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: AnimatedBuilder(
-                      animation: _pulseAnimation,
-                      builder: (context, child) => Transform.scale(
-                        scale: _pulseAnimation.value,
-                        child: Icon(
-                          Icons.local_fire_department,
-                          size: 18,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            // Progress ring with number inside
-            Center(
-              child: SizedBox(
-                width: 72,
-                height: 72,
-                child: AppProgressRing(
-                  progress: streakProgress,
-                  size: 72,
-                  strokeWidth: 5,
-                  color: AppColors.primary,
-                  child: Center(
-                    child: Text(
-                      '${widget.currentStreak}',
-                      style: const TextStyle(
-                        fontFamily: kNothingFont,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.onPrimary,
-                        fontFeatures: [FontFeature.tabularFigures()],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            // Longest streak label
-            Center(
-              child: Text(
-                'Longest: ${widget.longestStreak} days',
-                style: AppTextStyles.tiny,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            // Weekly activity dots
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(widget.weeklyGoalDays.length, (i) {
-                  final isCompleted = widget.weeklyGoalDays[i];
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    width: 6,
-                    height: 6,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isCompleted
-                          ? AppColors.goal
-                          : AppColors.textDisabled.withValues(alpha: 0.3),
-                    ),
-                  );
-                }),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            // Weekly summary text
-            Center(
-              child: Text(
-                '$completedDays/7 days this week',
-                style: AppTextStyles.tiny.copyWith(
-                  color: completedDays >= 5
-                      ? AppColors.success
-                      : AppColors.textSecondary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            // Next milestone progress
-            if (widget.currentStreak < nextMilestone) ...[
-              const SizedBox(height: AppSpacing.sm),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(2),
-                child: SizedBox(
-                  height: 3,
-                  child: LinearProgressIndicator(
-                    value: widget.currentStreak / nextMilestone,
-                    backgroundColor: AppColors.divider,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.goal,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              Center(
-                child: Text(
-                  '$daysToNext days to $milestoneLabel',
-                  style: AppTextStyles.tiny.copyWith(
-                    color: AppColors.textTertiary,
                   ),
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Progress ring with number inside
+          Center(
+            child: SizedBox(
+              width: 72,
+              height: 72,
+              child: AppProgressRing(
+                progress: streakProgress,
+                size: 72,
+                strokeWidth: 5,
+                color: AppColors.goal,
+                child: Center(
+                  child: Text(
+                    '${widget.currentStreak}',
+                    style: AppTextStyles.displaySmall.copyWith(fontSize: 28),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Longest streak label
+          Center(
+            child: Text(
+              'Longest: ${widget.longestStreak} days',
+              style: AppTextStyles.tiny,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Weekly activity dots
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(widget.weeklyGoalDays.length, (i) {
+                final isCompleted = widget.weeklyGoalDays[i];
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isCompleted
+                        ? AppColors.goal
+                        : AppColors.textDisabled.withValues(alpha: 0.3),
+                  ),
+                );
+              }),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          // Weekly summary text
+          Center(
+            child: Text(
+              '$completedDays/7 days this week',
+              style: AppTextStyles.tiny.copyWith(
+                color: completedDays >= 5
+                    ? AppColors.success
+                    : AppColors.textSecondary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          // Next milestone progress
+          if (widget.currentStreak < nextMilestone) ...[
+            const SizedBox(height: AppSpacing.sm),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(2),
+              child: SizedBox(
+                height: 3,
+                child: LinearProgressIndicator(
+                  value: widget.currentStreak / nextMilestone,
+                  backgroundColor: AppColors.divider,
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    AppColors.goal,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            Center(
+              child: Text(
+                '$daysToNext days to $milestoneLabel',
+                style: AppTextStyles.tiny.copyWith(
+                  color: AppColors.textTertiary,
+                ),
+              ),
+            ),
           ],
-        ),
+        ],
       ),
-      padding: EdgeInsets.zero,
-      borderRadius: AppBorderRadius.md,
-      level: 1,
-      clip: false,
     );
   }
 }

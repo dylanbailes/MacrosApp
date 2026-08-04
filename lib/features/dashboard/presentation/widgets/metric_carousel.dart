@@ -9,15 +9,19 @@ library;
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_border_radius.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/formatting/app_formatters.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_progress_ring.dart';
 import '../providers/dashboard_state.dart';
 
 /// A carousel card showing a single metric with rich detail.
+///
+/// Rendered on the shared [AppCard] shell — the surface/border/radius, hover
+/// lift, and press feedback come from the kit, not a local container copy.
 class _MetricCarouselCard extends StatelessWidget {
   const _MetricCarouselCard({
     required this.label,
@@ -29,7 +33,7 @@ class _MetricCarouselCard extends StatelessWidget {
     required this.isOverTarget,
     required this.cardIndex,
     required this.totalCards,
-    required this.onTap,
+    this.onTap,
   });
 
   final String label;
@@ -74,139 +78,132 @@ class _MetricCarouselCard extends StatelessWidget {
         comparisonLabel = 'Daily target';
     }
 
-    return GestureDetector(
+    return AppCard(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.xl),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppBorderRadius.md),
-          border: Border.all(color: AppColors.divider),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Top row: icon + label + card counter
-            Row(
+      padding: const EdgeInsets.all(AppSpacing.xl),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Top row: icon + label + card counter
+          Row(
+            children: [
+              Icon(metricIcon, size: 16, color: displayColor),
+              const SizedBox(width: AppSpacing.sm),
+              Text(
+                label.toUpperCase(),
+                style: AppTextStyles.macroLabel.copyWith(
+                  color: displayColor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '${cardIndex + 1}/$totalCards',
+                style: AppTextStyles.tiny.copyWith(
+                  color: AppColors.textDisabled,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          // Middle section: ring + values (fixed height to prevent overflow)
+          SizedBox(
+            height: 64,
+            child: Row(
               children: [
-                Icon(metricIcon, size: 16, color: displayColor),
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  label.toUpperCase(),
-                  style: AppTextStyles.macroLabel.copyWith(
+                // Progress ring
+                SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: AppProgressRing(
+                    progress: progress.clamp(0.0, 1.0),
+                    size: 64,
+                    strokeWidth: 6,
                     color: displayColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  '${cardIndex + 1}/$totalCards',
-                  style: AppTextStyles.tiny.copyWith(
-                    color: AppColors.textDisabled,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            // Middle section: ring + values (fixed height to prevent overflow)
-            SizedBox(
-              height: 64,
-              child: Row(
-                children: [
-                  // Progress ring
-                  SizedBox(
-                    width: 64,
-                    height: 64,
-                    child: AppProgressRing(
-                      progress: progress.clamp(0.0, 1.0),
-                      size: 64,
-                      strokeWidth: 6,
-                      color: displayColor,
-                      child: Center(
-                        child: Text(
-                          '${(progress * 100).toInt()}%',
-                          style: AppTextStyles.cardMetricSmall.copyWith(
-                            color: displayColor,
-                            fontSize: 14,
-                          ),
+                    child: Center(
+                      child: Text(
+                        '${(progress * 100).toInt()}%',
+                        style: AppTextStyles.cardMetricSmall.copyWith(
+                          color: displayColor,
+                          fontSize: 14,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.md),
-                  // Details column
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              AppFormatters.grams(consumed),
-                              style: AppTextStyles.displaySmall.copyWith(
-                                color: displayColor,
-                                fontSize: 28,
-                              ),
+                ),
+                const SizedBox(width: AppSpacing.md),
+                // Details column
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            AppFormatters.grams(consumed),
+                            style: AppTextStyles.displaySmall.copyWith(
+                              color: displayColor,
+                              fontSize: 28,
                             ),
-                            const SizedBox(width: AppSpacing.xs),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 4),
-                              child: Text(
-                                '/ ${target.toStringAsFixed(0)} $unit',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: AppColors.textTertiary,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: AppSpacing.xs),
-                        // Progress bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(2),
-                          child: SizedBox(
-                            height: 3,
-                            child: LinearProgressIndicator(
-                              value: progress.clamp(0.0, 1.0),
-                              backgroundColor: AppColors.divider,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                displayColor.withValues(alpha: 0.8),
+                          ),
+                          const SizedBox(width: AppSpacing.xs),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Text(
+                              '/ ${target.toStringAsFixed(0)} $unit',
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.textTertiary,
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      // Progress bar
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(2),
+                        child: SizedBox(
+                          height: 3,
+                          child: LinearProgressIndicator(
+                            value: progress.clamp(0.0, 1.0),
+                            backgroundColor: AppColors.divider,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              displayColor.withValues(alpha: 0.8),
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            // Bottom row: comparison label + remaining/over status
-            Row(
-              children: [
-                Text(
-                  comparisonLabel,
-                  style: AppTextStyles.tiny.copyWith(
-                    color: AppColors.textDisabled,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  isOverTarget
-                      ? '${(consumed - target).toStringAsFixed(0)}$unit over'
-                      : '${remaining.toStringAsFixed(0)}$unit left',
-                  style: AppTextStyles.tiny.copyWith(
-                    color: isOverTarget ? AppColors.error : displayColor,
-                    fontWeight: FontWeight.w600,
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Bottom row: comparison label + remaining/over status
+          Row(
+            children: [
+              Text(
+                comparisonLabel,
+                style: AppTextStyles.tiny.copyWith(
+                  color: AppColors.textDisabled,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                isOverTarget
+                    ? '${(consumed - target).toStringAsFixed(0)}$unit over'
+                    : '${remaining.toStringAsFixed(0)}$unit left',
+                style: AppTextStyles.tiny.copyWith(
+                  color: isOverTarget ? AppColors.error : displayColor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -252,6 +249,8 @@ class _MetricCarouselState extends State<MetricCarousel> {
     final cards = <_MetricCarouselCard>[];
 
     for (final macro in widget.macros) {
+      // No onTap: the carousel cards are informational (no destination), so
+      // they render as quiet AppCards without a misleading click cursor.
       cards.add(_MetricCarouselCard(
         label: macro.label,
         consumed: macro.consumed,
@@ -262,7 +261,6 @@ class _MetricCarouselState extends State<MetricCarousel> {
         isOverTarget: macro.isOverTarget,
         cardIndex: cards.length,
         totalCards: widget.macros.length + 1,
-        onTap: () {},
       ));
     }
 
@@ -280,7 +278,6 @@ class _MetricCarouselState extends State<MetricCarousel> {
       isOverTarget: widget.waterConsumed > widget.waterTarget,
       cardIndex: cards.length,
       totalCards: widget.macros.length + 1,
-      onTap: () {},
     ));
 
     return cards;
@@ -405,7 +402,8 @@ class _MetricCarouselState extends State<MetricCarousel> {
   }
 }
 
-/// A circular arrow button for carousel navigation.
+/// A circular arrow button for carousel navigation — uses the kit's
+/// [AppButton] icon variant for consistent hover/press feedback.
 class _CarouselArrow extends StatelessWidget {
   const _CarouselArrow({
     required this.icon,
@@ -417,25 +415,11 @@ class _CarouselArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            color: AppColors.surfaceElevated,
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColors.divider, width: 1),
-          ),
-          child: Icon(
-            icon,
-            size: 18,
-            color: AppColors.onPrimary,
-          ),
-        ),
-      ),
+    return AppButton(
+      onPressed: onTap,
+      icon: icon,
+      variant: AppButtonVariant.icon,
+      size: AppButtonSize.small,
     );
   }
 }

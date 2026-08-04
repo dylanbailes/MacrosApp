@@ -21,12 +21,14 @@ class AppTextField extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.obscureText = false,
+    this.minLines,
     this.maxLines = 1,
     this.maxLength,
     this.readOnly = false,
     this.enabled = true,
     this.autofocus = false,
     this.textCapitalization = TextCapitalization.none,
+    this.decoration,
   });
 
   final TextEditingController? controller;
@@ -41,12 +43,21 @@ class AppTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final bool obscureText;
+
+  /// Minimum growable lines (requires [maxLines] > 1).
+  final int? minLines;
   final int? maxLines;
   final int? maxLength;
   final bool readOnly;
   final bool enabled;
   final bool autofocus;
   final TextCapitalization textCapitalization;
+
+  /// Full [InputDecoration] override — lets callers embed the field in a
+  /// custom shell (e.g. a borderless composer pill inside a container that
+  /// provides its own border). When null, the standard themed decoration is
+  /// built from [labelText]/[hintText]/[prefixIcon]/[suffixIcon].
+  final InputDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +67,7 @@ class AppTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,
+      minLines: minLines,
       maxLines: maxLines,
       maxLength: maxLength,
       readOnly: readOnly,
@@ -66,16 +78,20 @@ class AppTextField extends StatelessWidget {
       onFieldSubmitted: onSubmitted,
       validator: validator,
       style: AppTextStyles.bodyLarge.copyWith(
-        color: enabled ? AppColors.onPrimary : AppColors.onSurface.withValues(alpha: 0.4),
+        color: enabled
+            ? AppColors.onPrimary
+            : AppColors.onSurface.withValues(alpha: 0.4),
       ),
-      decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
-        prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, size: AppSpacing.iconMd, color: AppColors.iconDefault)
-            : null,
-        suffixIcon: suffixIcon,
-      ),
+      decoration: decoration ??
+          InputDecoration(
+            labelText: labelText,
+            hintText: hintText,
+            prefixIcon: prefixIcon != null
+                ? Icon(prefixIcon,
+                    size: AppSpacing.iconMd, color: AppColors.iconDefault)
+                : null,
+            suffixIcon: suffixIcon,
+          ),
     );
   }
 }
